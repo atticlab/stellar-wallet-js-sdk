@@ -163,8 +163,27 @@ var StellarWallet =
 	    case 'email_exists':      return new errors.UpdateError('User with this email exists');
 	    case 'nothing_to_update': return new errors.UpdateError('Nothing to update');
 
-	    // TODO: invoice server errors
-
+	    // Invoice server
+	    case 'empty_param_account':               return new errors.UpdateError('Empty parameter: account id');
+	    case 'empty_param_asset':                 return new errors.UpdateError('Empty parameter: asset');
+	    case 'empty_param_invoice_id':            return new errors.UpdateError('Empty parameter: invoice id');
+	    case 'bad_param_amount':                  return new errors.UpdateError('Invalid parameter: amount');
+	    case 'bad_param_asset':                   return new errors.UpdateError('Invalid parameter: asset');
+	    case 'bad_param_account':                 return new errors.UpdateError('Invalid parameter: account id');
+	    case 'db_error':                          return new errors.UpdateError('Database error');
+	    case 'invoice_id_create_error':           return new errors.UpdateError('Can not create invoice id');
+	    case 'invoice_not_found':                 return new errors.UpdateError('Invoice not found');
+	    case 'invoice_expired':                   return new errors.UpdateError('Invoice has expired');
+	    case 'invoice_requested':                 return new errors.UpdateError('Invoice was already requested');
+	    case 'ip_block':                          return new errors.UpdateError('IP-address is blocked');
+	    case 'ip_exceeded_minute_limit_misses':   return new errors.UpdateError('IP-address exceeded the minute limit of missed requests');
+	    case 'ip_exceeded_daily_limit_misses':    return new errors.UpdateError('IP-address exceeded the daily limit of missed requests');
+	    case 'ip_exceeded_daily_limit_requests':  return new errors.UpdateError('IP-address exceeded the daily limit of requests');
+	    case 'acc_block':                         return new errors.UpdateError('Account is blocked');
+	    case 'acc_exceeded_minute_limit_misses':  return new errors.UpdateError('Account exceeded the minute limit of missed requests');
+	    case 'acc_exceeded_daily_limit_misses':   return new errors.UpdateError('Account exceeded the daily limit of missed requests');
+	    case 'acc_exceeded_daily_limit_requests': return new errors.UpdateError('Account exceeded the daily limit of requests');
+	    case 'acc_not_exist':                     return new errors.UpdateError('Account does not exist');
 
 	    default:                  return new errors.UnknownError();
 	  }
@@ -684,9 +703,9 @@ var StellarWallet =
 	var _ = __webpack_require__(12);
 	var errors = __webpack_require__(2);
 	var nacl = __webpack_require__(33);
-	var Base = __webpack_require__(39).Base;
-	var Seed = __webpack_require__(40).Seed;
-	var UInt256 = __webpack_require__(41).UInt256;
+	var Base = __webpack_require__(38).Base;
+	var Seed = __webpack_require__(39).Seed;
+	var UInt256 = __webpack_require__(40).UInt256;
 
 	function generateKeyPair(seed) {
 	  if(seed){
@@ -780,8 +799,8 @@ var StellarWallet =
 	// However, for some legacy browsers we need to add some entropy to sjcl using
 	// crypto.ensureEntropy method. Rather then doing this for both instances
 	// (stellar-wallet-js-sdk & stellar-lib) let's switch to stellar-lib's sjcl.
-	var sjcl = __webpack_require__(42).sjcl;
-	__webpack_require__(38).extendSjcl(sjcl);
+	var sjcl = __webpack_require__(41).sjcl;
+	__webpack_require__(42).extendSjcl(sjcl);
 
 	var randomWords = sjcl.random.randomWords;
 
@@ -9778,7 +9797,7 @@ var StellarWallet =
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(86);
+	exports.inherits = __webpack_require__(81);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -9796,7 +9815,7 @@ var StellarWallet =
 	  return Object.prototype.hasOwnProperty.call(obj, prop);
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(80)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(79)))
 
 /***/ },
 /* 31 */
@@ -9873,8 +9892,8 @@ var StellarWallet =
 	'use strict'
 
 	var base64 = __webpack_require__(93)
-	var ieee754 = __webpack_require__(87)
-	var isArray = __webpack_require__(91)
+	var ieee754 = __webpack_require__(83)
+	var isArray = __webpack_require__(90)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -13837,7 +13856,7 @@ var StellarWallet =
 
 	};
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(80)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(79)))
 
 /***/ },
 /* 37 */
@@ -13865,7 +13884,7 @@ var StellarWallet =
 	THE SOFTWARE.
 	*/
 
-	var base32 = __webpack_require__(79);
+	var base32 = __webpack_require__(80);
 
 	exports.encode = base32.encode;
 	exports.decode = base32.decode;
@@ -13875,187 +13894,8 @@ var StellarWallet =
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var sjcl = __webpack_require__(99);
-
-	var scrypt = function(passwd, salt, N, r, p, dkLen) {
-
-	  function flipEndian(x) {
-	    var first = x & 0xFF;
-	    var second = (x >>> 8) & 0xFF;
-	    var third = (x >>> 16) & 0xFF;
-	    var fourth = (x >>> 24) & 0xFF;
-	    return (first << 24) | (second << 16) | (third << 8) | fourth;
-	  }
-
-	  function sanityCheck() {
-	    if (r * p >= Math.pow(2, 30)) {
-	      throw "The parameters r, p must satisfy r * p < 2^30";
-	    }
-	    if ((N < 2) || (N & (N - 1) != 0)) {
-	      throw "The parameter N must be a power of 2.";
-	    }
-	    var SIZE_MAX = Math.pow(2, 32) - 1;
-	    if (N > SIZE_MAX / 128 / r) {
-	      throw "N too big.";
-	    }
-	    if (r > SIZE_MAX / 128 / p) {
-	      throw "r too big.";
-	    }
-	  }
-
-	  function scrypt(passwd, salt, N, r, p, dkLen) {
-	    var B = sjcl.misc.pbkdf2(passwd, salt, 1, p * 128 * r * 8);
-	    var V = [];
-	    var XY = [];
-	    for (var i = 0; i < p; i++) {
-	      smix(B, i * 128 * r, r, N, V, XY);
-	    }
-	    return sjcl.misc.pbkdf2(passwd, B, 1, dkLen * 8);
-	  };
-
-	  function salsa20_8(B) {
-
-	    function R(a, b) {
-	      return (a << b) | (a >>> (32 - b));
-	    }
-
-	    var B32 = [];
-	    for (var i = 0; i < 16; i++) {
-	      B32[i] = flipEndian(B[i]);
-	    }
-
-	    var x = [];
-	    for (var i = 0; i < 16; i++) {
-	      x[i] = B32[i] | 0;
-	    }
-
-	    for (i = 8; i > 0; i -= 2) {
-	      x[4] ^= R(x[0] + x[12], 7);
-	      x[8] ^= R(x[4] + x[0], 9);
-	      x[12] ^= R(x[8] + x[4], 13);
-	      x[0] ^= R(x[12] + x[8], 18);
-	      x[9] ^= R(x[5] + x[1], 7);
-	      x[13] ^= R(x[9] + x[5], 9);
-	      x[1] ^= R(x[13] + x[9], 13);
-	      x[5] ^= R(x[1] + x[13], 18);
-	      x[14] ^= R(x[10] + x[6], 7);
-	      x[2] ^= R(x[14] + x[10], 9);
-	      x[6] ^= R(x[2] + x[14], 13);
-	      x[10] ^= R(x[6] + x[2], 18);
-	      x[3] ^= R(x[15] + x[11], 7);
-	      x[7] ^= R(x[3] + x[15], 9);
-	      x[11] ^= R(x[7] + x[3], 13);
-	      x[15] ^= R(x[11] + x[7], 18);
-	      x[1] ^= R(x[0] + x[3], 7);
-	      x[2] ^= R(x[1] + x[0], 9);
-	      x[3] ^= R(x[2] + x[1], 13);
-	      x[0] ^= R(x[3] + x[2], 18);
-	      x[6] ^= R(x[5] + x[4], 7);
-	      x[7] ^= R(x[6] + x[5], 9);
-	      x[4] ^= R(x[7] + x[6], 13);
-	      x[5] ^= R(x[4] + x[7], 18);
-	      x[11] ^= R(x[10] + x[9], 7);
-	      x[8] ^= R(x[11] + x[10], 9);
-	      x[9] ^= R(x[8] + x[11], 13);
-	      x[10] ^= R(x[9] + x[8], 18);
-	      x[12] ^= R(x[15] + x[14], 7);
-	      x[13] ^= R(x[12] + x[15], 9);
-	      x[14] ^= R(x[13] + x[12], 13);
-	      x[15] ^= R(x[14] + x[13], 18);
-	    }
-
-	    for (var i = 0; i < 16; i++) {
-	      B32[i] = (B32[i] + x[i]) | 0;
-	    }
-
-	    for (var i = 0; i < 16; i++) {
-	      B[i] = flipEndian(B32[i]);
-	    }
-
-	    return B;
-	  }
-
-	  function blockxor(S, Si, D, Di, len) {
-	    len /= 4;
-	    Si /= 4;
-	    Di /= 4;
-	    for (var i = 0; i < len; i++) {
-	      D[Di + i] ^= S[Si + i] | 0;
-	    }
-	  }
-
-	  function blockcopy(S, Si, D, Di, len) {
-	    len /= 4;
-	    Si /= 4;
-	    Di /= 4;
-	    for (var i = 0; i < len; i++) {
-	      D[Di + i] = S[Si + i] | 0;
-	    }
-	  }
-
-	  function blockmix_salsa8(BY, Bi, Yi, r) {
-	    var X = [];
-	    var i;
-
-	    blockcopy(BY, Bi + (2 * r - 1) * 64, X, 0, 64);
-
-	    for (i = 0; i < 2 * r; i++) {
-	      blockxor(BY, i * 64, X, 0, 64);
-	      salsa20_8(X);
-	      blockcopy(X, 0, BY, Yi + (i * 64), 64);
-	    }
-
-	    for (i = 0; i < r; i++) {
-	      blockcopy(BY, Yi + (i * 2) * 64, BY, Bi + (i * 64), 64);
-	    }
-
-	    for (i = 0; i < r; i++) {
-	      blockcopy(BY, Yi + (i * 2 + 1) * 64, BY, Bi + (i + r) * 64, 64);
-	    }
-	  }
-
-	  function smix(B, Bi, r, N, V, XY) {
-	    var Xi = 0;
-	    var Yi = 128 * r;
-	    var i;
-
-	    blockcopy(B, Bi, XY, Xi, Yi);
-
-	    for (i = 0; i < N; i++) {
-	      blockcopy(XY, Xi, V, i * Yi, Yi);
-	      blockmix_salsa8(XY, Xi, Yi, r);
-	    }
-
-	    for (i = 0; i < N; i++) {
-	      var j = integerify(XY, Xi, r) & (N - 1);
-	      blockxor(V, j * Yi, XY, Xi, Yi);
-	      blockmix_salsa8(XY, Xi, Yi, r);
-	    }
-
-	    blockcopy(XY, Xi, B, Bi, Yi);
-	  }
-
-	  function integerify(B, Bi, r) {
-	    Bi = Bi + (2 * r - 1) * 64;
-	    return flipEndian(B[Bi / 4]);
-	  }
-
-	  sanityCheck();
-	  return scrypt(passwd, salt, N, r, p, dkLen);
-	}
-
-	module.exports = {
-	  extendSjcl: function(s) {
-	    s.misc.scrypt = scrypt;
-	  }
-	};
-
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var sjcl    = __webpack_require__(42).sjcl;
-	var utils   = __webpack_require__(42);
+	var sjcl    = __webpack_require__(41).sjcl;
+	var utils   = __webpack_require__(41);
 	var extend  = __webpack_require__(97);
 
 	var BigInteger = utils.jsbn.BigInteger;
@@ -14225,7 +14065,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 40 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//
@@ -14233,17 +14073,17 @@ var StellarWallet =
 	//
 
 	var extend = __webpack_require__(97);
-	var utils  = __webpack_require__(42);
+	var utils  = __webpack_require__(41);
 	var sjcl   = utils.sjcl;
 
 	var BigInteger = utils.jsbn.BigInteger;
 
-	var Base    = __webpack_require__(39).Base;
-	var UInt    = __webpack_require__(82).UInt;
-	var UInt256 = __webpack_require__(41).UInt256;
-	var UInt160 = __webpack_require__(83).UInt160;
-	var KeyPair = __webpack_require__(84).KeyPair;
-	var Crypt   = __webpack_require__(85).Crypt;
+	var Base    = __webpack_require__(38).Base;
+	var UInt    = __webpack_require__(84).UInt;
+	var UInt256 = __webpack_require__(40).UInt256;
+	var UInt160 = __webpack_require__(85).UInt160;
+	var KeyPair = __webpack_require__(86).KeyPair;
+	var Crypt   = __webpack_require__(87).Crypt;
 
 	var Seed = extend(function () {
 	  // Internal form: NaN or BigInteger
@@ -14343,12 +14183,12 @@ var StellarWallet =
 
 
 /***/ },
-/* 41 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils  = __webpack_require__(42);
+	var utils  = __webpack_require__(41);
 	var extend = __webpack_require__(97);
-	var UInt   = __webpack_require__(82).UInt;
+	var UInt   = __webpack_require__(84).UInt;
 
 	//
 	// UInt256 support
@@ -14372,7 +14212,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 42 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	function filterErr(code, done) {
@@ -14548,11 +14388,190 @@ var StellarWallet =
 
 	// Going up three levels is needed to escape the src-cov folder used for the
 	// test coverage stuff.
-	exports.sjcl = __webpack_require__(99);
-	exports.jsbn = __webpack_require__(90);
+	exports.sjcl = __webpack_require__(100);
+	exports.jsbn = __webpack_require__(91);
 
 	// vim:sw=2:sts=2:ts=8:et
 
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var sjcl = __webpack_require__(100);
+
+	var scrypt = function(passwd, salt, N, r, p, dkLen) {
+
+	  function flipEndian(x) {
+	    var first = x & 0xFF;
+	    var second = (x >>> 8) & 0xFF;
+	    var third = (x >>> 16) & 0xFF;
+	    var fourth = (x >>> 24) & 0xFF;
+	    return (first << 24) | (second << 16) | (third << 8) | fourth;
+	  }
+
+	  function sanityCheck() {
+	    if (r * p >= Math.pow(2, 30)) {
+	      throw "The parameters r, p must satisfy r * p < 2^30";
+	    }
+	    if ((N < 2) || (N & (N - 1) != 0)) {
+	      throw "The parameter N must be a power of 2.";
+	    }
+	    var SIZE_MAX = Math.pow(2, 32) - 1;
+	    if (N > SIZE_MAX / 128 / r) {
+	      throw "N too big.";
+	    }
+	    if (r > SIZE_MAX / 128 / p) {
+	      throw "r too big.";
+	    }
+	  }
+
+	  function scrypt(passwd, salt, N, r, p, dkLen) {
+	    var B = sjcl.misc.pbkdf2(passwd, salt, 1, p * 128 * r * 8);
+	    var V = [];
+	    var XY = [];
+	    for (var i = 0; i < p; i++) {
+	      smix(B, i * 128 * r, r, N, V, XY);
+	    }
+	    return sjcl.misc.pbkdf2(passwd, B, 1, dkLen * 8);
+	  };
+
+	  function salsa20_8(B) {
+
+	    function R(a, b) {
+	      return (a << b) | (a >>> (32 - b));
+	    }
+
+	    var B32 = [];
+	    for (var i = 0; i < 16; i++) {
+	      B32[i] = flipEndian(B[i]);
+	    }
+
+	    var x = [];
+	    for (var i = 0; i < 16; i++) {
+	      x[i] = B32[i] | 0;
+	    }
+
+	    for (i = 8; i > 0; i -= 2) {
+	      x[4] ^= R(x[0] + x[12], 7);
+	      x[8] ^= R(x[4] + x[0], 9);
+	      x[12] ^= R(x[8] + x[4], 13);
+	      x[0] ^= R(x[12] + x[8], 18);
+	      x[9] ^= R(x[5] + x[1], 7);
+	      x[13] ^= R(x[9] + x[5], 9);
+	      x[1] ^= R(x[13] + x[9], 13);
+	      x[5] ^= R(x[1] + x[13], 18);
+	      x[14] ^= R(x[10] + x[6], 7);
+	      x[2] ^= R(x[14] + x[10], 9);
+	      x[6] ^= R(x[2] + x[14], 13);
+	      x[10] ^= R(x[6] + x[2], 18);
+	      x[3] ^= R(x[15] + x[11], 7);
+	      x[7] ^= R(x[3] + x[15], 9);
+	      x[11] ^= R(x[7] + x[3], 13);
+	      x[15] ^= R(x[11] + x[7], 18);
+	      x[1] ^= R(x[0] + x[3], 7);
+	      x[2] ^= R(x[1] + x[0], 9);
+	      x[3] ^= R(x[2] + x[1], 13);
+	      x[0] ^= R(x[3] + x[2], 18);
+	      x[6] ^= R(x[5] + x[4], 7);
+	      x[7] ^= R(x[6] + x[5], 9);
+	      x[4] ^= R(x[7] + x[6], 13);
+	      x[5] ^= R(x[4] + x[7], 18);
+	      x[11] ^= R(x[10] + x[9], 7);
+	      x[8] ^= R(x[11] + x[10], 9);
+	      x[9] ^= R(x[8] + x[11], 13);
+	      x[10] ^= R(x[9] + x[8], 18);
+	      x[12] ^= R(x[15] + x[14], 7);
+	      x[13] ^= R(x[12] + x[15], 9);
+	      x[14] ^= R(x[13] + x[12], 13);
+	      x[15] ^= R(x[14] + x[13], 18);
+	    }
+
+	    for (var i = 0; i < 16; i++) {
+	      B32[i] = (B32[i] + x[i]) | 0;
+	    }
+
+	    for (var i = 0; i < 16; i++) {
+	      B[i] = flipEndian(B32[i]);
+	    }
+
+	    return B;
+	  }
+
+	  function blockxor(S, Si, D, Di, len) {
+	    len /= 4;
+	    Si /= 4;
+	    Di /= 4;
+	    for (var i = 0; i < len; i++) {
+	      D[Di + i] ^= S[Si + i] | 0;
+	    }
+	  }
+
+	  function blockcopy(S, Si, D, Di, len) {
+	    len /= 4;
+	    Si /= 4;
+	    Di /= 4;
+	    for (var i = 0; i < len; i++) {
+	      D[Di + i] = S[Si + i] | 0;
+	    }
+	  }
+
+	  function blockmix_salsa8(BY, Bi, Yi, r) {
+	    var X = [];
+	    var i;
+
+	    blockcopy(BY, Bi + (2 * r - 1) * 64, X, 0, 64);
+
+	    for (i = 0; i < 2 * r; i++) {
+	      blockxor(BY, i * 64, X, 0, 64);
+	      salsa20_8(X);
+	      blockcopy(X, 0, BY, Yi + (i * 64), 64);
+	    }
+
+	    for (i = 0; i < r; i++) {
+	      blockcopy(BY, Yi + (i * 2) * 64, BY, Bi + (i * 64), 64);
+	    }
+
+	    for (i = 0; i < r; i++) {
+	      blockcopy(BY, Yi + (i * 2 + 1) * 64, BY, Bi + (i + r) * 64, 64);
+	    }
+	  }
+
+	  function smix(B, Bi, r, N, V, XY) {
+	    var Xi = 0;
+	    var Yi = 128 * r;
+	    var i;
+
+	    blockcopy(B, Bi, XY, Xi, Yi);
+
+	    for (i = 0; i < N; i++) {
+	      blockcopy(XY, Xi, V, i * Yi, Yi);
+	      blockmix_salsa8(XY, Xi, Yi, r);
+	    }
+
+	    for (i = 0; i < N; i++) {
+	      var j = integerify(XY, Xi, r) & (N - 1);
+	      blockxor(V, j * Yi, XY, Xi, Yi);
+	      blockmix_salsa8(XY, Xi, Yi, r);
+	    }
+
+	    blockcopy(XY, Xi, B, Bi, Yi);
+	  }
+
+	  function integerify(B, Bi, r) {
+	    Bi = Bi + (2 * r - 1) * 64;
+	    return flipEndian(B[Bi / 4]);
+	  }
+
+	  sanityCheck();
+	  return scrypt(passwd, salt, N, r, p, dkLen);
+	}
+
+	module.exports = {
+	  extendSjcl: function(s) {
+	    s.misc.scrypt = scrypt;
+	  }
+	};
 
 /***/ },
 /* 43 */
@@ -14561,7 +14580,7 @@ var StellarWallet =
 	/* WEBPACK VAR INJECTION */(function(global, Buffer) {(function() {
 	  var g = ('undefined' === typeof window ? global : window) || {}
 	  _crypto = (
-	    g.crypto || g.msCrypto || __webpack_require__(81)
+	    g.crypto || g.msCrypto || __webpack_require__(82)
 	  )
 	  module.exports = function(size) {
 	    // Modern Browsers
@@ -14678,7 +14697,7 @@ var StellarWallet =
 /* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var pbkdf2Export = __webpack_require__(101)
+	var pbkdf2Export = __webpack_require__(102)
 
 	module.exports = function (crypto, exports) {
 	  exports = exports || {}
@@ -14748,7 +14767,7 @@ var StellarWallet =
 	 * 
 	 */
 	"use strict";
-	var es5 = __webpack_require__(96);
+	var es5 = __webpack_require__(94);
 	var haveGetters = (function(){
 	    try {
 	        var o = {};
@@ -15024,8 +15043,8 @@ var StellarWallet =
 	 * 
 	 */
 	"use strict";
-	var schedule = __webpack_require__(94);
-	var Queue = __webpack_require__(95);
+	var schedule = __webpack_require__(95);
+	var Queue = __webpack_require__(96);
 	var errorObj = __webpack_require__(49).errorObj;
 	var tryCatch1 = __webpack_require__(49).tryCatch1;
 	var _process = typeof process !== "undefined" ? process : void 0;
@@ -15113,7 +15132,7 @@ var StellarWallet =
 
 	module.exports = new Async();
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(80)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(79)))
 
 /***/ },
 /* 51 */
@@ -15144,7 +15163,7 @@ var StellarWallet =
 	 * 
 	 */
 	"use strict";
-	var Objectfreeze = __webpack_require__(96).freeze;
+	var Objectfreeze = __webpack_require__(94).freeze;
 	var util = __webpack_require__(49);
 	var inherits = util.inherits;
 	var notEnumerableProp = util.notEnumerableProp;
@@ -15650,7 +15669,7 @@ var StellarWallet =
 	"use strict";
 	module.exports = function() {
 	var inherits = __webpack_require__(49).inherits;
-	var defineProperty = __webpack_require__(96).defineProperty;
+	var defineProperty = __webpack_require__(94).defineProperty;
 
 	var rignore = new RegExp(
 	    "\\b(?:[a-zA-Z0-9.]+\\$_\\w+|" +
@@ -15903,7 +15922,7 @@ var StellarWallet =
 	var errors = __webpack_require__(51);
 	var tryCatch1 = util.tryCatch1;
 	var errorObj = util.errorObj;
-	var keys = __webpack_require__(96).keys;
+	var keys = __webpack_require__(94).keys;
 	var TypeError = errors.TypeError;
 
 	function CatchFilter(instances, callback, promise) {
@@ -16007,7 +16026,7 @@ var StellarWallet =
 	var OperationalError = errors.OperationalError;
 	var async = __webpack_require__(50);
 	var haveGetters = util.haveGetters;
-	var es5 = __webpack_require__(96);
+	var es5 = __webpack_require__(94);
 
 	function isUntypedError(obj) {
 	    return obj instanceof Error &&
@@ -17699,7 +17718,7 @@ var StellarWallet =
 	var util = __webpack_require__(49);
 	var apiRejection = __webpack_require__(57)(Promise);
 	var isObject = util.isObject;
-	var es5 = __webpack_require__(96);
+	var es5 = __webpack_require__(94);
 
 	function PropertiesPromiseArray(obj) {
 	    var keys = es5.keys(obj);
@@ -18759,6 +18778,70 @@ var StellarWallet =
 /* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// shim for using process in browser
+
+	var process = module.exports = {};
+	var queue = [];
+	var draining = false;
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    draining = true;
+	    var currentQueue;
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        var i = -1;
+	        while (++i < len) {
+	            currentQueue[i]();
+	        }
+	        len = queue.length;
+	    }
+	    draining = false;
+	}
+	process.nextTick = function (fun) {
+	    queue.push(fun);
+	    if (!draining) {
+	        setTimeout(drainQueue, 0);
+	    }
+	};
+
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	// TODO(shtylman)
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(Buffer) {/*                                                                              
 	Copyright (c) 2011, Chris Umbel
 
@@ -18888,82 +18971,137 @@ var StellarWallet =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32).Buffer))
 
 /***/ },
-/* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// shim for using process in browser
-
-	var process = module.exports = {};
-	var queue = [];
-	var draining = false;
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    draining = true;
-	    var currentQueue;
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        var i = -1;
-	        while (++i < len) {
-	            currentQueue[i]();
-	        }
-	        len = queue.length;
-	    }
-	    draining = false;
-	}
-	process.nextTick = function (fun) {
-	    queue.push(fun);
-	    if (!draining) {
-	        setTimeout(drainQueue, 0);
-	    }
-	};
-
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	// TODO(shtylman)
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
 /* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* (ignored) */
+	if (typeof Object.create === 'function') {
+	  // implementation from standard node.js 'util' module
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    ctor.prototype = Object.create(superCtor.prototype, {
+	      constructor: {
+	        value: ctor,
+	        enumerable: false,
+	        writable: true,
+	        configurable: true
+	      }
+	    });
+	  };
+	} else {
+	  // old school shim for old browsers
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    var TempCtor = function () {}
+	    TempCtor.prototype = superCtor.prototype
+	    ctor.prototype = new TempCtor()
+	    ctor.prototype.constructor = ctor
+	  }
+	}
+
 
 /***/ },
 /* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils   = __webpack_require__(42);
+	/* (ignored) */
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+	  var e, m
+	  var eLen = nBytes * 8 - mLen - 1
+	  var eMax = (1 << eLen) - 1
+	  var eBias = eMax >> 1
+	  var nBits = -7
+	  var i = isLE ? (nBytes - 1) : 0
+	  var d = isLE ? -1 : 1
+	  var s = buffer[offset + i]
+
+	  i += d
+
+	  e = s & ((1 << (-nBits)) - 1)
+	  s >>= (-nBits)
+	  nBits += eLen
+	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+	  m = e & ((1 << (-nBits)) - 1)
+	  e >>= (-nBits)
+	  nBits += mLen
+	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+	  if (e === 0) {
+	    e = 1 - eBias
+	  } else if (e === eMax) {
+	    return m ? NaN : ((s ? -1 : 1) * Infinity)
+	  } else {
+	    m = m + Math.pow(2, mLen)
+	    e = e - eBias
+	  }
+	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+	}
+
+	exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+	  var e, m, c
+	  var eLen = nBytes * 8 - mLen - 1
+	  var eMax = (1 << eLen) - 1
+	  var eBias = eMax >> 1
+	  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+	  var i = isLE ? 0 : (nBytes - 1)
+	  var d = isLE ? 1 : -1
+	  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+	  value = Math.abs(value)
+
+	  if (isNaN(value) || value === Infinity) {
+	    m = isNaN(value) ? 1 : 0
+	    e = eMax
+	  } else {
+	    e = Math.floor(Math.log(value) / Math.LN2)
+	    if (value * (c = Math.pow(2, -e)) < 1) {
+	      e--
+	      c *= 2
+	    }
+	    if (e + eBias >= 1) {
+	      value += rt / c
+	    } else {
+	      value += rt * Math.pow(2, 1 - eBias)
+	    }
+	    if (value * c >= 2) {
+	      e++
+	      c /= 2
+	    }
+
+	    if (e + eBias >= eMax) {
+	      m = 0
+	      e = eMax
+	    } else if (e + eBias >= 1) {
+	      m = (value * c - 1) * Math.pow(2, mLen)
+	      e = e + eBias
+	    } else {
+	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+	      e = 0
+	    }
+	  }
+
+	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+	  e = (e << mLen) | m
+	  eLen += mLen
+	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+	  buffer[offset + i - d] |= s * 128
+	}
+
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var utils   = __webpack_require__(41);
 	var sjcl    = utils.sjcl;
-	var config  = __webpack_require__(100);
+	var config  = __webpack_require__(99);
 
 	var BigInteger = utils.jsbn.BigInteger;
 
@@ -19260,17 +19398,17 @@ var StellarWallet =
 
 
 /***/ },
-/* 83 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils   = __webpack_require__(42);
-	var config  = __webpack_require__(100);
+	var utils   = __webpack_require__(41);
+	var config  = __webpack_require__(99);
 	var extend  = __webpack_require__(97);
 
 	var BigInteger = utils.jsbn.BigInteger;
 
-	var UInt = __webpack_require__(82).UInt;
-	var Base = __webpack_require__(39).Base;
+	var UInt = __webpack_require__(84).UInt;
+	var Base = __webpack_require__(38).Base;
 
 	//
 	// UInt160 support
@@ -19367,16 +19505,16 @@ var StellarWallet =
 
 
 /***/ },
-/* 84 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var sjcl = __webpack_require__(42).sjcl;
+	var sjcl = __webpack_require__(41).sjcl;
 	var tnacl = __webpack_require__(115);
 
-	var UInt160 = __webpack_require__(83).UInt160;
-	var UInt256 = __webpack_require__(41).UInt256;
-	var Base    = __webpack_require__(39).Base;
-	var Crypt   = __webpack_require__(85).Crypt;
+	var UInt160 = __webpack_require__(85).UInt160;
+	var UInt256 = __webpack_require__(40).UInt256;
+	var Base    = __webpack_require__(38).Base;
+	var Crypt   = __webpack_require__(87).Crypt;
 
 	/**
 	 * Creates an ED25519 key pair for signing.
@@ -19464,14 +19602,14 @@ var StellarWallet =
 
 
 /***/ },
-/* 85 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var sjcl        = __webpack_require__(42).sjcl;
-	var base        = __webpack_require__(39).Base;
-	var Seed        = __webpack_require__(40).Seed;
-	var UInt160     = __webpack_require__(83).UInt160;
-	var UInt256     = __webpack_require__(41).UInt256;
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var sjcl        = __webpack_require__(41).sjcl;
+	var base        = __webpack_require__(38).Base;
+	var Seed        = __webpack_require__(39).Seed;
+	var UInt160     = __webpack_require__(85).UInt160;
+	var UInt256     = __webpack_require__(40).UInt256;
 	var request     = __webpack_require__(118);
 	var querystring = __webpack_require__(107);
 	var extend      = __webpack_require__(97);
@@ -19799,125 +19937,6 @@ var StellarWallet =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32).Buffer))
 
 /***/ },
-/* 86 */
-/***/ function(module, exports, __webpack_require__) {
-
-	if (typeof Object.create === 'function') {
-	  // implementation from standard node.js 'util' module
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    ctor.prototype = Object.create(superCtor.prototype, {
-	      constructor: {
-	        value: ctor,
-	        enumerable: false,
-	        writable: true,
-	        configurable: true
-	      }
-	    });
-	  };
-	} else {
-	  // old school shim for old browsers
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    var TempCtor = function () {}
-	    TempCtor.prototype = superCtor.prototype
-	    ctor.prototype = new TempCtor()
-	    ctor.prototype.constructor = ctor
-	  }
-	}
-
-
-/***/ },
-/* 87 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
-	  var e, m
-	  var eLen = nBytes * 8 - mLen - 1
-	  var eMax = (1 << eLen) - 1
-	  var eBias = eMax >> 1
-	  var nBits = -7
-	  var i = isLE ? (nBytes - 1) : 0
-	  var d = isLE ? -1 : 1
-	  var s = buffer[offset + i]
-
-	  i += d
-
-	  e = s & ((1 << (-nBits)) - 1)
-	  s >>= (-nBits)
-	  nBits += eLen
-	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
-
-	  m = e & ((1 << (-nBits)) - 1)
-	  e >>= (-nBits)
-	  nBits += mLen
-	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
-
-	  if (e === 0) {
-	    e = 1 - eBias
-	  } else if (e === eMax) {
-	    return m ? NaN : ((s ? -1 : 1) * Infinity)
-	  } else {
-	    m = m + Math.pow(2, mLen)
-	    e = e - eBias
-	  }
-	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
-	}
-
-	exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
-	  var e, m, c
-	  var eLen = nBytes * 8 - mLen - 1
-	  var eMax = (1 << eLen) - 1
-	  var eBias = eMax >> 1
-	  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
-	  var i = isLE ? 0 : (nBytes - 1)
-	  var d = isLE ? 1 : -1
-	  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
-
-	  value = Math.abs(value)
-
-	  if (isNaN(value) || value === Infinity) {
-	    m = isNaN(value) ? 1 : 0
-	    e = eMax
-	  } else {
-	    e = Math.floor(Math.log(value) / Math.LN2)
-	    if (value * (c = Math.pow(2, -e)) < 1) {
-	      e--
-	      c *= 2
-	    }
-	    if (e + eBias >= 1) {
-	      value += rt / c
-	    } else {
-	      value += rt * Math.pow(2, 1 - eBias)
-	    }
-	    if (value * c >= 2) {
-	      e++
-	      c /= 2
-	    }
-
-	    if (e + eBias >= eMax) {
-	      m = 0
-	      e = eMax
-	    } else if (e + eBias >= 1) {
-	      m = (value * c - 1) * Math.pow(2, mLen)
-	      e = e + eBias
-	    } else {
-	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
-	      e = 0
-	    }
-	  }
-
-	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
-
-	  e = (e << mLen) | m
-	  eLen += mLen
-	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
-
-	  buffer[offset + i - d] |= s * 128
-	}
-
-
-/***/ },
 /* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -19925,8 +19944,8 @@ var StellarWallet =
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(110);
-	var reduce = __webpack_require__(109);
+	var Emitter = __webpack_require__(109);
+	var reduce = __webpack_require__(110);
 
 	/**
 	 * Root reference for iframes.
@@ -21012,7 +21031,7 @@ var StellarWallet =
 	 * See http://pajhome.org.uk/crypt/md5 for more info.
 	 */
 
-	var helpers = __webpack_require__(102);
+	var helpers = __webpack_require__(101);
 
 	/*
 	 * Calculate the MD5 of an array of little-endian words, and a bit length
@@ -21162,6 +21181,17 @@ var StellarWallet =
 
 /***/ },
 /* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toString = {}.toString;
+
+	module.exports = Array.isArray || function (arr) {
+	  return toString.call(arr) == '[object Array]';
+	};
+
+
+/***/ },
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright (c) 2005  Tom Wu
@@ -22377,17 +22407,6 @@ var StellarWallet =
 
 
 /***/ },
-/* 91 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var toString = {}.toString;
-
-	module.exports = Array.isArray || function (arr) {
-	  return toString.call(arr) == '[object Array]';
-	};
-
-
-/***/ },
 /* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22567,6 +22586,101 @@ var StellarWallet =
 /* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/**
+	 * The MIT License (MIT)
+	 * 
+	 * Copyright (c) 2014 Petka Antonov
+	 * 
+	 * Permission is hereby granted, free of charge, to any person obtaining a copy
+	 * of this software and associated documentation files (the "Software"), to deal
+	 * in the Software without restriction, including without limitation the rights
+	 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 * copies of the Software, and to permit persons to whom the Software is
+	 * furnished to do so, subject to the following conditions:</p>
+	 * 
+	 * The above copyright notice and this permission notice shall be included in
+	 * all copies or substantial portions of the Software.
+	 * 
+	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+	 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	 * THE SOFTWARE.
+	 * 
+	 */
+	var isES5 = (function(){
+	    "use strict";
+	    return this === void 0;
+	})();
+
+	if (isES5) {
+	    module.exports = {
+	        freeze: Object.freeze,
+	        defineProperty: Object.defineProperty,
+	        keys: Object.keys,
+	        getPrototypeOf: Object.getPrototypeOf,
+	        isArray: Array.isArray,
+	        isES5: isES5
+	    };
+	} else {
+	    var has = {}.hasOwnProperty;
+	    var str = {}.toString;
+	    var proto = {}.constructor.prototype;
+
+	    var ObjectKeys = function ObjectKeys(o) {
+	        var ret = [];
+	        for (var key in o) {
+	            if (has.call(o, key)) {
+	                ret.push(key);
+	            }
+	        }
+	        return ret;
+	    }
+
+	    var ObjectDefineProperty = function ObjectDefineProperty(o, key, desc) {
+	        o[key] = desc.value;
+	        return o;
+	    }
+
+	    var ObjectFreeze = function ObjectFreeze(obj) {
+	        return obj;
+	    }
+
+	    var ObjectGetPrototypeOf = function ObjectGetPrototypeOf(obj) {
+	        try {
+	            return Object(obj).constructor.prototype;
+	        }
+	        catch (e) {
+	            return proto;
+	        }
+	    }
+
+	    var ArrayIsArray = function ArrayIsArray(obj) {
+	        try {
+	            return str.call(obj) === "[object Array]";
+	        }
+	        catch(e) {
+	            return false;
+	        }
+	    }
+
+	    module.exports = {
+	        isArray: ArrayIsArray,
+	        keys: ObjectKeys,
+	        defineProperty: ObjectDefineProperty,
+	        freeze: ObjectFreeze,
+	        getPrototypeOf: ObjectGetPrototypeOf,
+	        isES5: isES5
+	    };
+	}
+
+
+/***/ },
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(process) {/**
 	 * The MIT License (MIT)
 	 * 
@@ -22631,10 +22745,10 @@ var StellarWallet =
 	else throw new Error("no async scheduler available");
 	module.exports = schedule;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(80)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(79)))
 
 /***/ },
-/* 95 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -22757,101 +22871,6 @@ var StellarWallet =
 
 
 /***/ },
-/* 96 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * The MIT License (MIT)
-	 * 
-	 * Copyright (c) 2014 Petka Antonov
-	 * 
-	 * Permission is hereby granted, free of charge, to any person obtaining a copy
-	 * of this software and associated documentation files (the "Software"), to deal
-	 * in the Software without restriction, including without limitation the rights
-	 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	 * copies of the Software, and to permit persons to whom the Software is
-	 * furnished to do so, subject to the following conditions:</p>
-	 * 
-	 * The above copyright notice and this permission notice shall be included in
-	 * all copies or substantial portions of the Software.
-	 * 
-	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
-	 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-	 * THE SOFTWARE.
-	 * 
-	 */
-	var isES5 = (function(){
-	    "use strict";
-	    return this === void 0;
-	})();
-
-	if (isES5) {
-	    module.exports = {
-	        freeze: Object.freeze,
-	        defineProperty: Object.defineProperty,
-	        keys: Object.keys,
-	        getPrototypeOf: Object.getPrototypeOf,
-	        isArray: Array.isArray,
-	        isES5: isES5
-	    };
-	} else {
-	    var has = {}.hasOwnProperty;
-	    var str = {}.toString;
-	    var proto = {}.constructor.prototype;
-
-	    var ObjectKeys = function ObjectKeys(o) {
-	        var ret = [];
-	        for (var key in o) {
-	            if (has.call(o, key)) {
-	                ret.push(key);
-	            }
-	        }
-	        return ret;
-	    }
-
-	    var ObjectDefineProperty = function ObjectDefineProperty(o, key, desc) {
-	        o[key] = desc.value;
-	        return o;
-	    }
-
-	    var ObjectFreeze = function ObjectFreeze(obj) {
-	        return obj;
-	    }
-
-	    var ObjectGetPrototypeOf = function ObjectGetPrototypeOf(obj) {
-	        try {
-	            return Object(obj).constructor.prototype;
-	        }
-	        catch (e) {
-	            return proto;
-	        }
-	    }
-
-	    var ArrayIsArray = function ArrayIsArray(obj) {
-	        try {
-	            return str.call(obj) === "[object Array]";
-	        }
-	        catch(e) {
-	            return false;
-	        }
-	    }
-
-	    module.exports = {
-	        isArray: ArrayIsArray,
-	        keys: ObjectKeys,
-	        defineProperty: ObjectDefineProperty,
-	        freeze: ObjectFreeze,
-	        getPrototypeOf: ObjectGetPrototypeOf,
-	        isES5: isES5
-	    };
-	}
-
-
-/***/ },
 /* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22957,6 +22976,22 @@ var StellarWallet =
 /* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// This object serves as a singleton to store config options
+
+	var extend = __webpack_require__(97);
+
+	var config = module.exports = {
+	  load: function (newOpts) {
+	    extend(config, newOpts);
+	    return config;
+	  }
+	};
+
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;"use strict";function q(a){throw a;}var u=void 0,v=!1;var sjcl={cipher:{},hash:{},keyexchange:{},mode:{},misc:{},codec:{},exception:{corrupt:function(a){this.toString=function(){return"CORRUPT: "+this.message};this.message=a},invalid:function(a){this.toString=function(){return"INVALID: "+this.message};this.message=a},bug:function(a){this.toString=function(){return"BUG: "+this.message};this.message=a},notReady:function(a){this.toString=function(){return"NOT READY: "+this.message};this.message=a}}};
 	"undefined"!==typeof module&&module.exports&&(module.exports=sjcl);"function"==="function"&&!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function(){return sjcl}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	sjcl.cipher.aes=function(a){this.p[0][0][0]||this.u();var b,c,d,e,f=this.p[0][4],g=this.p[1];b=a.length;var h=1;4!==b&&(6!==b&&8!==b)&&q(new sjcl.exception.invalid("invalid aes key size"));this.b=[d=a.slice(0),e=[]];for(a=b;a<4*b+28;a++){c=d[a-1];if(0===a%b||8===b&&4===a%b)c=f[c>>>24]<<24^f[c>>16&255]<<16^f[c>>8&255]<<8^f[c&255],0===a%b&&(c=c<<8^c>>>24^h<<24,h=h<<1^283*(h>>7));d[a]=d[a-b]^c}for(b=0;a;b++,a--)c=d[b&3?a:a-4],e[b]=4>=a||4>b?c:g[0][f[c>>>24]]^g[1][f[c>>16&255]]^g[2][f[c>>8&255]]^g[3][f[c&
@@ -23040,23 +23075,48 @@ var StellarWallet =
 
 
 /***/ },
-/* 100 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// This object serves as a singleton to store config options
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var intSize = 4;
+	var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
+	var chrsz = 8;
 
-	var extend = __webpack_require__(97);
-
-	var config = module.exports = {
-	  load: function (newOpts) {
-	    extend(config, newOpts);
-	    return config;
+	function toArray(buf, bigEndian) {
+	  if ((buf.length % intSize) !== 0) {
+	    var len = buf.length + (intSize - (buf.length % intSize));
+	    buf = Buffer.concat([buf, zeroBuffer], len);
 	  }
-	};
 
+	  var arr = [];
+	  var fn = bigEndian ? buf.readInt32BE : buf.readInt32LE;
+	  for (var i = 0; i < buf.length; i += intSize) {
+	    arr.push(fn.call(buf, i));
+	  }
+	  return arr;
+	}
+
+	function toBuffer(arr, size, bigEndian) {
+	  var buf = new Buffer(size);
+	  var fn = bigEndian ? buf.writeInt32BE : buf.writeInt32LE;
+	  for (var i = 0; i < arr.length; i++) {
+	    fn.call(buf, arr[i], i * 4, true);
+	  }
+	  return buf;
+	}
+
+	function hash(buf, fn, hashSize, bigEndian) {
+	  if (!Buffer.isBuffer(buf)) buf = new Buffer(buf);
+	  var arr = fn(toArray(buf, bigEndian), buf.length * chrsz);
+	  return toBuffer(arr, hashSize, bigEndian);
+	}
+
+	module.exports = { hash: hash };
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32).Buffer))
 
 /***/ },
-/* 101 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = function(crypto) {
@@ -23143,47 +23203,6 @@ var StellarWallet =
 	    pbkdf2Sync: pbkdf2Sync
 	  }
 	}
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32).Buffer))
-
-/***/ },
-/* 102 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var intSize = 4;
-	var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
-	var chrsz = 8;
-
-	function toArray(buf, bigEndian) {
-	  if ((buf.length % intSize) !== 0) {
-	    var len = buf.length + (intSize - (buf.length % intSize));
-	    buf = Buffer.concat([buf, zeroBuffer], len);
-	  }
-
-	  var arr = [];
-	  var fn = bigEndian ? buf.readInt32BE : buf.readInt32LE;
-	  for (var i = 0; i < buf.length; i += intSize) {
-	    arr.push(fn.call(buf, i));
-	  }
-	  return arr;
-	}
-
-	function toBuffer(arr, size, bigEndian) {
-	  var buf = new Buffer(size);
-	  var fn = bigEndian ? buf.writeInt32BE : buf.writeInt32LE;
-	  for (var i = 0; i < arr.length; i++) {
-	    fn.call(buf, arr[i], i * 4, true);
-	  }
-	  return buf;
-	}
-
-	function hash(buf, fn, hashSize, bigEndian) {
-	  if (!Buffer.isBuffer(buf)) buf = new Buffer(buf);
-	  var arr = fn(toArray(buf, bigEndian), buf.length * chrsz);
-	  return toBuffer(arr, hashSize, bigEndian);
-	}
-
-	module.exports = { hash: hash };
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32).Buffer))
 
@@ -24149,35 +24168,6 @@ var StellarWallet =
 
 	
 	/**
-	 * Reduce `arr` with `fn`.
-	 *
-	 * @param {Array} arr
-	 * @param {Function} fn
-	 * @param {Mixed} initial
-	 *
-	 * TODO: combatible error handling?
-	 */
-
-	module.exports = function(arr, fn, initial){  
-	  var idx = 0;
-	  var len = arr.length;
-	  var curr = arguments.length == 3
-	    ? initial
-	    : arr[idx++];
-
-	  while (idx < len) {
-	    curr = fn.call(null, curr, arr[idx], ++idx, arr);
-	  }
-	  
-	  return curr;
-	};
-
-/***/ },
-/* 110 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
 	 * Expose `Emitter`.
 	 */
 
@@ -24341,6 +24331,35 @@ var StellarWallet =
 	  return !! this.listeners(event).length;
 	};
 
+
+/***/ },
+/* 110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * Reduce `arr` with `fn`.
+	 *
+	 * @param {Array} arr
+	 * @param {Function} fn
+	 * @param {Mixed} initial
+	 *
+	 * TODO: combatible error handling?
+	 */
+
+	module.exports = function(arr, fn, initial){  
+	  var idx = 0;
+	  var len = arr.length;
+	  var curr = arguments.length == 3
+	    ? initial
+	    : arr[idx++];
+
+	  while (idx < len) {
+	    curr = fn.call(null, curr, arr[idx], ++idx, arr);
+	  }
+	  
+	  return curr;
+	};
 
 /***/ },
 /* 111 */
@@ -26449,8 +26468,8 @@ var StellarWallet =
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(110);
-	var reduce = __webpack_require__(109);
+	var Emitter = __webpack_require__(109);
+	var reduce = __webpack_require__(110);
 
 	/**
 	 * Root reference for iframes.
