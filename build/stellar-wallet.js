@@ -150,6 +150,7 @@ var StellarWallet =
 	errors.getProtocolError = function(code) {
 	  switch(code) {
 	    case 'not_found':         return new errors.WalletNotFound('Login/password combination is invalid');
+	    case 'wallet_not_found':  return new errors.WalletNotFound('Login/password combination is invalid');
 	    case 'already_taken':     return new errors.UsernameAlreadyTaken('Username already exists');
 	    case 'invalid_username':  return new errors.InvalidUsername('Invalid username');
 	    case 'invalid_totp_code': return new errors.InvalidTotpCode('Invalid TOTP code');
@@ -563,7 +564,7 @@ var StellarWallet =
 
 	var _ = __webpack_require__(12);
 	var base58 = __webpack_require__(37);
-	var crypto  = __webpack_require__(34);
+	var crypto  = __webpack_require__(33);
 	var errors = __webpack_require__(2);
 	var nacl = __webpack_require__(35);
 	var sjcl = __webpack_require__(10);
@@ -694,7 +695,7 @@ var StellarWallet =
 	  return words;
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
 
 /***/ },
 /* 7 */
@@ -9979,10 +9980,70 @@ var StellarWallet =
 	  return Object.prototype.hasOwnProperty.call(obj, prop);
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(51)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(81)))
 
 /***/ },
 /* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var rng = __webpack_require__(45)
+
+	function error () {
+	  var m = [].slice.call(arguments).join(' ')
+	  throw new Error([
+	    m,
+	    'we accept pull requests',
+	    'http://github.com/dominictarr/crypto-browserify'
+	    ].join('\n'))
+	}
+
+	exports.createHash = __webpack_require__(46)
+
+	exports.createHmac = __webpack_require__(47)
+
+	exports.randomBytes = function(size, callback) {
+	  if (callback && callback.call) {
+	    try {
+	      callback.call(this, undefined, new Buffer(rng(size)))
+	    } catch (err) { callback(err) }
+	  } else {
+	    return new Buffer(rng(size))
+	  }
+	}
+
+	function each(a, f) {
+	  for(var i in a)
+	    f(a[i], i)
+	}
+
+	exports.getHashes = function () {
+	  return ['sha1', 'sha256', 'sha512', 'md5', 'rmd160']
+	}
+
+	var p = __webpack_require__(48)(exports)
+	exports.pbkdf2 = p.pbkdf2
+	exports.pbkdf2Sync = p.pbkdf2Sync
+
+
+	// the least I can do is make error messages for the rest of the node.js/crypto api.
+	each(['createCredentials'
+	, 'createCipher'
+	, 'createCipheriv'
+	, 'createDecipher'
+	, 'createDecipheriv'
+	, 'createSign'
+	, 'createVerify'
+	, 'createDiffieHellman'
+	], function (name) {
+	  exports[name] = function () {
+	    error('sorry,', name, 'is not implemented yet')
+	  }
+	})
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
+
+/***/ },
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -11534,67 +11595,7 @@ var StellarWallet =
 	  return i
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer, (function() { return this; }())))
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var rng = __webpack_require__(45)
-
-	function error () {
-	  var m = [].slice.call(arguments).join(' ')
-	  throw new Error([
-	    m,
-	    'we accept pull requests',
-	    'http://github.com/dominictarr/crypto-browserify'
-	    ].join('\n'))
-	}
-
-	exports.createHash = __webpack_require__(46)
-
-	exports.createHmac = __webpack_require__(47)
-
-	exports.randomBytes = function(size, callback) {
-	  if (callback && callback.call) {
-	    try {
-	      callback.call(this, undefined, new Buffer(rng(size)))
-	    } catch (err) { callback(err) }
-	  } else {
-	    return new Buffer(rng(size))
-	  }
-	}
-
-	function each(a, f) {
-	  for(var i in a)
-	    f(a[i], i)
-	}
-
-	exports.getHashes = function () {
-	  return ['sha1', 'sha256', 'sha512', 'md5', 'rmd160']
-	}
-
-	var p = __webpack_require__(48)(exports)
-	exports.pbkdf2 = p.pbkdf2
-	exports.pbkdf2Sync = p.pbkdf2Sync
-
-
-	// the least I can do is make error messages for the rest of the node.js/crypto api.
-	each(['createCredentials'
-	, 'createCipher'
-	, 'createCipheriv'
-	, 'createDecipher'
-	, 'createDecipheriv'
-	, 'createSign'
-	, 'createVerify'
-	, 'createDiffieHellman'
-	], function (name) {
-	  exports[name] = function () {
-	    error('sorry,', name, 'is not implemented yet')
-	  }
-	})
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer, (function() { return this; }())))
 
 /***/ },
 /* 35 */
@@ -12791,7 +12792,7 @@ var StellarWallet =
 	    }
 	  } else if (true) {
 	    // Node.js.
-	    crypto = __webpack_require__(34);
+	    crypto = __webpack_require__(33);
 	    if (crypto) {
 	      nacl.setPRNG(function(x, n) {
 	        var i, v = crypto.randomBytes(n);
@@ -12803,7 +12804,7 @@ var StellarWallet =
 
 	})(typeof module !== 'undefined' && module.exports ? module.exports : (window.nacl = window.nacl || {}));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
 
 /***/ },
 /* 36 */
@@ -12956,19 +12957,19 @@ var StellarWallet =
 	    return bluebird;
 	}
 	module.exports = function() {
-	var util = __webpack_require__(52);
-	var async = __webpack_require__(53);
-	var errors = __webpack_require__(54);
+	var util = __webpack_require__(51);
+	var async = __webpack_require__(52);
+	var errors = __webpack_require__(53);
 
 	var INTERNAL = function(){};
 	var APPLY = {};
 	var NEXT_FILTER = {e: null};
 
-	var cast = __webpack_require__(55)(Promise, INTERNAL);
-	var PromiseArray = __webpack_require__(56)(Promise, INTERNAL, cast);
-	var CapturedTrace = __webpack_require__(57)();
-	var CatchFilter = __webpack_require__(58)(NEXT_FILTER);
-	var PromiseResolver = __webpack_require__(59);
+	var cast = __webpack_require__(54)(Promise, INTERNAL);
+	var PromiseArray = __webpack_require__(55)(Promise, INTERNAL, cast);
+	var CapturedTrace = __webpack_require__(56)();
+	var CatchFilter = __webpack_require__(57)(NEXT_FILTER);
+	var PromiseResolver = __webpack_require__(58);
 
 	var isArray = util.isArray;
 
@@ -12985,7 +12986,7 @@ var StellarWallet =
 	var markAsOriginatingFromRejection = errors.markAsOriginatingFromRejection;
 	var canAttach = errors.canAttach;
 	var thrower = util.thrower;
-	var apiRejection = __webpack_require__(60)(Promise);
+	var apiRejection = __webpack_require__(59)(Promise);
 
 
 	var makeSelfResolutionError = function Promise$_makeSelfResolutionError() {
@@ -13982,10 +13983,10 @@ var StellarWallet =
 	}
 
 	Promise._makeSelfResolutionError = makeSelfResolutionError;
-	__webpack_require__(61)(Promise, NEXT_FILTER, cast);
+	__webpack_require__(60)(Promise, NEXT_FILTER, cast);
+	__webpack_require__(61)(Promise);
 	__webpack_require__(62)(Promise);
-	__webpack_require__(63)(Promise);
-	__webpack_require__(64)(Promise, PromiseArray, cast, INTERNAL);
+	__webpack_require__(63)(Promise, PromiseArray, cast, INTERNAL);
 	Promise.RangeError = RangeError;
 	Promise.CancellationError = CancellationError;
 	Promise.TimeoutError = TimeoutError;
@@ -13997,30 +13998,30 @@ var StellarWallet =
 	util.toFastProperties(Promise);
 	util.toFastProperties(Promise.prototype);
 	Promise.Promise = Promise;
+	__webpack_require__(64)(Promise,INTERNAL,cast);
 	__webpack_require__(65)(Promise,INTERNAL,cast);
-	__webpack_require__(66)(Promise,INTERNAL,cast);
-	__webpack_require__(67)(Promise);
-	__webpack_require__(68)(Promise,apiRejection,INTERNAL,cast);
-	__webpack_require__(69)(Promise,PromiseArray,apiRejection,cast,INTERNAL);
-	__webpack_require__(70)(Promise);
-	__webpack_require__(71)(Promise,INTERNAL);
-	__webpack_require__(72)(Promise,PromiseArray,cast);
-	__webpack_require__(73)(Promise,PromiseArray,apiRejection,cast,INTERNAL);
-	__webpack_require__(74)(Promise,PromiseArray);
-	__webpack_require__(75)(Promise,PromiseArray,apiRejection);
-	__webpack_require__(76)(Promise,PromiseArray);
+	__webpack_require__(66)(Promise);
+	__webpack_require__(67)(Promise,apiRejection,INTERNAL,cast);
+	__webpack_require__(68)(Promise,PromiseArray,apiRejection,cast,INTERNAL);
+	__webpack_require__(69)(Promise);
+	__webpack_require__(70)(Promise,INTERNAL);
+	__webpack_require__(71)(Promise,PromiseArray,cast);
+	__webpack_require__(72)(Promise,PromiseArray,apiRejection,cast,INTERNAL);
+	__webpack_require__(73)(Promise,PromiseArray);
+	__webpack_require__(74)(Promise,PromiseArray,apiRejection);
+	__webpack_require__(75)(Promise,PromiseArray);
+	__webpack_require__(76)(Promise,INTERNAL);
 	__webpack_require__(77)(Promise,INTERNAL);
-	__webpack_require__(78)(Promise,INTERNAL);
-	__webpack_require__(79)(Promise,PromiseArray);
-	__webpack_require__(80)(Promise,INTERNAL);
-	__webpack_require__(81)(Promise,apiRejection,cast);
+	__webpack_require__(78)(Promise,PromiseArray);
+	__webpack_require__(79)(Promise,INTERNAL);
+	__webpack_require__(80)(Promise,apiRejection,cast);
 
 	Promise.prototype = Promise.prototype;
 	return Promise;
 
 	};
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(51)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(81)))
 
 /***/ },
 /* 39 */
@@ -14552,7 +14553,7 @@ var StellarWallet =
 
 	// Going up three levels is needed to escape the src-cov folder used for the
 	// test coverage stuff.
-	exports.sjcl = __webpack_require__(102);
+	exports.sjcl = __webpack_require__(101);
 	exports.jsbn = __webpack_require__(93);
 
 	// vim:sw=2:sts=2:ts=8:et
@@ -14562,7 +14563,7 @@ var StellarWallet =
 /* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var sjcl = __webpack_require__(102);
+	var sjcl = __webpack_require__(101);
 
 	var scrypt = function(passwd, salt, N, r, p, dkLen) {
 
@@ -14768,7 +14769,7 @@ var StellarWallet =
 	  }
 	}())
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(34).Buffer))
 
 /***/ },
 /* 46 */
@@ -14805,7 +14806,7 @@ var StellarWallet =
 	  return createHash(alg)
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
 
 /***/ },
 /* 47 */
@@ -14855,7 +14856,7 @@ var StellarWallet =
 	}
 
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
 
 /***/ },
 /* 48 */
@@ -14904,70 +14905,6 @@ var StellarWallet =
 
 /***/ },
 /* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// shim for using process in browser
-
-	var process = module.exports = {};
-	var queue = [];
-	var draining = false;
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    draining = true;
-	    var currentQueue;
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        var i = -1;
-	        while (++i < len) {
-	            currentQueue[i]();
-	        }
-	        len = queue.length;
-	    }
-	    draining = false;
-	}
-	process.nextTick = function (fun) {
-	    queue.push(fun);
-	    if (!draining) {
-	        setTimeout(drainQueue, 0);
-	    }
-	};
-
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	// TODO(shtylman)
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
-/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15243,7 +15180,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 53 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -15273,8 +15210,8 @@ var StellarWallet =
 	"use strict";
 	var schedule = __webpack_require__(97);
 	var Queue = __webpack_require__(98);
-	var errorObj = __webpack_require__(52).errorObj;
-	var tryCatch1 = __webpack_require__(52).tryCatch1;
+	var errorObj = __webpack_require__(51).errorObj;
+	var tryCatch1 = __webpack_require__(51).tryCatch1;
 	var _process = typeof process !== "undefined" ? process : void 0;
 
 	function Async() {
@@ -15360,10 +15297,10 @@ var StellarWallet =
 
 	module.exports = new Async();
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(51)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(81)))
 
 /***/ },
-/* 54 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15392,7 +15329,7 @@ var StellarWallet =
 	 */
 	"use strict";
 	var Objectfreeze = __webpack_require__(96).freeze;
-	var util = __webpack_require__(52);
+	var util = __webpack_require__(51);
 	var inherits = util.inherits;
 	var notEnumerableProp = util.notEnumerableProp;
 
@@ -15516,7 +15453,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15545,8 +15482,8 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise, INTERNAL) {
-	var util = __webpack_require__(52);
-	var canAttach = __webpack_require__(54).canAttach;
+	var util = __webpack_require__(51);
+	var canAttach = __webpack_require__(53).canAttach;
 	var errorObj = util.errorObj;
 	var isObject = util.isObject;
 
@@ -15657,7 +15594,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15686,8 +15623,8 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise, INTERNAL, cast) {
-	var canAttach = __webpack_require__(54).canAttach;
-	var util = __webpack_require__(52);
+	var canAttach = __webpack_require__(53).canAttach;
+	var util = __webpack_require__(51);
 	var isArray = util.isArray;
 
 	function toResolutionValue(val) {
@@ -15867,7 +15804,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15896,7 +15833,7 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function() {
-	var inherits = __webpack_require__(52).inherits;
+	var inherits = __webpack_require__(51).inherits;
 	var defineProperty = __webpack_require__(96).defineProperty;
 
 	var rignore = new RegExp(
@@ -16117,7 +16054,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16146,8 +16083,8 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(NEXT_FILTER) {
-	var util = __webpack_require__(52);
-	var errors = __webpack_require__(54);
+	var util = __webpack_require__(51);
+	var errors = __webpack_require__(53);
 	var tryCatch1 = util.tryCatch1;
 	var errorObj = util.errorObj;
 	var keys = __webpack_require__(96).keys;
@@ -16219,7 +16156,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 59 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16247,12 +16184,12 @@ var StellarWallet =
 	 * 
 	 */
 	"use strict";
-	var util = __webpack_require__(52);
+	var util = __webpack_require__(51);
 	var maybeWrapAsError = util.maybeWrapAsError;
-	var errors = __webpack_require__(54);
+	var errors = __webpack_require__(53);
 	var TimeoutError = errors.TimeoutError;
 	var OperationalError = errors.OperationalError;
-	var async = __webpack_require__(53);
+	var async = __webpack_require__(52);
 	var haveGetters = util.haveGetters;
 	var es5 = __webpack_require__(96);
 
@@ -16385,7 +16322,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 60 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16414,7 +16351,7 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise) {
-	var TypeError = __webpack_require__(54).TypeError;
+	var TypeError = __webpack_require__(53).TypeError;
 
 	function apiRejection(msg) {
 	    var error = new TypeError(msg);
@@ -16431,7 +16368,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 61 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16460,7 +16397,7 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise, NEXT_FILTER, cast) {
-	var util = __webpack_require__(52);
+	var util = __webpack_require__(51);
 	var wrapsPrimitiveReceiver = util.wrapsPrimitiveReceiver;
 	var isPrimitive = util.isPrimitive;
 	var thrower = util.thrower;
@@ -16559,7 +16496,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 62 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16587,7 +16524,7 @@ var StellarWallet =
 	 * 
 	 */
 	"use strict";
-	var util = __webpack_require__(52);
+	var util = __webpack_require__(51);
 	var isPrimitive = util.isPrimitive;
 	var wrapsPrimitiveReceiver = util.wrapsPrimitiveReceiver;
 
@@ -16645,7 +16582,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 63 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16729,7 +16666,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 64 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16759,7 +16696,7 @@ var StellarWallet =
 	"use strict";
 	module.exports =
 	function(Promise, PromiseArray, cast, INTERNAL) {
-	var util = __webpack_require__(52);
+	var util = __webpack_require__(51);
 	var canEvaluate = util.canEvaluate;
 	var tryCatch1 = util.tryCatch1;
 	var errorObj = util.errorObj;
@@ -16859,7 +16796,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 65 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16898,9 +16835,9 @@ var StellarWallet =
 	};
 
 	module.exports = function(Promise, INTERNAL, cast) {
-	var util = __webpack_require__(52);
-	var errors = __webpack_require__(54);
-	var apiRejection = __webpack_require__(60)(Promise);
+	var util = __webpack_require__(51);
+	var errors = __webpack_require__(53);
+	var apiRejection = __webpack_require__(59)(Promise);
 	var TimeoutError = Promise.TimeoutError;
 
 	var afterTimeout = function Promise$_afterTimeout(promise, message, ms) {
@@ -16973,7 +16910,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 66 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17002,8 +16939,8 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise, INTERNAL, cast) {
-	var apiRejection = __webpack_require__(60)(Promise);
-	var isArray = __webpack_require__(52).isArray;
+	var apiRejection = __webpack_require__(59)(Promise);
+	var isArray = __webpack_require__(51).isArray;
 
 	var raceLater = function Promise$_raceLater(promise) {
 	    return promise.then(function(array) {
@@ -17053,7 +16990,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 67 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17089,7 +17026,7 @@ var StellarWallet =
 	}
 
 	module.exports = function(Promise) {
-	var util = __webpack_require__(52);
+	var util = __webpack_require__(51);
 	var canEvaluate = util.canEvaluate;
 	var isIdentifier = util.isIdentifier;
 
@@ -17180,7 +17117,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 68 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17209,10 +17146,10 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise, apiRejection, INTERNAL, cast) {
-	var errors = __webpack_require__(54);
+	var errors = __webpack_require__(53);
 	var TypeError = errors.TypeError;
-	var deprecated = __webpack_require__(52).deprecated;
-	var util = __webpack_require__(52);
+	var deprecated = __webpack_require__(51).deprecated;
+	var util = __webpack_require__(51);
 	var errorObj = util.errorObj;
 	var tryCatch1 = util.tryCatch1;
 	var yieldHandlers = [];
@@ -17339,7 +17276,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 69 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17368,7 +17305,7 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise, PromiseArray, apiRejection, cast, INTERNAL) {
-	var util = __webpack_require__(52);
+	var util = __webpack_require__(51);
 	var tryCatch3 = util.tryCatch3;
 	var errorObj = util.errorObj;
 	var PENDING = {};
@@ -17496,7 +17433,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 70 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17525,8 +17462,8 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise) {
-	var util = __webpack_require__(52);
-	var async = __webpack_require__(53);
+	var util = __webpack_require__(51);
+	var async = __webpack_require__(52);
 	var tryCatch2 = util.tryCatch2;
 	var tryCatch1 = util.tryCatch1;
 	var errorObj = util.errorObj;
@@ -17580,7 +17517,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 71 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17610,13 +17547,13 @@ var StellarWallet =
 	"use strict";
 	module.exports = function(Promise, INTERNAL) {
 	var THIS = {};
-	var util = __webpack_require__(52);
-	var nodebackForPromise = __webpack_require__(59)
+	var util = __webpack_require__(51);
+	var nodebackForPromise = __webpack_require__(58)
 	    ._nodebackForPromise;
 	var withAppended = util.withAppended;
 	var maybeWrapAsError = util.maybeWrapAsError;
 	var canEvaluate = util.canEvaluate;
-	var TypeError = __webpack_require__(54).TypeError;
+	var TypeError = __webpack_require__(53).TypeError;
 	var defaultSuffix = "Async";
 	var defaultFilter = function(name, func) {
 	    return util.isIdentifier(name) &&
@@ -17914,7 +17851,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 72 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17943,8 +17880,8 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise, PromiseArray, cast) {
-	var util = __webpack_require__(52);
-	var apiRejection = __webpack_require__(60)(Promise);
+	var util = __webpack_require__(51);
+	var apiRejection = __webpack_require__(59)(Promise);
 	var isObject = util.isObject;
 	var es5 = __webpack_require__(96);
 
@@ -18030,7 +17967,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 73 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18059,7 +17996,7 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise, PromiseArray, apiRejection, cast, INTERNAL) {
-	var util = __webpack_require__(52);
+	var util = __webpack_require__(51);
 	var tryCatch4 = util.tryCatch4;
 	var tryCatch3 = util.tryCatch3;
 	var errorObj = util.errorObj;
@@ -18219,7 +18156,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 74 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18250,7 +18187,7 @@ var StellarWallet =
 	module.exports =
 	    function(Promise, PromiseArray) {
 	var PromiseInspection = Promise.PromiseInspection;
-	var util = __webpack_require__(52);
+	var util = __webpack_require__(51);
 
 	function SettledPromiseArray(values) {
 	    this.constructor$(values);
@@ -18294,7 +18231,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 75 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18324,9 +18261,9 @@ var StellarWallet =
 	"use strict";
 	module.exports =
 	function(Promise, PromiseArray, apiRejection) {
-	var util = __webpack_require__(52);
-	var RangeError = __webpack_require__(54).RangeError;
-	var AggregateError = __webpack_require__(54).AggregateError;
+	var util = __webpack_require__(51);
+	var RangeError = __webpack_require__(53).RangeError;
+	var AggregateError = __webpack_require__(53).AggregateError;
 	var isArray = util.isArray;
 
 
@@ -18463,7 +18400,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 76 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18492,9 +18429,9 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise, PromiseArray) {
-	var util = __webpack_require__(52);
-	var async = __webpack_require__(53);
-	var errors = __webpack_require__(54);
+	var util = __webpack_require__(51);
+	var async = __webpack_require__(52);
+	var errors = __webpack_require__(53);
 	var tryCatch1 = util.tryCatch1;
 	var errorObj = util.errorObj;
 
@@ -18583,7 +18520,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 77 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18612,9 +18549,9 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function(Promise, INTERNAL) {
-	var errors = __webpack_require__(54);
+	var errors = __webpack_require__(53);
 	var canAttach = errors.canAttach;
-	var async = __webpack_require__(53);
+	var async = __webpack_require__(52);
 	var CancellationError = errors.CancellationError;
 
 	Promise.prototype._cancel = function Promise$_cancel(reason) {
@@ -18667,7 +18604,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 78 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18709,7 +18646,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 79 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18763,7 +18700,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 80 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18805,7 +18742,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 81 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18834,8 +18771,8 @@ var StellarWallet =
 	 */
 	"use strict";
 	module.exports = function (Promise, apiRejection, cast) {
-	    var TypeError = __webpack_require__(54).TypeError;
-	    var inherits = __webpack_require__(52).inherits;
+	    var TypeError = __webpack_require__(53).TypeError;
+	    var inherits = __webpack_require__(51).inherits;
 	    var PromiseInspection = Promise.PromiseInspection;
 
 	    function inspectionMapper(inspections) {
@@ -19003,6 +18940,70 @@ var StellarWallet =
 
 
 /***/ },
+/* 81 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// shim for using process in browser
+
+	var process = module.exports = {};
+	var queue = [];
+	var draining = false;
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    draining = true;
+	    var currentQueue;
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        var i = -1;
+	        while (++i < len) {
+	            currentQueue[i]();
+	        }
+	        len = queue.length;
+	    }
+	    draining = false;
+	}
+	process.nextTick = function (fun) {
+	    queue.push(fun);
+	    if (!draining) {
+	        setTimeout(drainQueue, 0);
+	    }
+	};
+
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	// TODO(shtylman)
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
 /* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -19132,7 +19133,7 @@ var StellarWallet =
 	    return decoded.slice(0, plainPos);
 	};
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
 
 /***/ },
 /* 83 */
@@ -19265,7 +19266,7 @@ var StellarWallet =
 
 	var utils   = __webpack_require__(43);
 	var sjcl    = utils.sjcl;
-	var config  = __webpack_require__(101);
+	var config  = __webpack_require__(102);
 
 	var BigInteger = utils.jsbn.BigInteger;
 
@@ -19566,7 +19567,7 @@ var StellarWallet =
 /***/ function(module, exports, __webpack_require__) {
 
 	var utils   = __webpack_require__(43);
-	var config  = __webpack_require__(101);
+	var config  = __webpack_require__(102);
 	var extend  = __webpack_require__(99);
 
 	var BigInteger = utils.jsbn.BigInteger;
@@ -20098,7 +20099,7 @@ var StellarWallet =
 
 	exports.Crypt = Crypt;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
 
 /***/ },
 /* 90 */
@@ -20108,8 +20109,8 @@ var StellarWallet =
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(115);
-	var reduce = __webpack_require__(116);
+	var Emitter = __webpack_require__(111);
+	var reduce = __webpack_require__(112);
 
 	/**
 	 * Root reference for iframes.
@@ -22909,7 +22910,7 @@ var StellarWallet =
 	else throw new Error("no async scheduler available");
 	module.exports = schedule;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(51)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(81)))
 
 /***/ },
 /* 98 */
@@ -23128,32 +23129,16 @@ var StellarWallet =
 	  return new Alg()
 	}
 
-	var Buffer = __webpack_require__(33).Buffer
-	var Hash   = __webpack_require__(111)(Buffer)
+	var Buffer = __webpack_require__(34).Buffer
+	var Hash   = __webpack_require__(113)(Buffer)
 
-	exports.sha1 = __webpack_require__(112)(Buffer, Hash)
-	exports.sha256 = __webpack_require__(113)(Buffer, Hash)
-	exports.sha512 = __webpack_require__(114)(Buffer, Hash)
+	exports.sha1 = __webpack_require__(114)(Buffer, Hash)
+	exports.sha256 = __webpack_require__(115)(Buffer, Hash)
+	exports.sha512 = __webpack_require__(116)(Buffer, Hash)
 
 
 /***/ },
 /* 101 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// This object serves as a singleton to store config options
-
-	var extend = __webpack_require__(99);
-
-	var config = module.exports = {
-	  load: function (newOpts) {
-	    extend(config, newOpts);
-	    return config;
-	  }
-	};
-
-
-/***/ },
-/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;"use strict";function q(a){throw a;}var u=void 0,v=!1;var sjcl={cipher:{},hash:{},keyexchange:{},mode:{},misc:{},codec:{},exception:{corrupt:function(a){this.toString=function(){return"CORRUPT: "+this.message};this.message=a},invalid:function(a){this.toString=function(){return"INVALID: "+this.message};this.message=a},bug:function(a){this.toString=function(){return"BUG: "+this.message};this.message=a},notReady:function(a){this.toString=function(){return"NOT READY: "+this.message};this.message=a}}};
@@ -23199,7 +23184,7 @@ var StellarWallet =
 	b){var c,d,e=this.D[a],f=[];for(d in e)e.hasOwnProperty(d)&&e[d]===b&&f.push(d);for(c=0;c<f.length;c++)d=f[c],delete e[d]},da:function(){Q(1)},ga:function(a){var b,c;try{b=a.x||a.clientX||a.offsetX||0,c=a.y||a.clientY||a.offsetY||0}catch(d){c=b=0}0!=b&&0!=c&&sjcl.random.addEntropy([b,c],2,"mouse");Q(0)},fa:function(){Q(2)},X:function(a){a=a.accelerationIncludingGravity.x||a.accelerationIncludingGravity.y||a.accelerationIncludingGravity.z;if(window.orientation){var b=window.orientation;"number"===
 	typeof b&&sjcl.random.addEntropy(b,1,"accelerometer")}a&&sjcl.random.addEntropy(a,2,"accelerometer");Q(0)}};function ga(a,b){var c,d=sjcl.random.D[a],e=[];for(c in d)d.hasOwnProperty(c)&&e.push(d[c]);for(c=0;c<e.length;c++)e[c](b)}function Q(a){"undefined"!==typeof window&&window.performance&&"function"===typeof window.performance.now?sjcl.random.addEntropy(window.performance.now(),a,"loadtime"):sjcl.random.addEntropy((new Date).valueOf(),a,"loadtime")}
 	function fa(a){a.b=B(a).concat(B(a));a.F=new sjcl.cipher.aes(a.b)}function B(a){for(var b=0;4>b&&!(a.l[b]=a.l[b]+1|0,a.l[b]);b++);return a.F.encrypt(a.l)}function P(a,b){return function(){b.apply(a,arguments)}}sjcl.random=new sjcl.prng(6);
-	a:try{var R,S,X,Y;if(Y="undefined"!==typeof module){var Z;if(Z=module.exports){var ha;try{ha=__webpack_require__(34)}catch(ma){ha=null}Z=(S=ha)&&S.randomBytes}Y=Z}if(Y)R=S.randomBytes(128),R=new Uint32Array((new Uint8Array(R)).buffer),sjcl.random.addEntropy(R,1024,"crypto['randomBytes']");else if("undefined"!==typeof window&&"undefined"!==typeof Uint32Array){X=new Uint32Array(32);if(window.crypto&&window.crypto.getRandomValues)window.crypto.getRandomValues(X);else if(window.msCrypto&&window.msCrypto.getRandomValues)window.msCrypto.getRandomValues(X);
+	a:try{var R,S,X,Y;if(Y="undefined"!==typeof module){var Z;if(Z=module.exports){var ha;try{ha=__webpack_require__(33)}catch(ma){ha=null}Z=(S=ha)&&S.randomBytes}Y=Z}if(Y)R=S.randomBytes(128),R=new Uint32Array((new Uint8Array(R)).buffer),sjcl.random.addEntropy(R,1024,"crypto['randomBytes']");else if("undefined"!==typeof window&&"undefined"!==typeof Uint32Array){X=new Uint32Array(32);if(window.crypto&&window.crypto.getRandomValues)window.crypto.getRandomValues(X);else if(window.msCrypto&&window.msCrypto.getRandomValues)window.msCrypto.getRandomValues(X);
 	else break a;sjcl.random.addEntropy(X,1024,"crypto['getRandomValues']")}}catch(pa){"undefined"!==typeof window&&window.console&&(console.log("There was an error collecting entropy from the browser:"),console.log(pa))}
 	sjcl.json={defaults:{v:1,iter:1E3,ks:128,ts:64,mode:"ccm",adata:"",cipher:"aes"},aa:function(a,b,c,d){c=c||{};d=d||{};var e=sjcl.json,f=e.k({iv:sjcl.random.randomWords(4,0)},e.defaults),g;e.k(f,c);c=f.adata;"string"===typeof f.salt&&(f.salt=sjcl.codec.base64.toBits(f.salt));"string"===typeof f.iv&&(f.iv=sjcl.codec.base64.toBits(f.iv));(!sjcl.mode[f.mode]||!sjcl.cipher[f.cipher]||"string"===typeof a&&100>=f.iter||64!==f.ts&&96!==f.ts&&128!==f.ts||128!==f.ks&&192!==f.ks&&0x100!==f.ks||2>f.iv.length||
 	4<f.iv.length)&&q(new sjcl.exception.invalid("json encrypt: invalid parameters"));"string"===typeof a?(g=sjcl.misc.cachedPbkdf2(a,f),a=g.key.slice(0,f.ks/32),f.salt=g.salt):sjcl.ecc&&a instanceof sjcl.ecc.elGamal.publicKey&&(g=a.kem(),f.kemtag=g.tag,a=g.key.slice(0,f.ks/32));"string"===typeof b&&(b=sjcl.codec.utf8String.toBits(b));"string"===typeof c&&(c=sjcl.codec.utf8String.toBits(c));g=new sjcl.cipher[f.cipher](a);e.k(d,f);d.key=a;f.ct=sjcl.mode[f.mode].encrypt(g,b,f.iv,c,f.ts);return f},encrypt:function(a,
@@ -23236,6 +23221,22 @@ var StellarWallet =
 	sjcl.hash.sha1.prototype={blockSize:512,reset:function(){this.e=this.i.slice(0);this.c=[];this.a=0;return this},update:function(a){"string"===typeof a&&(a=sjcl.codec.utf8String.toBits(a));var b,c=this.c=sjcl.bitArray.concat(this.c,a);b=this.a;a=this.a=b+sjcl.bitArray.bitLength(a);for(b=this.blockSize+b&-this.blockSize;b<=a;b+=this.blockSize)this.h(c.splice(0,16));return this},finalize:function(){var a,b=this.c,c=this.e,b=sjcl.bitArray.concat(b,[sjcl.bitArray.partial(1,1)]);for(a=b.length+2;a&15;a++)b.push(0);
 	b.push(Math.floor(this.a/0x100000000));for(b.push(this.a|0);b.length;)this.h(b.splice(0,16));this.reset();return c},i:[1732584193,4023233417,2562383102,271733878,3285377520],b:[1518500249,1859775393,2400959708,3395469782],h:function(a){var b,c,d,e,f,g,h=a.slice(0),k=this.e;c=k[0];d=k[1];e=k[2];f=k[3];g=k[4];for(a=0;79>=a;a++)16<=a&&(h[a]=(h[a-3]^h[a-8]^h[a-14]^h[a-16])<<1|(h[a-3]^h[a-8]^h[a-14]^h[a-16])>>>31),b=19>=a?d&e|~d&f:39>=a?d^e^f:59>=a?d&e|d&f|e&f:79>=a?d^e^f:u,b=(c<<5|c>>>27)+b+g+h[a]+this.b[Math.floor(a/
 	20)]|0,g=f,f=e,e=d<<30|d>>>2,d=c,c=b;k[0]=k[0]+c|0;k[1]=k[1]+d|0;k[2]=k[2]+e|0;k[3]=k[3]+f|0;k[4]=k[4]+g|0}};
+
+
+/***/ },
+/* 102 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// This object serves as a singleton to store config options
+
+	var extend = __webpack_require__(99);
+
+	var config = module.exports = {
+	  load: function (newOpts) {
+	    extend(config, newOpts);
+	    return config;
+	  }
+	};
 
 
 /***/ },
@@ -23277,7 +23278,7 @@ var StellarWallet =
 
 	module.exports = { hash: hash };
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
 
 /***/ },
 /* 104 */
@@ -23368,7 +23369,7 @@ var StellarWallet =
 	  }
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
 
 /***/ },
 /* 105 */
@@ -23601,7 +23602,7 @@ var StellarWallet =
 
 
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
 
 /***/ },
 /* 109 */
@@ -24330,6 +24331,205 @@ var StellarWallet =
 /* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
+	
+	/**
+	 * Expose `Emitter`.
+	 */
+
+	module.exports = Emitter;
+
+	/**
+	 * Initialize a new `Emitter`.
+	 *
+	 * @api public
+	 */
+
+	function Emitter(obj) {
+	  if (obj) return mixin(obj);
+	};
+
+	/**
+	 * Mixin the emitter properties.
+	 *
+	 * @param {Object} obj
+	 * @return {Object}
+	 * @api private
+	 */
+
+	function mixin(obj) {
+	  for (var key in Emitter.prototype) {
+	    obj[key] = Emitter.prototype[key];
+	  }
+	  return obj;
+	}
+
+	/**
+	 * Listen on the given `event` with `fn`.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.on =
+	Emitter.prototype.addEventListener = function(event, fn){
+	  this._callbacks = this._callbacks || {};
+	  (this._callbacks[event] = this._callbacks[event] || [])
+	    .push(fn);
+	  return this;
+	};
+
+	/**
+	 * Adds an `event` listener that will be invoked a single
+	 * time then automatically removed.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.once = function(event, fn){
+	  var self = this;
+	  this._callbacks = this._callbacks || {};
+
+	  function on() {
+	    self.off(event, on);
+	    fn.apply(this, arguments);
+	  }
+
+	  on.fn = fn;
+	  this.on(event, on);
+	  return this;
+	};
+
+	/**
+	 * Remove the given callback for `event` or all
+	 * registered callbacks.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.off =
+	Emitter.prototype.removeListener =
+	Emitter.prototype.removeAllListeners =
+	Emitter.prototype.removeEventListener = function(event, fn){
+	  this._callbacks = this._callbacks || {};
+
+	  // all
+	  if (0 == arguments.length) {
+	    this._callbacks = {};
+	    return this;
+	  }
+
+	  // specific event
+	  var callbacks = this._callbacks[event];
+	  if (!callbacks) return this;
+
+	  // remove all handlers
+	  if (1 == arguments.length) {
+	    delete this._callbacks[event];
+	    return this;
+	  }
+
+	  // remove specific handler
+	  var cb;
+	  for (var i = 0; i < callbacks.length; i++) {
+	    cb = callbacks[i];
+	    if (cb === fn || cb.fn === fn) {
+	      callbacks.splice(i, 1);
+	      break;
+	    }
+	  }
+	  return this;
+	};
+
+	/**
+	 * Emit `event` with the given args.
+	 *
+	 * @param {String} event
+	 * @param {Mixed} ...
+	 * @return {Emitter}
+	 */
+
+	Emitter.prototype.emit = function(event){
+	  this._callbacks = this._callbacks || {};
+	  var args = [].slice.call(arguments, 1)
+	    , callbacks = this._callbacks[event];
+
+	  if (callbacks) {
+	    callbacks = callbacks.slice(0);
+	    for (var i = 0, len = callbacks.length; i < len; ++i) {
+	      callbacks[i].apply(this, args);
+	    }
+	  }
+
+	  return this;
+	};
+
+	/**
+	 * Return array of callbacks for `event`.
+	 *
+	 * @param {String} event
+	 * @return {Array}
+	 * @api public
+	 */
+
+	Emitter.prototype.listeners = function(event){
+	  this._callbacks = this._callbacks || {};
+	  return this._callbacks[event] || [];
+	};
+
+	/**
+	 * Check if this emitter has `event` handlers.
+	 *
+	 * @param {String} event
+	 * @return {Boolean}
+	 * @api public
+	 */
+
+	Emitter.prototype.hasListeners = function(event){
+	  return !! this.listeners(event).length;
+	};
+
+
+/***/ },
+/* 112 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * Reduce `arr` with `fn`.
+	 *
+	 * @param {Array} arr
+	 * @param {Function} fn
+	 * @param {Mixed} initial
+	 *
+	 * TODO: combatible error handling?
+	 */
+
+	module.exports = function(arr, fn, initial){  
+	  var idx = 0;
+	  var len = arr.length;
+	  var curr = arguments.length == 3
+	    ? initial
+	    : arr[idx++];
+
+	  while (idx < len) {
+	    curr = fn.call(null, curr, arr[idx], ++idx, arr);
+	  }
+	  
+	  return curr;
+	};
+
+/***/ },
+/* 113 */
+/***/ function(module, exports, __webpack_require__) {
+
 	module.exports = function (Buffer) {
 
 	  //prototype class for hash functions
@@ -24410,7 +24610,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 112 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -24554,7 +24754,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 113 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -24707,7 +24907,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 114 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var inherits = __webpack_require__(32).inherits
@@ -24955,205 +25155,6 @@ var StellarWallet =
 
 	}
 
-
-/***/ },
-/* 115 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * Expose `Emitter`.
-	 */
-
-	module.exports = Emitter;
-
-	/**
-	 * Initialize a new `Emitter`.
-	 *
-	 * @api public
-	 */
-
-	function Emitter(obj) {
-	  if (obj) return mixin(obj);
-	};
-
-	/**
-	 * Mixin the emitter properties.
-	 *
-	 * @param {Object} obj
-	 * @return {Object}
-	 * @api private
-	 */
-
-	function mixin(obj) {
-	  for (var key in Emitter.prototype) {
-	    obj[key] = Emitter.prototype[key];
-	  }
-	  return obj;
-	}
-
-	/**
-	 * Listen on the given `event` with `fn`.
-	 *
-	 * @param {String} event
-	 * @param {Function} fn
-	 * @return {Emitter}
-	 * @api public
-	 */
-
-	Emitter.prototype.on =
-	Emitter.prototype.addEventListener = function(event, fn){
-	  this._callbacks = this._callbacks || {};
-	  (this._callbacks[event] = this._callbacks[event] || [])
-	    .push(fn);
-	  return this;
-	};
-
-	/**
-	 * Adds an `event` listener that will be invoked a single
-	 * time then automatically removed.
-	 *
-	 * @param {String} event
-	 * @param {Function} fn
-	 * @return {Emitter}
-	 * @api public
-	 */
-
-	Emitter.prototype.once = function(event, fn){
-	  var self = this;
-	  this._callbacks = this._callbacks || {};
-
-	  function on() {
-	    self.off(event, on);
-	    fn.apply(this, arguments);
-	  }
-
-	  on.fn = fn;
-	  this.on(event, on);
-	  return this;
-	};
-
-	/**
-	 * Remove the given callback for `event` or all
-	 * registered callbacks.
-	 *
-	 * @param {String} event
-	 * @param {Function} fn
-	 * @return {Emitter}
-	 * @api public
-	 */
-
-	Emitter.prototype.off =
-	Emitter.prototype.removeListener =
-	Emitter.prototype.removeAllListeners =
-	Emitter.prototype.removeEventListener = function(event, fn){
-	  this._callbacks = this._callbacks || {};
-
-	  // all
-	  if (0 == arguments.length) {
-	    this._callbacks = {};
-	    return this;
-	  }
-
-	  // specific event
-	  var callbacks = this._callbacks[event];
-	  if (!callbacks) return this;
-
-	  // remove all handlers
-	  if (1 == arguments.length) {
-	    delete this._callbacks[event];
-	    return this;
-	  }
-
-	  // remove specific handler
-	  var cb;
-	  for (var i = 0; i < callbacks.length; i++) {
-	    cb = callbacks[i];
-	    if (cb === fn || cb.fn === fn) {
-	      callbacks.splice(i, 1);
-	      break;
-	    }
-	  }
-	  return this;
-	};
-
-	/**
-	 * Emit `event` with the given args.
-	 *
-	 * @param {String} event
-	 * @param {Mixed} ...
-	 * @return {Emitter}
-	 */
-
-	Emitter.prototype.emit = function(event){
-	  this._callbacks = this._callbacks || {};
-	  var args = [].slice.call(arguments, 1)
-	    , callbacks = this._callbacks[event];
-
-	  if (callbacks) {
-	    callbacks = callbacks.slice(0);
-	    for (var i = 0, len = callbacks.length; i < len; ++i) {
-	      callbacks[i].apply(this, args);
-	    }
-	  }
-
-	  return this;
-	};
-
-	/**
-	 * Return array of callbacks for `event`.
-	 *
-	 * @param {String} event
-	 * @return {Array}
-	 * @api public
-	 */
-
-	Emitter.prototype.listeners = function(event){
-	  this._callbacks = this._callbacks || {};
-	  return this._callbacks[event] || [];
-	};
-
-	/**
-	 * Check if this emitter has `event` handlers.
-	 *
-	 * @param {String} event
-	 * @return {Boolean}
-	 * @api public
-	 */
-
-	Emitter.prototype.hasListeners = function(event){
-	  return !! this.listeners(event).length;
-	};
-
-
-/***/ },
-/* 116 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * Reduce `arr` with `fn`.
-	 *
-	 * @param {Array} arr
-	 * @param {Function} fn
-	 * @param {Mixed} initial
-	 *
-	 * TODO: combatible error handling?
-	 */
-
-	module.exports = function(arr, fn, initial){  
-	  var idx = 0;
-	  var len = arr.length;
-	  var curr = arguments.length == 3
-	    ? initial
-	    : arr[idx++];
-
-	  while (idx < len) {
-	    curr = fn.call(null, curr, arr[idx], ++idx, arr);
-	  }
-	  
-	  return curr;
-	};
 
 /***/ },
 /* 117 */
@@ -26338,7 +26339,7 @@ var StellarWallet =
 	    }
 	  } else if (true) {
 	    // Node.js.
-	    crypto = __webpack_require__(34);
+	    crypto = __webpack_require__(33);
 	    if (crypto) {
 	      nacl.setPRNG(function(x, n) {
 	        var i, v = crypto.randomBytes(n);
@@ -26350,7 +26351,7 @@ var StellarWallet =
 
 	})(typeof module !== 'undefined' && module.exports ? module.exports : (window.nacl = window.nacl || {}));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
 
 /***/ },
 /* 118 */
@@ -26562,7 +26563,7 @@ var StellarWallet =
 
 
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34).Buffer))
 
 /***/ },
 /* 119 */
@@ -26632,8 +26633,8 @@ var StellarWallet =
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(115);
-	var reduce = __webpack_require__(116);
+	var Emitter = __webpack_require__(111);
+	var reduce = __webpack_require__(112);
 
 	/**
 	 * Root reference for iframes.
