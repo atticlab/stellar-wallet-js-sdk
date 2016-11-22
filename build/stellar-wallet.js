@@ -9816,7 +9816,7 @@ var StellarWallet =
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(122);
+	exports.inherits = __webpack_require__(121);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -10682,8 +10682,8 @@ var StellarWallet =
 	'use strict'
 
 	var base64 = __webpack_require__(123)
-	var ieee754 = __webpack_require__(114)
-	var isArray = __webpack_require__(119)
+	var ieee754 = __webpack_require__(110)
+	var isArray = __webpack_require__(118)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -15048,11 +15048,11 @@ var StellarWallet =
 	var BigInteger = utils.jsbn.BigInteger;
 
 	var Base    = __webpack_require__(65).Base;
-	var UInt    = __webpack_require__(110).UInt;
+	var UInt    = __webpack_require__(111).UInt;
 	var UInt256 = __webpack_require__(67).UInt256;
-	var UInt160 = __webpack_require__(111).UInt160;
-	var KeyPair = __webpack_require__(112).KeyPair;
-	var Crypt   = __webpack_require__(113).Crypt;
+	var UInt160 = __webpack_require__(112).UInt160;
+	var KeyPair = __webpack_require__(113).KeyPair;
+	var Crypt   = __webpack_require__(114).Crypt;
 
 	var Seed = extend(function () {
 	  // Internal form: NaN or BigInteger
@@ -15157,7 +15157,7 @@ var StellarWallet =
 
 	var utils  = __webpack_require__(68);
 	var extend = __webpack_require__(133);
-	var UInt   = __webpack_require__(110).UInt;
+	var UInt   = __webpack_require__(111).UInt;
 
 	//
 	// UInt256 support
@@ -15358,7 +15358,7 @@ var StellarWallet =
 	// Going up three levels is needed to escape the src-cov folder used for the
 	// test coverage stuff.
 	exports.sjcl = __webpack_require__(135);
-	exports.jsbn = __webpack_require__(118);
+	exports.jsbn = __webpack_require__(119);
 
 	// vim:sw=2:sts=2:ts=8:et
 
@@ -15507,7 +15507,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(121);
+	var utils = __webpack_require__(122);
 	var bind = __webpack_require__(124);
 	var Axios = __webpack_require__(126);
 
@@ -19839,6 +19839,96 @@ var StellarWallet =
 /* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
+	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+	  var e, m
+	  var eLen = nBytes * 8 - mLen - 1
+	  var eMax = (1 << eLen) - 1
+	  var eBias = eMax >> 1
+	  var nBits = -7
+	  var i = isLE ? (nBytes - 1) : 0
+	  var d = isLE ? -1 : 1
+	  var s = buffer[offset + i]
+
+	  i += d
+
+	  e = s & ((1 << (-nBits)) - 1)
+	  s >>= (-nBits)
+	  nBits += eLen
+	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+	  m = e & ((1 << (-nBits)) - 1)
+	  e >>= (-nBits)
+	  nBits += mLen
+	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+	  if (e === 0) {
+	    e = 1 - eBias
+	  } else if (e === eMax) {
+	    return m ? NaN : ((s ? -1 : 1) * Infinity)
+	  } else {
+	    m = m + Math.pow(2, mLen)
+	    e = e - eBias
+	  }
+	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+	}
+
+	exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+	  var e, m, c
+	  var eLen = nBytes * 8 - mLen - 1
+	  var eMax = (1 << eLen) - 1
+	  var eBias = eMax >> 1
+	  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+	  var i = isLE ? 0 : (nBytes - 1)
+	  var d = isLE ? 1 : -1
+	  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+	  value = Math.abs(value)
+
+	  if (isNaN(value) || value === Infinity) {
+	    m = isNaN(value) ? 1 : 0
+	    e = eMax
+	  } else {
+	    e = Math.floor(Math.log(value) / Math.LN2)
+	    if (value * (c = Math.pow(2, -e)) < 1) {
+	      e--
+	      c *= 2
+	    }
+	    if (e + eBias >= 1) {
+	      value += rt / c
+	    } else {
+	      value += rt * Math.pow(2, 1 - eBias)
+	    }
+	    if (value * c >= 2) {
+	      e++
+	      c /= 2
+	    }
+
+	    if (e + eBias >= eMax) {
+	      m = 0
+	      e = eMax
+	    } else if (e + eBias >= 1) {
+	      m = (value * c - 1) * Math.pow(2, mLen)
+	      e = e + eBias
+	    } else {
+	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+	      e = 0
+	    }
+	  }
+
+	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+	  e = (e << mLen) | m
+	  eLen += mLen
+	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+	  buffer[offset + i - d] |= s * 128
+	}
+
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var utils   = __webpack_require__(68);
 	var sjcl    = utils.sjcl;
 	var config  = __webpack_require__(136);
@@ -20138,7 +20228,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 111 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var utils   = __webpack_require__(68);
@@ -20147,7 +20237,7 @@ var StellarWallet =
 
 	var BigInteger = utils.jsbn.BigInteger;
 
-	var UInt = __webpack_require__(110).UInt;
+	var UInt = __webpack_require__(111).UInt;
 	var Base = __webpack_require__(65).Base;
 
 	//
@@ -20245,16 +20335,16 @@ var StellarWallet =
 
 
 /***/ },
-/* 112 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var sjcl = __webpack_require__(68).sjcl;
 	var tnacl = __webpack_require__(156);
 
-	var UInt160 = __webpack_require__(111).UInt160;
+	var UInt160 = __webpack_require__(112).UInt160;
 	var UInt256 = __webpack_require__(67).UInt256;
 	var Base    = __webpack_require__(65).Base;
-	var Crypt   = __webpack_require__(113).Crypt;
+	var Crypt   = __webpack_require__(114).Crypt;
 
 	/**
 	 * Creates an ED25519 key pair for signing.
@@ -20342,13 +20432,13 @@ var StellarWallet =
 
 
 /***/ },
-/* 113 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {var sjcl        = __webpack_require__(68).sjcl;
 	var base        = __webpack_require__(65).Base;
 	var Seed        = __webpack_require__(66).Seed;
-	var UInt160     = __webpack_require__(111).UInt160;
+	var UInt160     = __webpack_require__(112).UInt160;
 	var UInt256     = __webpack_require__(67).UInt256;
 	var request     = __webpack_require__(161);
 	var querystring = __webpack_require__(148);
@@ -20675,96 +20765,6 @@ var StellarWallet =
 	exports.Crypt = Crypt;
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58).Buffer))
-
-/***/ },
-/* 114 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
-	  var e, m
-	  var eLen = nBytes * 8 - mLen - 1
-	  var eMax = (1 << eLen) - 1
-	  var eBias = eMax >> 1
-	  var nBits = -7
-	  var i = isLE ? (nBytes - 1) : 0
-	  var d = isLE ? -1 : 1
-	  var s = buffer[offset + i]
-
-	  i += d
-
-	  e = s & ((1 << (-nBits)) - 1)
-	  s >>= (-nBits)
-	  nBits += eLen
-	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
-
-	  m = e & ((1 << (-nBits)) - 1)
-	  e >>= (-nBits)
-	  nBits += mLen
-	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
-
-	  if (e === 0) {
-	    e = 1 - eBias
-	  } else if (e === eMax) {
-	    return m ? NaN : ((s ? -1 : 1) * Infinity)
-	  } else {
-	    m = m + Math.pow(2, mLen)
-	    e = e - eBias
-	  }
-	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
-	}
-
-	exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
-	  var e, m, c
-	  var eLen = nBytes * 8 - mLen - 1
-	  var eMax = (1 << eLen) - 1
-	  var eBias = eMax >> 1
-	  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
-	  var i = isLE ? 0 : (nBytes - 1)
-	  var d = isLE ? 1 : -1
-	  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
-
-	  value = Math.abs(value)
-
-	  if (isNaN(value) || value === Infinity) {
-	    m = isNaN(value) ? 1 : 0
-	    e = eMax
-	  } else {
-	    e = Math.floor(Math.log(value) / Math.LN2)
-	    if (value * (c = Math.pow(2, -e)) < 1) {
-	      e--
-	      c *= 2
-	    }
-	    if (e + eBias >= 1) {
-	      value += rt / c
-	    } else {
-	      value += rt * Math.pow(2, 1 - eBias)
-	    }
-	    if (value * c >= 2) {
-	      e++
-	      c /= 2
-	    }
-
-	    if (e + eBias >= eMax) {
-	      m = 0
-	      e = eMax
-	    } else if (e + eBias >= 1) {
-	      m = (value * c - 1) * Math.pow(2, mLen)
-	      e = e + eBias
-	    } else {
-	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
-	      e = 0
-	    }
-	  }
-
-	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
-
-	  e = (e << mLen) | m
-	  eLen += mLen
-	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
-
-	  buffer[offset + i - d] |= s * 128
-	}
-
 
 /***/ },
 /* 115 */
@@ -22102,6 +22102,17 @@ var StellarWallet =
 /* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var toString = {}.toString;
+
+	module.exports = Array.isArray || function (arr) {
+	  return toString.call(arr) == '[object Array]';
+	};
+
+
+/***/ },
+/* 119 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// Copyright (c) 2005  Tom Wu
 	// All Rights Reserved.
 	// See "LICENSE" for details.
@@ -23315,17 +23326,6 @@ var StellarWallet =
 
 
 /***/ },
-/* 119 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var toString = {}.toString;
-
-	module.exports = Array.isArray || function (arr) {
-	  return toString.call(arr) == '[object Array]';
-	};
-
-
-/***/ },
 /* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -23373,6 +23373,35 @@ var StellarWallet =
 
 /***/ },
 /* 121 */
+/***/ function(module, exports, __webpack_require__) {
+
+	if (typeof Object.create === 'function') {
+	  // implementation from standard node.js 'util' module
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    ctor.prototype = Object.create(superCtor.prototype, {
+	      constructor: {
+	        value: ctor,
+	        enumerable: false,
+	        writable: true,
+	        configurable: true
+	      }
+	    });
+	  };
+	} else {
+	  // old school shim for old browsers
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    var TempCtor = function () {}
+	    TempCtor.prototype = superCtor.prototype
+	    ctor.prototype = new TempCtor()
+	    ctor.prototype.constructor = ctor
+	  }
+	}
+
+
+/***/ },
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23677,35 +23706,6 @@ var StellarWallet =
 
 
 /***/ },
-/* 122 */
-/***/ function(module, exports, __webpack_require__) {
-
-	if (typeof Object.create === 'function') {
-	  // implementation from standard node.js 'util' module
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    ctor.prototype = Object.create(superCtor.prototype, {
-	      constructor: {
-	        value: ctor,
-	        enumerable: false,
-	        writable: true,
-	        configurable: true
-	      }
-	    });
-	  };
-	} else {
-	  // old school shim for old browsers
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    var TempCtor = function () {}
-	    TempCtor.prototype = superCtor.prototype
-	    ctor.prototype = new TempCtor()
-	    ctor.prototype.constructor = ctor
-	  }
-	}
-
-
-/***/ },
 /* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -23892,7 +23892,7 @@ var StellarWallet =
 	'use strict';
 
 	var defaults = __webpack_require__(142);
-	var utils = __webpack_require__(121);
+	var utils = __webpack_require__(122);
 	var InterceptorManager = __webpack_require__(143);
 	var dispatchRequest = __webpack_require__(144);
 	var isAbsoluteURL = __webpack_require__(145);
@@ -24726,8 +24726,8 @@ var StellarWallet =
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(121);
-	var normalizeHeaderName = __webpack_require__(159);
+	var utils = __webpack_require__(122);
+	var normalizeHeaderName = __webpack_require__(160);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -24819,7 +24819,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(121);
+	var utils = __webpack_require__(122);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -24877,8 +24877,8 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(121);
-	var transformData = __webpack_require__(160);
+	var utils = __webpack_require__(122);
+	var transformData = __webpack_require__(159);
 	var isCancel = __webpack_require__(129);
 	var defaults = __webpack_require__(142);
 
@@ -28233,25 +28233,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(121);
-
-	module.exports = function normalizeHeaderName(headers, normalizedName) {
-	  utils.forEach(headers, function processHeader(value, name) {
-	    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
-	      headers[normalizedName] = value;
-	      delete headers[name];
-	    }
-	  });
-	};
-
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var utils = __webpack_require__(121);
+	var utils = __webpack_require__(122);
 
 	/**
 	 * Transform the data for a request or a response
@@ -28268,6 +28250,24 @@ var StellarWallet =
 	  });
 
 	  return data;
+	};
+
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var utils = __webpack_require__(122);
+
+	module.exports = function normalizeHeaderName(headers, normalizedName) {
+	  utils.forEach(headers, function processHeader(value, name) {
+	    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+	      headers[normalizedName] = value;
+	      delete headers[name];
+	    }
+	  });
 	};
 
 
@@ -29332,7 +29332,7 @@ var StellarWallet =
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(121);
+	var utils = __webpack_require__(122);
 	var settle = __webpack_require__(165);
 	var buildURL = __webpack_require__(166);
 	var parseHeaders = __webpack_require__(167);
@@ -29703,7 +29703,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(121);
+	var utils = __webpack_require__(122);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -29777,7 +29777,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(121);
+	var utils = __webpack_require__(122);
 
 	/**
 	 * Parse headers into an object
@@ -29820,7 +29820,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(121);
+	var utils = __webpack_require__(122);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -29959,7 +29959,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(121);
+	var utils = __webpack_require__(122);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
