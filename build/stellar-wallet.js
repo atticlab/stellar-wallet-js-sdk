@@ -472,7 +472,7 @@ var StellarWallet =
 	    this.nonce = null;
 	    this.axios = axios.create();
 	    this.axios.defaults.baseURL = server.replace(/\/+$/g, '');
-	    this.axios.defaults.timeout = 2500;
+	    this.axios.defaults.timeout = 30000;
 	    this.axios.defaults.paramsSerializer = function(params) {
 	        return queryString.stringify(params);
 	    };
@@ -10103,7 +10103,7 @@ var StellarWallet =
 	            return self.axios.post('/cards', _.pick(params, [
 	                'tx',
 	                'data'
-	            ]), {timeout: 20000})
+	            ]))
 	        })
 	};
 
