@@ -387,7 +387,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var util = __webpack_require__(66);
+	var util = __webpack_require__(31);
 
 	Error.subclass = function(errorName) {
 	  var newError = function(message, descr) {
@@ -480,10 +480,10 @@ var StellarWallet =
 	var getNonce = __webpack_require__(12);
 	var camelCase = __webpack_require__(70);
 	var validate = __webpack_require__(13);
-	var axios = __webpack_require__(31);
+	var axios = __webpack_require__(32);
 	var crypto = __webpack_require__(6);
 	var errors = __webpack_require__(3);
-	var queryString = __webpack_require__(32);
+	var queryString = __webpack_require__(33);
 
 	function Api(server, keypair) {
 	    if (typeof server != 'string' || !server.length) {
@@ -924,9 +924,9 @@ var StellarWallet =
 	var _ = __webpack_require__(14);
 	var errors = __webpack_require__(3);
 	var nacl = __webpack_require__(69);
-	var Base = __webpack_require__(75).Base;
-	var Seed = __webpack_require__(76).Seed;
-	var UInt256 = __webpack_require__(77).UInt256;
+	var Base = __webpack_require__(74).Base;
+	var Seed = __webpack_require__(75).Seed;
+	var UInt256 = __webpack_require__(76).UInt256;
 
 	function generateKeyPair(seed) {
 	  if(seed){
@@ -963,74 +963,74 @@ var StellarWallet =
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./admin/create_admin": 33,
-		"./admin/create_admin.js": 33,
-		"./admin/delete_admin": 34,
-		"./admin/delete_admin.js": 34,
-		"./admin/get_admin": 35,
-		"./admin/get_admin.js": 35,
-		"./admin/get_admins_list": 36,
-		"./admin/get_admins_list.js": 36,
-		"./agents/create_agent": 37,
-		"./agents/create_agent.js": 37,
-		"./agents/get_agents_list": 38,
-		"./agents/get_agents_list.js": 38,
-		"./bans/ban_ip": 39,
-		"./bans/ban_ip.js": 39,
-		"./bans/get_bans_list": 40,
-		"./bans/get_bans_list.js": 40,
-		"./bans/unban_ip": 41,
-		"./bans/unban_ip.js": 41,
-		"./cards/create_cards": 42,
-		"./cards/create_cards.js": 42,
-		"./cards/get_card": 43,
-		"./cards/get_card.js": 43,
-		"./cards/get_cards_list": 44,
-		"./cards/get_cards_list.js": 44,
-		"./companies/create_company": 45,
-		"./companies/create_company.js": 45,
-		"./companies/get_companies_list": 46,
-		"./companies/get_companies_list.js": 46,
-		"./companies/get_company": 47,
-		"./companies/get_company.js": 47,
-		"./enrollments/enrollment_accept": 48,
-		"./enrollments/enrollment_accept.js": 48,
-		"./enrollments/enrollment_approve": 49,
-		"./enrollments/enrollment_approve.js": 49,
-		"./enrollments/enrollment_decline": 50,
-		"./enrollments/enrollment_decline.js": 50,
-		"./enrollments/get_agent_enrollment": 51,
-		"./enrollments/get_agent_enrollment.js": 51,
-		"./enrollments/get_enrollments_list": 52,
-		"./enrollments/get_enrollments_list.js": 52,
-		"./enrollments/get_user_enrollment": 53,
-		"./enrollments/get_user_enrollment.js": 53,
+		"./admin/create_admin": 34,
+		"./admin/create_admin.js": 34,
+		"./admin/delete_admin": 35,
+		"./admin/delete_admin.js": 35,
+		"./admin/get_admin": 36,
+		"./admin/get_admin.js": 36,
+		"./admin/get_admins_list": 37,
+		"./admin/get_admins_list.js": 37,
+		"./agents/create_agent": 38,
+		"./agents/create_agent.js": 38,
+		"./agents/get_agents_list": 39,
+		"./agents/get_agents_list.js": 39,
+		"./bans/ban_ip": 40,
+		"./bans/ban_ip.js": 40,
+		"./bans/get_bans_list": 41,
+		"./bans/get_bans_list.js": 41,
+		"./bans/unban_ip": 42,
+		"./bans/unban_ip.js": 42,
+		"./cards/create_cards": 43,
+		"./cards/create_cards.js": 43,
+		"./cards/get_card": 44,
+		"./cards/get_card.js": 44,
+		"./cards/get_cards_list": 45,
+		"./cards/get_cards_list.js": 45,
+		"./companies/create_company": 46,
+		"./companies/create_company.js": 46,
+		"./companies/get_companies_list": 47,
+		"./companies/get_companies_list.js": 47,
+		"./companies/get_company": 48,
+		"./companies/get_company.js": 48,
+		"./enrollments/enrollment_accept": 49,
+		"./enrollments/enrollment_accept.js": 49,
+		"./enrollments/enrollment_approve": 50,
+		"./enrollments/enrollment_approve.js": 50,
+		"./enrollments/enrollment_decline": 51,
+		"./enrollments/enrollment_decline.js": 51,
+		"./enrollments/get_agent_enrollment": 52,
+		"./enrollments/get_agent_enrollment.js": 52,
+		"./enrollments/get_enrollments_list": 53,
+		"./enrollments/get_enrollments_list.js": 53,
+		"./enrollments/get_user_enrollment": 54,
+		"./enrollments/get_user_enrollment.js": 54,
 		"./get_nonce": 12,
 		"./get_nonce.js": 12,
-		"./invoices/create_invoice": 54,
-		"./invoices/create_invoice.js": 54,
-		"./invoices/get_invoice": 55,
-		"./invoices/get_invoice.js": 55,
-		"./invoices/get_invoices_list": 56,
-		"./invoices/get_invoices_list.js": 56,
-		"./invoices/get_invoices_statistics": 57,
-		"./invoices/get_invoices_statistics.js": 57,
-		"./merchant/create_store": 58,
-		"./merchant/create_store.js": 58,
-		"./merchant/get_order": 59,
-		"./merchant/get_order.js": 59,
-		"./merchant/get_order_refunds": 60,
-		"./merchant/get_order_refunds.js": 60,
-		"./merchant/get_orders_list": 61,
-		"./merchant/get_orders_list.js": 61,
-		"./merchant/get_stores_list": 62,
-		"./merchant/get_stores_list.js": 62,
-		"./regusers/create_reguser": 63,
-		"./regusers/create_reguser.js": 63,
-		"./regusers/get_reguser": 64,
-		"./regusers/get_reguser.js": 64,
-		"./regusers/get_regusers_list": 65,
-		"./regusers/get_regusers_list.js": 65
+		"./invoices/create_invoice": 55,
+		"./invoices/create_invoice.js": 55,
+		"./invoices/get_invoice": 56,
+		"./invoices/get_invoice.js": 56,
+		"./invoices/get_invoices_list": 57,
+		"./invoices/get_invoices_list.js": 57,
+		"./invoices/get_invoices_statistics": 58,
+		"./invoices/get_invoices_statistics.js": 58,
+		"./merchant/create_store": 59,
+		"./merchant/create_store.js": 59,
+		"./merchant/get_order": 60,
+		"./merchant/get_order.js": 60,
+		"./merchant/get_order_refunds": 61,
+		"./merchant/get_order_refunds.js": 61,
+		"./merchant/get_orders_list": 62,
+		"./merchant/get_orders_list.js": 62,
+		"./merchant/get_stores_list": 63,
+		"./merchant/get_stores_list.js": 63,
+		"./regusers/create_reguser": 64,
+		"./regusers/create_reguser.js": 64,
+		"./regusers/get_reguser": 65,
+		"./regusers/get_reguser.js": 65,
+		"./regusers/get_regusers_list": 66,
+		"./regusers/get_regusers_list.js": 66
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -1106,8 +1106,8 @@ var StellarWallet =
 	// However, for some legacy browsers we need to add some entropy to sjcl using
 	// crypto.ensureEntropy method. Rather then doing this for both instances
 	// (stellar-wallet-js-sdk & stellar-lib) let's switch to stellar-lib's sjcl.
-	var sjcl = __webpack_require__(78).sjcl;
-	__webpack_require__(74).extendSjcl(sjcl);
+	var sjcl = __webpack_require__(77).sjcl;
+	__webpack_require__(78).extendSjcl(sjcl);
 
 	var randomWords = sjcl.random.randomWords;
 
@@ -8418,7 +8418,7 @@ var StellarWallet =
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(84)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)(module), (function() { return this; }())))
 
 /***/ },
 /* 15 */
@@ -9770,1039 +9770,6 @@ var StellarWallet =
 /* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(83);
-
-/***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var strictUriEncode = __webpack_require__(117);
-	var objectAssign = __webpack_require__(118);
-
-	function encoderForArrayFormat(opts) {
-		switch (opts.arrayFormat) {
-			case 'index':
-				return function (key, value, index) {
-					return value === null ? [
-						encode(key, opts),
-						'[',
-						index,
-						']'
-					].join('') : [
-						encode(key, opts),
-						'[',
-						encode(index, opts),
-						']=',
-						encode(value, opts)
-					].join('');
-				};
-
-			case 'bracket':
-				return function (key, value) {
-					return value === null ? encode(key, opts) : [
-						encode(key, opts),
-						'[]=',
-						encode(value, opts)
-					].join('');
-				};
-
-			default:
-				return function (key, value) {
-					return value === null ? encode(key, opts) : [
-						encode(key, opts),
-						'=',
-						encode(value, opts)
-					].join('');
-				};
-		}
-	}
-
-	function parserForArrayFormat(opts) {
-		var result;
-
-		switch (opts.arrayFormat) {
-			case 'index':
-				return function (key, value, accumulator) {
-					result = /\[(\d*)]$/.exec(key);
-
-					key = key.replace(/\[\d*]$/, '');
-
-					if (!result) {
-						accumulator[key] = value;
-						return;
-					}
-
-					if (accumulator[key] === undefined) {
-						accumulator[key] = {};
-					}
-
-					accumulator[key][result[1]] = value;
-				};
-
-			case 'bracket':
-				return function (key, value, accumulator) {
-					result = /(\[])$/.exec(key);
-
-					key = key.replace(/\[]$/, '');
-
-					if (!result || accumulator[key] === undefined) {
-						accumulator[key] = value;
-						return;
-					}
-
-					accumulator[key] = [].concat(accumulator[key], value);
-				};
-
-			default:
-				return function (key, value, accumulator) {
-					if (accumulator[key] === undefined) {
-						accumulator[key] = value;
-						return;
-					}
-
-					accumulator[key] = [].concat(accumulator[key], value);
-				};
-		}
-	}
-
-	function encode(value, opts) {
-		if (opts.encode) {
-			return opts.strict ? strictUriEncode(value) : encodeURIComponent(value);
-		}
-
-		return value;
-	}
-
-	function keysSorter(input) {
-		if (Array.isArray(input)) {
-			return input.sort();
-		} else if (typeof input === 'object') {
-			return keysSorter(Object.keys(input)).sort(function (a, b) {
-				return Number(a) - Number(b);
-			}).map(function (key) {
-				return input[key];
-			});
-		}
-
-		return input;
-	}
-
-	exports.extract = function (str) {
-		return str.split('?')[1] || '';
-	};
-
-	exports.parse = function (str, opts) {
-		opts = objectAssign({arrayFormat: 'none'}, opts);
-
-		var formatter = parserForArrayFormat(opts);
-
-		// Create an object with no prototype
-		// https://github.com/sindresorhus/query-string/issues/47
-		var ret = Object.create(null);
-
-		if (typeof str !== 'string') {
-			return ret;
-		}
-
-		str = str.trim().replace(/^(\?|#|&)/, '');
-
-		if (!str) {
-			return ret;
-		}
-
-		str.split('&').forEach(function (param) {
-			var parts = param.replace(/\+/g, ' ').split('=');
-			// Firefox (pre 40) decodes `%3D` to `=`
-			// https://github.com/sindresorhus/query-string/pull/37
-			var key = parts.shift();
-			var val = parts.length > 0 ? parts.join('=') : undefined;
-
-			// missing `=` should be `null`:
-			// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
-			val = val === undefined ? null : decodeURIComponent(val);
-
-			formatter(decodeURIComponent(key), val, ret);
-		});
-
-		return Object.keys(ret).sort().reduce(function (result, key) {
-			var val = ret[key];
-			if (Boolean(val) && typeof val === 'object' && !Array.isArray(val)) {
-				// Sort object keys, not values
-				result[key] = keysSorter(val);
-			} else {
-				result[key] = val;
-			}
-
-			return result;
-		}, Object.create(null));
-	};
-
-	exports.stringify = function (obj, opts) {
-		var defaults = {
-			encode: true,
-			strict: true,
-			arrayFormat: 'none'
-		};
-
-		opts = objectAssign(defaults, opts);
-
-		var formatter = encoderForArrayFormat(opts);
-
-		return obj ? Object.keys(obj).sort().map(function (key) {
-			var val = obj[key];
-
-			if (val === undefined) {
-				return '';
-			}
-
-			if (val === null) {
-				return encode(key, opts);
-			}
-
-			if (Array.isArray(val)) {
-				var result = [];
-
-				val.slice().forEach(function (val2) {
-					if (val2 === undefined) {
-						return;
-					}
-
-					result.push(formatter(key, val2, result.length));
-				});
-
-				return result.join('&');
-			}
-
-			return encode(key, opts) + '=' + encode(val, opts);
-		}).filter(function (x) {
-			return x.length > 0;
-		}).join('&') : '';
-	};
-
-
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('account_id'))
-	        .then(validate.string('name'))
-	        .then(validate.string('position'))
-	        .then(validate.string('comment'))
-	        .then(function (params) {
-	            return self.axios.post('/admins', _.pick(params, [
-	                'account_id',
-	                'name',
-	                'position',
-	                'comment'
-	            ]))
-	        })
-	};
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	    .then(validate.string('account_id'))
-	        .then(function (params) {
-	            return self.axios.get('/admins/delete/' + params['account_id'])
-	        })
-	};
-
-/***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.present('account_id'))
-	        .then(function (params) {
-	            return self.axios.get('/admins/' + params['account_id'])
-	        })
-	};
-
-/***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.present('account_ids'))
-	        .then(function (params) {
-	            return self.axios.post('/admins/list', _.pick(params, 'account_ids'))
-	        })
-	};
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.number('type'))
-	        .then(validate.string('asset'))
-	        .then(validate.string('company_code'))
-	        .then(function (params) {
-	            return self.axios.post('/agents', _.pick(params, [
-	                'type',
-	                'asset',
-	                'company_code'
-	            ]))
-	        })
-	};
-
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('company_code', true))
-	        .then(validate.number('type', true))
-	        .then(validate.number('limit', true))
-	        .then(validate.number('offset', true))
-	        .then(function (params) {
-	            return self.axios.get('/agents', {
-	                params: _.pick(params, [
-	                    'company_code',
-	                    'type',
-	                    'limit',
-	                    'offset'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('ip'))
-	        .then(validate.number('banned_for'))
-	        .then(function (params) {
-	            return self.axios.post('/bans/manage', _.pick(params, [
-	                'ip',
-	                'banned_for'
-	            ]))
-	        })
-	};
-
-/***/ },
-/* 40 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.number('limit', true))
-	        .then(validate.number('offset', true))
-	        .then(function (params) {
-	            return self.axios.get('/bans/list', {
-	                params: _.pick(params, [
-	                    'limit',
-	                    'offset'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('ip'))
-	        .then(function (params) {
-	            return self.axios.post('/bans/manage', _.pick(params, [
-	                'ip'
-	            ]))
-	        })
-	};
-
-/***/ },
-/* 42 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('tx'))
-	        .then(validate.string('data'))
-	        .then(function (params) {
-	            return self.axios.post('/cards', _.pick(params, [
-	                'tx',
-	                'data'
-	            ]))
-	        })
-	};
-
-/***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('account_id'))
-	        .then(function (params) {
-	            return self.axios.get('/cards/' + params['account_id'])
-	        })
-	};
-
-/***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.number('limit', true))
-	        .then(validate.number('offset', true))
-	        .then(function (params) {
-	            return self.axios.get('/cards', {
-	                params: _.pick(params, [
-	                    'limit',
-	                    'offset'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 45 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.present('code'))
-	        .then(validate.string('title'))
-	        .then(validate.string('address'))
-	        .then(validate.present('phone'))
-	        .then(validate.email('email'))
-	        .then(function (params) {
-	            return self.axios.post('/companies', _.pick(params, [
-	                'code',
-	                'title',
-	                'address',
-	                'phone',
-	                'email'
-	            ]))
-	        })
-	};
-
-/***/ },
-/* 46 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.number('limit', true))
-	        .then(validate.number('offset', true))
-	        .then(function (params) {
-	            return self.axios.get('/companies', {
-	                params: _.pick(params, [
-	                    'offset',
-	                    'limit'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 47 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.present('code'))
-	        .then(function (params) {
-	            return self.axios.get('/companies/' + params['code'])
-	        })
-	};
-
-/***/ },
-/* 48 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('id'))
-	        .then(validate.string('token'))
-	        .then(validate.string('account_id'))
-	        .then(validate.string('tx_trust'))
-	        .then(validate.string('login'))
-	        .then(function (params) {
-	            return self.axios.post('/enrollments/accept/' + params['id'], _.pick(params, [
-	                'token',
-	                'account_id',
-	                'tx_trust',
-	                'login'
-	            ]))
-	        })
-	};
-
-/***/ },
-/* 49 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('id'))
-	        .then(function (params) {
-	            return self.axios.post('/enrollments/approve/' + params['id'])
-	        })
-	};
-
-/***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('id'))
-	        .then(validate.string('token'))
-	        .then(function (params) {
-	            return self.axios.post('/enrollments/decline/' + params['id'], _.pick(params, [
-	                'token'
-	            ]))
-	        })
-	};
-
-/***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('token'))
-	        .then(validate.string('company_code'))
-	        .then(function (params) {
-	            return self.axios.get('/enrollment/agent/get/' + params['token'], {
-	                params: _.pick(params, [
-	                    'company_code'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('type', true))
-	        .then(validate.number('limit', true))
-	        .then(validate.number('offset', true))
-	        .then(function (params) {
-	            return self.axios.get('/enrollments', {
-	                params: _.pick(params, [
-	                    'type',
-	                    'limit',
-	                    'offset'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('token'))
-	        .then(function (params) {
-	            return self.axios.get('/enrollment/user/get/' + params['token'])
-	        })
-	};
-
-/***/ },
-/* 54 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-	    
-	    return Promise.resolve(params)
-	        .then(validate.string('asset'))
-	        .then(validate.present('amount'))
-	        .then(validate.memolength('memo'))
-	        .then(function (params) {
-	            return self.axios.post('/invoices', _.pick(params, [
-	                'asset',
-	                'amount',
-	                'memo',
-	            ]))
-	        })
-	};
-
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.present('id'))
-	        .then(function (params) {
-	            return self.axios.get('/invoices/' + params['id'])
-	        })
-	};
-
-/***/ },
-/* 56 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('account_id', true))
-	        .then(validate.number('limit', true))
-	        .then(validate.number('offset', true))
-	        .then(function (params) {
-	            return self.axios.get('/invoices', {
-	                params: _.pick(params, [
-	                    'account_id',
-	                    'limit',
-	                    'offset'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 57 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.number('limit', true))
-	        .then(validate.number('offset', true))
-	        .then(function (params) {
-	            return self.axios.get('/invoices/statistics', {
-	                params: _.pick(params, [                    
-	                    'limit',
-	                    'offset'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('url'))
-	        .then(validate.string('name'))
-	        .then(function (params) {
-	            return self.axios.post('/merchant/stores', _.pick(params, [
-	                'url',
-	                'name'
-	            ]))
-	        })
-	};
-
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('order_id'))
-	        .then(function (params) {
-	            return self.axios.get('/merchant/orders/' + params['order_id'])
-	        })
-	};
-
-/***/ },
-/* 60 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('order_id'))
-	        .then(function (params) {
-	            return self.axios.get('/merchant/refunds/' + params['order_id'])
-	        })
-	};
-
-/***/ },
-/* 61 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('store_id'))
-	        .then(validate.number('limit', true))
-	        .then(validate.number('offset', true))
-	        .then(function (params) {
-	            return self.axios.get('/merchant/stores/' + params['store_id'] + '/orders', {
-	                params: _.pick(params, [
-	                    'limit',
-	                    'offset'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.number('limit', true))
-	        .then(validate.number('offset', true))
-	        .then(function (params) {
-	            return self.axios.get('/merchant/stores', {
-	                params: _.pick(params, [
-	                    'limit',
-	                    'offset'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('ipn_code'))
-	        .then(validate.string('asset'))
-	        .then(validate.string('surname'))
-	        .then(validate.string('name'))
-	        .then(validate.string('middle_name'))
-	        .then(validate.email('email'))
-	        .then(validate.string('phone'))
-	        .then(validate.string('address'))
-	        .then(validate.string('passport'))
-	        .then(function (params) {
-	            return self.axios.post('/reguser', _.pick(params, [
-	                'ipn_code',
-	                'asset',
-	                'surname',
-	                'name',
-	                'middle_name',
-	                'email',
-	                'phone',
-	                'address',
-	                'passport'
-	            ]))
-	        })
-	};
-
-/***/ },
-/* 64 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.string('ipn_code', true))
-	        .then(validate.string('passport', true))
-	        .then(validate.string('phone', true))
-	        .then(validate.email('email', true))
-	        .then(function (params) {
-	            return self.axios.get('/reguser', {
-	                params: _.pick(params, [
-	                    'passport',
-	                    'ipn_code',
-	                    'email',
-	                    'phone'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _ = __webpack_require__(14);
-	var validate = __webpack_require__(13);
-	var crypto = __webpack_require__(6);
-
-	module.exports = function (params) {
-	    var self = this;
-
-	    return Promise.resolve(params)
-	        .then(validate.number('limit', true))
-	        .then(validate.number('offset', true))
-	        .then(function (params) {
-	            return self.axios.get('/regusers', {
-	                params: _.pick(params, [
-	                    'limit',
-	                    'offset'
-	                ])
-	            })
-	        })
-	};
-
-/***/ },
-/* 66 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
 	//
 	// Permission is hereby granted, free of charge, to any person obtaining a
@@ -11328,7 +10295,7 @@ var StellarWallet =
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(85);
+	exports.isBuffer = __webpack_require__(84);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -11372,7 +10339,7 @@ var StellarWallet =
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(133);
+	exports.inherits = __webpack_require__(130);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -11390,7 +10357,1039 @@ var StellarWallet =
 	  return Object.prototype.hasOwnProperty.call(obj, prop);
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(119)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(117)))
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(83);
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var strictUriEncode = __webpack_require__(118);
+	var objectAssign = __webpack_require__(119);
+
+	function encoderForArrayFormat(opts) {
+		switch (opts.arrayFormat) {
+			case 'index':
+				return function (key, value, index) {
+					return value === null ? [
+						encode(key, opts),
+						'[',
+						index,
+						']'
+					].join('') : [
+						encode(key, opts),
+						'[',
+						encode(index, opts),
+						']=',
+						encode(value, opts)
+					].join('');
+				};
+
+			case 'bracket':
+				return function (key, value) {
+					return value === null ? encode(key, opts) : [
+						encode(key, opts),
+						'[]=',
+						encode(value, opts)
+					].join('');
+				};
+
+			default:
+				return function (key, value) {
+					return value === null ? encode(key, opts) : [
+						encode(key, opts),
+						'=',
+						encode(value, opts)
+					].join('');
+				};
+		}
+	}
+
+	function parserForArrayFormat(opts) {
+		var result;
+
+		switch (opts.arrayFormat) {
+			case 'index':
+				return function (key, value, accumulator) {
+					result = /\[(\d*)]$/.exec(key);
+
+					key = key.replace(/\[\d*]$/, '');
+
+					if (!result) {
+						accumulator[key] = value;
+						return;
+					}
+
+					if (accumulator[key] === undefined) {
+						accumulator[key] = {};
+					}
+
+					accumulator[key][result[1]] = value;
+				};
+
+			case 'bracket':
+				return function (key, value, accumulator) {
+					result = /(\[])$/.exec(key);
+
+					key = key.replace(/\[]$/, '');
+
+					if (!result || accumulator[key] === undefined) {
+						accumulator[key] = value;
+						return;
+					}
+
+					accumulator[key] = [].concat(accumulator[key], value);
+				};
+
+			default:
+				return function (key, value, accumulator) {
+					if (accumulator[key] === undefined) {
+						accumulator[key] = value;
+						return;
+					}
+
+					accumulator[key] = [].concat(accumulator[key], value);
+				};
+		}
+	}
+
+	function encode(value, opts) {
+		if (opts.encode) {
+			return opts.strict ? strictUriEncode(value) : encodeURIComponent(value);
+		}
+
+		return value;
+	}
+
+	function keysSorter(input) {
+		if (Array.isArray(input)) {
+			return input.sort();
+		} else if (typeof input === 'object') {
+			return keysSorter(Object.keys(input)).sort(function (a, b) {
+				return Number(a) - Number(b);
+			}).map(function (key) {
+				return input[key];
+			});
+		}
+
+		return input;
+	}
+
+	exports.extract = function (str) {
+		return str.split('?')[1] || '';
+	};
+
+	exports.parse = function (str, opts) {
+		opts = objectAssign({arrayFormat: 'none'}, opts);
+
+		var formatter = parserForArrayFormat(opts);
+
+		// Create an object with no prototype
+		// https://github.com/sindresorhus/query-string/issues/47
+		var ret = Object.create(null);
+
+		if (typeof str !== 'string') {
+			return ret;
+		}
+
+		str = str.trim().replace(/^(\?|#|&)/, '');
+
+		if (!str) {
+			return ret;
+		}
+
+		str.split('&').forEach(function (param) {
+			var parts = param.replace(/\+/g, ' ').split('=');
+			// Firefox (pre 40) decodes `%3D` to `=`
+			// https://github.com/sindresorhus/query-string/pull/37
+			var key = parts.shift();
+			var val = parts.length > 0 ? parts.join('=') : undefined;
+
+			// missing `=` should be `null`:
+			// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+			val = val === undefined ? null : decodeURIComponent(val);
+
+			formatter(decodeURIComponent(key), val, ret);
+		});
+
+		return Object.keys(ret).sort().reduce(function (result, key) {
+			var val = ret[key];
+			if (Boolean(val) && typeof val === 'object' && !Array.isArray(val)) {
+				// Sort object keys, not values
+				result[key] = keysSorter(val);
+			} else {
+				result[key] = val;
+			}
+
+			return result;
+		}, Object.create(null));
+	};
+
+	exports.stringify = function (obj, opts) {
+		var defaults = {
+			encode: true,
+			strict: true,
+			arrayFormat: 'none'
+		};
+
+		opts = objectAssign(defaults, opts);
+
+		var formatter = encoderForArrayFormat(opts);
+
+		return obj ? Object.keys(obj).sort().map(function (key) {
+			var val = obj[key];
+
+			if (val === undefined) {
+				return '';
+			}
+
+			if (val === null) {
+				return encode(key, opts);
+			}
+
+			if (Array.isArray(val)) {
+				var result = [];
+
+				val.slice().forEach(function (val2) {
+					if (val2 === undefined) {
+						return;
+					}
+
+					result.push(formatter(key, val2, result.length));
+				});
+
+				return result.join('&');
+			}
+
+			return encode(key, opts) + '=' + encode(val, opts);
+		}).filter(function (x) {
+			return x.length > 0;
+		}).join('&') : '';
+	};
+
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('account_id'))
+	        .then(validate.string('name'))
+	        .then(validate.string('position'))
+	        .then(validate.string('comment'))
+	        .then(function (params) {
+	            return self.axios.post('/admins', _.pick(params, [
+	                'account_id',
+	                'name',
+	                'position',
+	                'comment'
+	            ]))
+	        })
+	};
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	    .then(validate.string('account_id'))
+	        .then(function (params) {
+	            return self.axios.get('/admins/delete/' + params['account_id'])
+	        })
+	};
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.present('account_id'))
+	        .then(function (params) {
+	            return self.axios.get('/admins/' + params['account_id'])
+	        })
+	};
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.present('account_ids'))
+	        .then(function (params) {
+	            return self.axios.post('/admins/list', _.pick(params, 'account_ids'))
+	        })
+	};
+
+/***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.number('type'))
+	        .then(validate.string('asset'))
+	        .then(validate.string('company_code'))
+	        .then(function (params) {
+	            return self.axios.post('/agents', _.pick(params, [
+	                'type',
+	                'asset',
+	                'company_code'
+	            ]))
+	        })
+	};
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('company_code', true))
+	        .then(validate.number('type', true))
+	        .then(validate.number('limit', true))
+	        .then(validate.number('offset', true))
+	        .then(function (params) {
+	            return self.axios.get('/agents', {
+	                params: _.pick(params, [
+	                    'company_code',
+	                    'type',
+	                    'limit',
+	                    'offset'
+	                ])
+	            })
+	        })
+	};
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('ip'))
+	        .then(validate.number('banned_for'))
+	        .then(function (params) {
+	            return self.axios.post('/bans/manage', _.pick(params, [
+	                'ip',
+	                'banned_for'
+	            ]))
+	        })
+	};
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.number('limit', true))
+	        .then(validate.number('offset', true))
+	        .then(function (params) {
+	            return self.axios.get('/bans/list', {
+	                params: _.pick(params, [
+	                    'limit',
+	                    'offset'
+	                ])
+	            })
+	        })
+	};
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('ip'))
+	        .then(function (params) {
+	            return self.axios.post('/bans/manage', _.pick(params, [
+	                'ip'
+	            ]))
+	        })
+	};
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('tx'))
+	        .then(validate.string('data'))
+	        .then(function (params) {
+	            return self.axios.post('/cards', _.pick(params, [
+	                'tx',
+	                'data'
+	            ]))
+	        })
+	};
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('account_id'))
+	        .then(function (params) {
+	            return self.axios.get('/cards/' + params['account_id'])
+	        })
+	};
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.number('limit', true))
+	        .then(validate.number('offset', true))
+	        .then(function (params) {
+	            return self.axios.get('/cards', {
+	                params: _.pick(params, [
+	                    'limit',
+	                    'offset'
+	                ])
+	            })
+	        })
+	};
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.present('code'))
+	        .then(validate.string('title'))
+	        .then(validate.string('address'))
+	        .then(validate.present('phone'))
+	        .then(validate.email('email'))
+	        .then(function (params) {
+	            return self.axios.post('/companies', _.pick(params, [
+	                'code',
+	                'title',
+	                'address',
+	                'phone',
+	                'email'
+	            ]))
+	        })
+	};
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.number('limit', true))
+	        .then(validate.number('offset', true))
+	        .then(function (params) {
+	            return self.axios.get('/companies', {
+	                params: _.pick(params, [
+	                    'offset',
+	                    'limit'
+	                ])
+	            })
+	        })
+	};
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.present('code'))
+	        .then(function (params) {
+	            return self.axios.get('/companies/' + params['code'])
+	        })
+	};
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('id'))
+	        .then(validate.string('token'))
+	        .then(validate.string('account_id'))
+	        .then(validate.string('tx_trust'))
+	        .then(function (params) {
+	            return self.axios.post('/enrollments/accept/' + params['id'], _.pick(params, [
+	                'token',
+	                'account_id',
+	                'tx_trust',
+	                'login'
+	            ]))
+	        })
+	};
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('id'))
+	        .then(function (params) {
+	            return self.axios.post('/enrollments/approve/' + params['id'])
+	        })
+	};
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('id'))
+	        .then(validate.string('token'))
+	        .then(function (params) {
+	            return self.axios.post('/enrollments/decline/' + params['id'], _.pick(params, [
+	                'token'
+	            ]))
+	        })
+	};
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('token'))
+	        .then(validate.string('company_code'))
+	        .then(function (params) {
+	            return self.axios.get('/enrollment/agent/get/' + params['token'], {
+	                params: _.pick(params, [
+	                    'company_code'
+	                ])
+	            })
+	        })
+	};
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('type', true))
+	        .then(validate.number('limit', true))
+	        .then(validate.number('offset', true))
+	        .then(function (params) {
+	            return self.axios.get('/enrollments', {
+	                params: _.pick(params, [
+	                    'type',
+	                    'limit',
+	                    'offset'
+	                ])
+	            })
+	        })
+	};
+
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('token'))
+	        .then(function (params) {
+	            return self.axios.get('/enrollment/user/get/' + params['token'])
+	        })
+	};
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+	    
+	    return Promise.resolve(params)
+	        .then(validate.string('asset'))
+	        .then(validate.present('amount'))
+	        .then(validate.memolength('memo'))
+	        .then(function (params) {
+	            return self.axios.post('/invoices', _.pick(params, [
+	                'asset',
+	                'amount',
+	                'memo',
+	            ]))
+	        })
+	};
+
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.present('id'))
+	        .then(function (params) {
+	            return self.axios.get('/invoices/' + params['id'])
+	        })
+	};
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('account_id', true))
+	        .then(validate.number('limit', true))
+	        .then(validate.number('offset', true))
+	        .then(function (params) {
+	            return self.axios.get('/invoices', {
+	                params: _.pick(params, [
+	                    'account_id',
+	                    'limit',
+	                    'offset'
+	                ])
+	            })
+	        })
+	};
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.number('limit', true))
+	        .then(validate.number('offset', true))
+	        .then(function (params) {
+	            return self.axios.get('/invoices/statistics', {
+	                params: _.pick(params, [                    
+	                    'limit',
+	                    'offset'
+	                ])
+	            })
+	        })
+	};
+
+/***/ },
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('url'))
+	        .then(validate.string('name'))
+	        .then(function (params) {
+	            return self.axios.post('/merchant/stores', _.pick(params, [
+	                'url',
+	                'name'
+	            ]))
+	        })
+	};
+
+/***/ },
+/* 60 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('order_id'))
+	        .then(function (params) {
+	            return self.axios.get('/merchant/orders/' + params['order_id'])
+	        })
+	};
+
+/***/ },
+/* 61 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('order_id'))
+	        .then(function (params) {
+	            return self.axios.get('/merchant/refunds/' + params['order_id'])
+	        })
+	};
+
+/***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('store_id'))
+	        .then(validate.number('limit', true))
+	        .then(validate.number('offset', true))
+	        .then(function (params) {
+	            return self.axios.get('/merchant/stores/' + params['store_id'] + '/orders', {
+	                params: _.pick(params, [
+	                    'limit',
+	                    'offset'
+	                ])
+	            })
+	        })
+	};
+
+/***/ },
+/* 63 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.number('limit', true))
+	        .then(validate.number('offset', true))
+	        .then(function (params) {
+	            return self.axios.get('/merchant/stores', {
+	                params: _.pick(params, [
+	                    'limit',
+	                    'offset'
+	                ])
+	            })
+	        })
+	};
+
+/***/ },
+/* 64 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('ipn_code'))
+	        .then(validate.string('asset'))
+	        .then(validate.string('surname'))
+	        .then(validate.string('name'))
+	        .then(validate.string('middle_name'))
+	        .then(validate.email('email'))
+	        .then(validate.string('phone'))
+	        .then(validate.string('address'))
+	        .then(validate.string('passport'))
+	        .then(function (params) {
+	            return self.axios.post('/reguser', _.pick(params, [
+	                'ipn_code',
+	                'asset',
+	                'surname',
+	                'name',
+	                'middle_name',
+	                'email',
+	                'phone',
+	                'address',
+	                'passport'
+	            ]))
+	        })
+	};
+
+/***/ },
+/* 65 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.string('ipn_code', true))
+	        .then(validate.string('passport', true))
+	        .then(validate.string('phone', true))
+	        .then(validate.email('email', true))
+	        .then(function (params) {
+	            return self.axios.get('/reguser', {
+	                params: _.pick(params, [
+	                    'passport',
+	                    'ipn_code',
+	                    'email',
+	                    'phone'
+	                ])
+	            })
+	        })
+	};
+
+/***/ },
+/* 66 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _ = __webpack_require__(14);
+	var validate = __webpack_require__(13);
+	var crypto = __webpack_require__(6);
+
+	module.exports = function (params) {
+	    var self = this;
+
+	    return Promise.resolve(params)
+	        .then(validate.number('limit', true))
+	        .then(validate.number('offset', true))
+	        .then(function (params) {
+	            return self.axios.get('/regusers', {
+	                params: _.pick(params, [
+	                    'limit',
+	                    'offset'
+	                ])
+	            })
+	        })
+	};
 
 /***/ },
 /* 67 */
@@ -11466,8 +11465,8 @@ var StellarWallet =
 
 	'use strict'
 
-	var base64 = __webpack_require__(140)
-	var ieee754 = __webpack_require__(125)
+	var base64 = __webpack_require__(134)
+	var ieee754 = __webpack_require__(121)
 	var isArray = __webpack_require__(128)
 
 	exports.Buffer = Buffer
@@ -14220,7 +14219,7 @@ var StellarWallet =
 /* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var sentence = __webpack_require__(129);
+	var sentence = __webpack_require__(131);
 
 	/**
 	 * Camel case a string.
@@ -15431,7 +15430,7 @@ var StellarWallet =
 
 	};
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(119)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(117)))
 
 /***/ },
 /* 73 */
@@ -15469,187 +15468,8 @@ var StellarWallet =
 /* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var sjcl = __webpack_require__(146);
-
-	var scrypt = function(passwd, salt, N, r, p, dkLen) {
-
-	  function flipEndian(x) {
-	    var first = x & 0xFF;
-	    var second = (x >>> 8) & 0xFF;
-	    var third = (x >>> 16) & 0xFF;
-	    var fourth = (x >>> 24) & 0xFF;
-	    return (first << 24) | (second << 16) | (third << 8) | fourth;
-	  }
-
-	  function sanityCheck() {
-	    if (r * p >= Math.pow(2, 30)) {
-	      throw "The parameters r, p must satisfy r * p < 2^30";
-	    }
-	    if ((N < 2) || (N & (N - 1) != 0)) {
-	      throw "The parameter N must be a power of 2.";
-	    }
-	    var SIZE_MAX = Math.pow(2, 32) - 1;
-	    if (N > SIZE_MAX / 128 / r) {
-	      throw "N too big.";
-	    }
-	    if (r > SIZE_MAX / 128 / p) {
-	      throw "r too big.";
-	    }
-	  }
-
-	  function scrypt(passwd, salt, N, r, p, dkLen) {
-	    var B = sjcl.misc.pbkdf2(passwd, salt, 1, p * 128 * r * 8);
-	    var V = [];
-	    var XY = [];
-	    for (var i = 0; i < p; i++) {
-	      smix(B, i * 128 * r, r, N, V, XY);
-	    }
-	    return sjcl.misc.pbkdf2(passwd, B, 1, dkLen * 8);
-	  };
-
-	  function salsa20_8(B) {
-
-	    function R(a, b) {
-	      return (a << b) | (a >>> (32 - b));
-	    }
-
-	    var B32 = [];
-	    for (var i = 0; i < 16; i++) {
-	      B32[i] = flipEndian(B[i]);
-	    }
-
-	    var x = [];
-	    for (var i = 0; i < 16; i++) {
-	      x[i] = B32[i] | 0;
-	    }
-
-	    for (i = 8; i > 0; i -= 2) {
-	      x[4] ^= R(x[0] + x[12], 7);
-	      x[8] ^= R(x[4] + x[0], 9);
-	      x[12] ^= R(x[8] + x[4], 13);
-	      x[0] ^= R(x[12] + x[8], 18);
-	      x[9] ^= R(x[5] + x[1], 7);
-	      x[13] ^= R(x[9] + x[5], 9);
-	      x[1] ^= R(x[13] + x[9], 13);
-	      x[5] ^= R(x[1] + x[13], 18);
-	      x[14] ^= R(x[10] + x[6], 7);
-	      x[2] ^= R(x[14] + x[10], 9);
-	      x[6] ^= R(x[2] + x[14], 13);
-	      x[10] ^= R(x[6] + x[2], 18);
-	      x[3] ^= R(x[15] + x[11], 7);
-	      x[7] ^= R(x[3] + x[15], 9);
-	      x[11] ^= R(x[7] + x[3], 13);
-	      x[15] ^= R(x[11] + x[7], 18);
-	      x[1] ^= R(x[0] + x[3], 7);
-	      x[2] ^= R(x[1] + x[0], 9);
-	      x[3] ^= R(x[2] + x[1], 13);
-	      x[0] ^= R(x[3] + x[2], 18);
-	      x[6] ^= R(x[5] + x[4], 7);
-	      x[7] ^= R(x[6] + x[5], 9);
-	      x[4] ^= R(x[7] + x[6], 13);
-	      x[5] ^= R(x[4] + x[7], 18);
-	      x[11] ^= R(x[10] + x[9], 7);
-	      x[8] ^= R(x[11] + x[10], 9);
-	      x[9] ^= R(x[8] + x[11], 13);
-	      x[10] ^= R(x[9] + x[8], 18);
-	      x[12] ^= R(x[15] + x[14], 7);
-	      x[13] ^= R(x[12] + x[15], 9);
-	      x[14] ^= R(x[13] + x[12], 13);
-	      x[15] ^= R(x[14] + x[13], 18);
-	    }
-
-	    for (var i = 0; i < 16; i++) {
-	      B32[i] = (B32[i] + x[i]) | 0;
-	    }
-
-	    for (var i = 0; i < 16; i++) {
-	      B[i] = flipEndian(B32[i]);
-	    }
-
-	    return B;
-	  }
-
-	  function blockxor(S, Si, D, Di, len) {
-	    len /= 4;
-	    Si /= 4;
-	    Di /= 4;
-	    for (var i = 0; i < len; i++) {
-	      D[Di + i] ^= S[Si + i] | 0;
-	    }
-	  }
-
-	  function blockcopy(S, Si, D, Di, len) {
-	    len /= 4;
-	    Si /= 4;
-	    Di /= 4;
-	    for (var i = 0; i < len; i++) {
-	      D[Di + i] = S[Si + i] | 0;
-	    }
-	  }
-
-	  function blockmix_salsa8(BY, Bi, Yi, r) {
-	    var X = [];
-	    var i;
-
-	    blockcopy(BY, Bi + (2 * r - 1) * 64, X, 0, 64);
-
-	    for (i = 0; i < 2 * r; i++) {
-	      blockxor(BY, i * 64, X, 0, 64);
-	      salsa20_8(X);
-	      blockcopy(X, 0, BY, Yi + (i * 64), 64);
-	    }
-
-	    for (i = 0; i < r; i++) {
-	      blockcopy(BY, Yi + (i * 2) * 64, BY, Bi + (i * 64), 64);
-	    }
-
-	    for (i = 0; i < r; i++) {
-	      blockcopy(BY, Yi + (i * 2 + 1) * 64, BY, Bi + (i + r) * 64, 64);
-	    }
-	  }
-
-	  function smix(B, Bi, r, N, V, XY) {
-	    var Xi = 0;
-	    var Yi = 128 * r;
-	    var i;
-
-	    blockcopy(B, Bi, XY, Xi, Yi);
-
-	    for (i = 0; i < N; i++) {
-	      blockcopy(XY, Xi, V, i * Yi, Yi);
-	      blockmix_salsa8(XY, Xi, Yi, r);
-	    }
-
-	    for (i = 0; i < N; i++) {
-	      var j = integerify(XY, Xi, r) & (N - 1);
-	      blockxor(V, j * Yi, XY, Xi, Yi);
-	      blockmix_salsa8(XY, Xi, Yi, r);
-	    }
-
-	    blockcopy(XY, Xi, B, Bi, Yi);
-	  }
-
-	  function integerify(B, Bi, r) {
-	    Bi = Bi + (2 * r - 1) * 64;
-	    return flipEndian(B[Bi / 4]);
-	  }
-
-	  sanityCheck();
-	  return scrypt(passwd, salt, N, r, p, dkLen);
-	}
-
-	module.exports = {
-	  extendSjcl: function(s) {
-	    s.misc.scrypt = scrypt;
-	  }
-	};
-
-/***/ },
-/* 75 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var sjcl    = __webpack_require__(78).sjcl;
-	var utils   = __webpack_require__(78);
+	var sjcl    = __webpack_require__(77).sjcl;
+	var utils   = __webpack_require__(77);
 	var extend  = __webpack_require__(144);
 
 	var BigInteger = utils.jsbn.BigInteger;
@@ -15819,7 +15639,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 76 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//
@@ -15827,17 +15647,17 @@ var StellarWallet =
 	//
 
 	var extend = __webpack_require__(144);
-	var utils  = __webpack_require__(78);
+	var utils  = __webpack_require__(77);
 	var sjcl   = utils.sjcl;
 
 	var BigInteger = utils.jsbn.BigInteger;
 
-	var Base    = __webpack_require__(75).Base;
-	var UInt    = __webpack_require__(121).UInt;
-	var UInt256 = __webpack_require__(77).UInt256;
-	var UInt160 = __webpack_require__(122).UInt160;
-	var KeyPair = __webpack_require__(123).KeyPair;
-	var Crypt   = __webpack_require__(124).Crypt;
+	var Base    = __webpack_require__(74).Base;
+	var UInt    = __webpack_require__(122).UInt;
+	var UInt256 = __webpack_require__(76).UInt256;
+	var UInt160 = __webpack_require__(123).UInt160;
+	var KeyPair = __webpack_require__(124).KeyPair;
+	var Crypt   = __webpack_require__(125).Crypt;
 
 	var Seed = extend(function () {
 	  // Internal form: NaN or BigInteger
@@ -15937,12 +15757,12 @@ var StellarWallet =
 
 
 /***/ },
-/* 77 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils  = __webpack_require__(78);
+	var utils  = __webpack_require__(77);
 	var extend = __webpack_require__(144);
-	var UInt   = __webpack_require__(121).UInt;
+	var UInt   = __webpack_require__(122).UInt;
 
 	//
 	// UInt256 support
@@ -15966,7 +15786,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 78 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	function filterErr(code, done) {
@@ -16142,11 +15962,190 @@ var StellarWallet =
 
 	// Going up three levels is needed to escape the src-cov folder used for the
 	// test coverage stuff.
-	exports.sjcl = __webpack_require__(146);
-	exports.jsbn = __webpack_require__(132);
+	exports.sjcl = __webpack_require__(147);
+	exports.jsbn = __webpack_require__(129);
 
 	// vim:sw=2:sts=2:ts=8:et
 
+
+/***/ },
+/* 78 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var sjcl = __webpack_require__(147);
+
+	var scrypt = function(passwd, salt, N, r, p, dkLen) {
+
+	  function flipEndian(x) {
+	    var first = x & 0xFF;
+	    var second = (x >>> 8) & 0xFF;
+	    var third = (x >>> 16) & 0xFF;
+	    var fourth = (x >>> 24) & 0xFF;
+	    return (first << 24) | (second << 16) | (third << 8) | fourth;
+	  }
+
+	  function sanityCheck() {
+	    if (r * p >= Math.pow(2, 30)) {
+	      throw "The parameters r, p must satisfy r * p < 2^30";
+	    }
+	    if ((N < 2) || (N & (N - 1) != 0)) {
+	      throw "The parameter N must be a power of 2.";
+	    }
+	    var SIZE_MAX = Math.pow(2, 32) - 1;
+	    if (N > SIZE_MAX / 128 / r) {
+	      throw "N too big.";
+	    }
+	    if (r > SIZE_MAX / 128 / p) {
+	      throw "r too big.";
+	    }
+	  }
+
+	  function scrypt(passwd, salt, N, r, p, dkLen) {
+	    var B = sjcl.misc.pbkdf2(passwd, salt, 1, p * 128 * r * 8);
+	    var V = [];
+	    var XY = [];
+	    for (var i = 0; i < p; i++) {
+	      smix(B, i * 128 * r, r, N, V, XY);
+	    }
+	    return sjcl.misc.pbkdf2(passwd, B, 1, dkLen * 8);
+	  };
+
+	  function salsa20_8(B) {
+
+	    function R(a, b) {
+	      return (a << b) | (a >>> (32 - b));
+	    }
+
+	    var B32 = [];
+	    for (var i = 0; i < 16; i++) {
+	      B32[i] = flipEndian(B[i]);
+	    }
+
+	    var x = [];
+	    for (var i = 0; i < 16; i++) {
+	      x[i] = B32[i] | 0;
+	    }
+
+	    for (i = 8; i > 0; i -= 2) {
+	      x[4] ^= R(x[0] + x[12], 7);
+	      x[8] ^= R(x[4] + x[0], 9);
+	      x[12] ^= R(x[8] + x[4], 13);
+	      x[0] ^= R(x[12] + x[8], 18);
+	      x[9] ^= R(x[5] + x[1], 7);
+	      x[13] ^= R(x[9] + x[5], 9);
+	      x[1] ^= R(x[13] + x[9], 13);
+	      x[5] ^= R(x[1] + x[13], 18);
+	      x[14] ^= R(x[10] + x[6], 7);
+	      x[2] ^= R(x[14] + x[10], 9);
+	      x[6] ^= R(x[2] + x[14], 13);
+	      x[10] ^= R(x[6] + x[2], 18);
+	      x[3] ^= R(x[15] + x[11], 7);
+	      x[7] ^= R(x[3] + x[15], 9);
+	      x[11] ^= R(x[7] + x[3], 13);
+	      x[15] ^= R(x[11] + x[7], 18);
+	      x[1] ^= R(x[0] + x[3], 7);
+	      x[2] ^= R(x[1] + x[0], 9);
+	      x[3] ^= R(x[2] + x[1], 13);
+	      x[0] ^= R(x[3] + x[2], 18);
+	      x[6] ^= R(x[5] + x[4], 7);
+	      x[7] ^= R(x[6] + x[5], 9);
+	      x[4] ^= R(x[7] + x[6], 13);
+	      x[5] ^= R(x[4] + x[7], 18);
+	      x[11] ^= R(x[10] + x[9], 7);
+	      x[8] ^= R(x[11] + x[10], 9);
+	      x[9] ^= R(x[8] + x[11], 13);
+	      x[10] ^= R(x[9] + x[8], 18);
+	      x[12] ^= R(x[15] + x[14], 7);
+	      x[13] ^= R(x[12] + x[15], 9);
+	      x[14] ^= R(x[13] + x[12], 13);
+	      x[15] ^= R(x[14] + x[13], 18);
+	    }
+
+	    for (var i = 0; i < 16; i++) {
+	      B32[i] = (B32[i] + x[i]) | 0;
+	    }
+
+	    for (var i = 0; i < 16; i++) {
+	      B[i] = flipEndian(B32[i]);
+	    }
+
+	    return B;
+	  }
+
+	  function blockxor(S, Si, D, Di, len) {
+	    len /= 4;
+	    Si /= 4;
+	    Di /= 4;
+	    for (var i = 0; i < len; i++) {
+	      D[Di + i] ^= S[Si + i] | 0;
+	    }
+	  }
+
+	  function blockcopy(S, Si, D, Di, len) {
+	    len /= 4;
+	    Si /= 4;
+	    Di /= 4;
+	    for (var i = 0; i < len; i++) {
+	      D[Di + i] = S[Si + i] | 0;
+	    }
+	  }
+
+	  function blockmix_salsa8(BY, Bi, Yi, r) {
+	    var X = [];
+	    var i;
+
+	    blockcopy(BY, Bi + (2 * r - 1) * 64, X, 0, 64);
+
+	    for (i = 0; i < 2 * r; i++) {
+	      blockxor(BY, i * 64, X, 0, 64);
+	      salsa20_8(X);
+	      blockcopy(X, 0, BY, Yi + (i * 64), 64);
+	    }
+
+	    for (i = 0; i < r; i++) {
+	      blockcopy(BY, Yi + (i * 2) * 64, BY, Bi + (i * 64), 64);
+	    }
+
+	    for (i = 0; i < r; i++) {
+	      blockcopy(BY, Yi + (i * 2 + 1) * 64, BY, Bi + (i + r) * 64, 64);
+	    }
+	  }
+
+	  function smix(B, Bi, r, N, V, XY) {
+	    var Xi = 0;
+	    var Yi = 128 * r;
+	    var i;
+
+	    blockcopy(B, Bi, XY, Xi, Yi);
+
+	    for (i = 0; i < N; i++) {
+	      blockcopy(XY, Xi, V, i * Yi, Yi);
+	      blockmix_salsa8(XY, Xi, Yi, r);
+	    }
+
+	    for (i = 0; i < N; i++) {
+	      var j = integerify(XY, Xi, r) & (N - 1);
+	      blockxor(V, j * Yi, XY, Xi, Yi);
+	      blockmix_salsa8(XY, Xi, Yi, r);
+	    }
+
+	    blockcopy(XY, Xi, B, Bi, Yi);
+	  }
+
+	  function integerify(B, Bi, r) {
+	    Bi = Bi + (2 * r - 1) * 64;
+	    return flipEndian(B[Bi / 4]);
+	  }
+
+	  sanityCheck();
+	  return scrypt(passwd, salt, N, r, p, dkLen);
+	}
+
+	module.exports = {
+	  extendSjcl: function(s) {
+	    s.misc.scrypt = scrypt;
+	  }
+	};
 
 /***/ },
 /* 79 */
@@ -16272,7 +16271,7 @@ var StellarWallet =
 /* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var pbkdf2Export = __webpack_require__(150)
+	var pbkdf2Export = __webpack_require__(149)
 
 	module.exports = function (crypto, exports) {
 	  exports = exports || {}
@@ -16292,10 +16291,10 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(130);
-	var bind = __webpack_require__(134);
-	var Axios = __webpack_require__(136);
-	var defaults = __webpack_require__(131);
+	var utils = __webpack_require__(132);
+	var bind = __webpack_require__(135);
+	var Axios = __webpack_require__(137);
+	var defaults = __webpack_require__(133);
 
 	/**
 	 * Create an instance of Axios
@@ -16328,15 +16327,15 @@ var StellarWallet =
 	};
 
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(137);
-	axios.CancelToken = __webpack_require__(138);
-	axios.isCancel = __webpack_require__(139);
+	axios.Cancel = __webpack_require__(138);
+	axios.CancelToken = __webpack_require__(139);
+	axios.isCancel = __webpack_require__(140);
 
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(135);
+	axios.spread = __webpack_require__(136);
 
 	module.exports = axios;
 
@@ -16346,6 +16345,17 @@ var StellarWallet =
 
 /***/ },
 /* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function isBuffer(arg) {
+	  return arg && typeof arg === 'object'
+	    && typeof arg.copy === 'function'
+	    && typeof arg.fill === 'function'
+	    && typeof arg.readUInt8 === 'function';
+	}
+
+/***/ },
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(module) {
@@ -16359,17 +16369,6 @@ var StellarWallet =
 		return module;
 	}
 
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function isBuffer(arg) {
-	  return arg && typeof arg === 'object'
-	    && typeof arg.copy === 'function'
-	    && typeof arg.fill === 'function'
-	    && typeof arg.readUInt8 === 'function';
-	}
 
 /***/ },
 /* 86 */
@@ -16765,7 +16764,7 @@ var StellarWallet =
 
 	module.exports = new Async();
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(119)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(117)))
 
 /***/ },
 /* 88 */
@@ -20543,6 +20542,70 @@ var StellarWallet =
 /* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// shim for using process in browser
+
+	var process = module.exports = {};
+	var queue = [];
+	var draining = false;
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    draining = true;
+	    var currentQueue;
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        var i = -1;
+	        while (++i < len) {
+	            currentQueue[i]();
+	        }
+	        len = queue.length;
+	    }
+	    draining = false;
+	}
+	process.nextTick = function (fun) {
+	    queue.push(fun);
+	    if (!draining) {
+	        setTimeout(drainQueue, 0);
+	    }
+	};
+
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	// TODO(shtylman)
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	module.exports = function (str) {
 		return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
@@ -20552,7 +20615,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 118 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -20648,70 +20711,6 @@ var StellarWallet =
 
 
 /***/ },
-/* 119 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// shim for using process in browser
-
-	var process = module.exports = {};
-	var queue = [];
-	var draining = false;
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    draining = true;
-	    var currentQueue;
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        var i = -1;
-	        while (++i < len) {
-	            currentQueue[i]();
-	        }
-	        len = queue.length;
-	    }
-	    draining = false;
-	}
-	process.nextTick = function (fun) {
-	    queue.push(fun);
-	    if (!draining) {
-	        setTimeout(drainQueue, 0);
-	    }
-	};
-
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	// TODO(shtylman)
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
 /* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -20721,9 +20720,99 @@ var StellarWallet =
 /* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils   = __webpack_require__(78);
+	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+	  var e, m
+	  var eLen = nBytes * 8 - mLen - 1
+	  var eMax = (1 << eLen) - 1
+	  var eBias = eMax >> 1
+	  var nBits = -7
+	  var i = isLE ? (nBytes - 1) : 0
+	  var d = isLE ? -1 : 1
+	  var s = buffer[offset + i]
+
+	  i += d
+
+	  e = s & ((1 << (-nBits)) - 1)
+	  s >>= (-nBits)
+	  nBits += eLen
+	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+	  m = e & ((1 << (-nBits)) - 1)
+	  e >>= (-nBits)
+	  nBits += mLen
+	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+	  if (e === 0) {
+	    e = 1 - eBias
+	  } else if (e === eMax) {
+	    return m ? NaN : ((s ? -1 : 1) * Infinity)
+	  } else {
+	    m = m + Math.pow(2, mLen)
+	    e = e - eBias
+	  }
+	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+	}
+
+	exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+	  var e, m, c
+	  var eLen = nBytes * 8 - mLen - 1
+	  var eMax = (1 << eLen) - 1
+	  var eBias = eMax >> 1
+	  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+	  var i = isLE ? 0 : (nBytes - 1)
+	  var d = isLE ? 1 : -1
+	  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+	  value = Math.abs(value)
+
+	  if (isNaN(value) || value === Infinity) {
+	    m = isNaN(value) ? 1 : 0
+	    e = eMax
+	  } else {
+	    e = Math.floor(Math.log(value) / Math.LN2)
+	    if (value * (c = Math.pow(2, -e)) < 1) {
+	      e--
+	      c *= 2
+	    }
+	    if (e + eBias >= 1) {
+	      value += rt / c
+	    } else {
+	      value += rt * Math.pow(2, 1 - eBias)
+	    }
+	    if (value * c >= 2) {
+	      e++
+	      c /= 2
+	    }
+
+	    if (e + eBias >= eMax) {
+	      m = 0
+	      e = eMax
+	    } else if (e + eBias >= 1) {
+	      m = (value * c - 1) * Math.pow(2, mLen)
+	      e = e + eBias
+	    } else {
+	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+	      e = 0
+	    }
+	  }
+
+	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+	  e = (e << mLen) | m
+	  eLen += mLen
+	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+	  buffer[offset + i - d] |= s * 128
+	}
+
+
+/***/ },
+/* 122 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var utils   = __webpack_require__(77);
 	var sjcl    = utils.sjcl;
-	var config  = __webpack_require__(147);
+	var config  = __webpack_require__(146);
 
 	var BigInteger = utils.jsbn.BigInteger;
 
@@ -21020,17 +21109,17 @@ var StellarWallet =
 
 
 /***/ },
-/* 122 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils   = __webpack_require__(78);
-	var config  = __webpack_require__(147);
+	var utils   = __webpack_require__(77);
+	var config  = __webpack_require__(146);
 	var extend  = __webpack_require__(144);
 
 	var BigInteger = utils.jsbn.BigInteger;
 
-	var UInt = __webpack_require__(121).UInt;
-	var Base = __webpack_require__(75).Base;
+	var UInt = __webpack_require__(122).UInt;
+	var Base = __webpack_require__(74).Base;
 
 	//
 	// UInt160 support
@@ -21127,16 +21216,16 @@ var StellarWallet =
 
 
 /***/ },
-/* 123 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var sjcl = __webpack_require__(78).sjcl;
+	var sjcl = __webpack_require__(77).sjcl;
 	var tnacl = __webpack_require__(168);
 
-	var UInt160 = __webpack_require__(122).UInt160;
-	var UInt256 = __webpack_require__(77).UInt256;
-	var Base    = __webpack_require__(75).Base;
-	var Crypt   = __webpack_require__(124).Crypt;
+	var UInt160 = __webpack_require__(123).UInt160;
+	var UInt256 = __webpack_require__(76).UInt256;
+	var Base    = __webpack_require__(74).Base;
+	var Crypt   = __webpack_require__(125).Crypt;
 
 	/**
 	 * Creates an ED25519 key pair for signing.
@@ -21224,19 +21313,19 @@ var StellarWallet =
 
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var sjcl        = __webpack_require__(78).sjcl;
-	var base        = __webpack_require__(75).Base;
-	var Seed        = __webpack_require__(76).Seed;
-	var UInt160     = __webpack_require__(122).UInt160;
-	var UInt256     = __webpack_require__(77).UInt256;
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var sjcl        = __webpack_require__(77).sjcl;
+	var base        = __webpack_require__(74).Base;
+	var Seed        = __webpack_require__(75).Seed;
+	var UInt160     = __webpack_require__(123).UInt160;
+	var UInt256     = __webpack_require__(76).UInt256;
 	var request     = __webpack_require__(179);
-	var querystring = __webpack_require__(161);
+	var querystring = __webpack_require__(160);
 	var extend      = __webpack_require__(144);
-	var parser      = __webpack_require__(160);
-	var ripemd160   = __webpack_require__(170);
+	var parser      = __webpack_require__(161);
+	var ripemd160   = __webpack_require__(169);
 	var Crypt       = { };
 
 	var cryptConfig = {
@@ -21559,96 +21648,6 @@ var StellarWallet =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(68).Buffer))
 
 /***/ },
-/* 125 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
-	  var e, m
-	  var eLen = nBytes * 8 - mLen - 1
-	  var eMax = (1 << eLen) - 1
-	  var eBias = eMax >> 1
-	  var nBits = -7
-	  var i = isLE ? (nBytes - 1) : 0
-	  var d = isLE ? -1 : 1
-	  var s = buffer[offset + i]
-
-	  i += d
-
-	  e = s & ((1 << (-nBits)) - 1)
-	  s >>= (-nBits)
-	  nBits += eLen
-	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
-
-	  m = e & ((1 << (-nBits)) - 1)
-	  e >>= (-nBits)
-	  nBits += mLen
-	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
-
-	  if (e === 0) {
-	    e = 1 - eBias
-	  } else if (e === eMax) {
-	    return m ? NaN : ((s ? -1 : 1) * Infinity)
-	  } else {
-	    m = m + Math.pow(2, mLen)
-	    e = e - eBias
-	  }
-	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
-	}
-
-	exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
-	  var e, m, c
-	  var eLen = nBytes * 8 - mLen - 1
-	  var eMax = (1 << eLen) - 1
-	  var eBias = eMax >> 1
-	  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
-	  var i = isLE ? 0 : (nBytes - 1)
-	  var d = isLE ? 1 : -1
-	  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
-
-	  value = Math.abs(value)
-
-	  if (isNaN(value) || value === Infinity) {
-	    m = isNaN(value) ? 1 : 0
-	    e = eMax
-	  } else {
-	    e = Math.floor(Math.log(value) / Math.LN2)
-	    if (value * (c = Math.pow(2, -e)) < 1) {
-	      e--
-	      c *= 2
-	    }
-	    if (e + eBias >= 1) {
-	      value += rt / c
-	    } else {
-	      value += rt * Math.pow(2, 1 - eBias)
-	    }
-	    if (value * c >= 2) {
-	      e++
-	      c /= 2
-	    }
-
-	    if (e + eBias >= eMax) {
-	      m = 0
-	      e = eMax
-	    } else if (e + eBias >= 1) {
-	      m = (value * c - 1) * Math.pow(2, mLen)
-	      e = e + eBias
-	    } else {
-	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
-	      e = 0
-	    }
-	  }
-
-	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
-
-	  e = (e << mLen) | m
-	  eLen += mLen
-	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
-
-	  buffer[offset + i - d] |= s * 128
-	}
-
-
-/***/ },
 /* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -21656,8 +21655,8 @@ var StellarWallet =
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(166);
-	var reduce = __webpack_require__(167);
+	var Emitter = __webpack_require__(162);
+	var reduce = __webpack_require__(163);
 
 	/**
 	 * Root reference for iframes.
@@ -22906,457 +22905,6 @@ var StellarWallet =
 /* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var lowerCase = __webpack_require__(169)
-
-	var NON_WORD_REGEXP = __webpack_require__(151)
-	var CAMEL_CASE_REGEXP = __webpack_require__(152)
-	var TRAILING_DIGIT_REGEXP = __webpack_require__(153)
-
-	/**
-	 * Sentence case a string.
-	 *
-	 * @param  {String} str
-	 * @param  {String} locale
-	 * @param  {String} replacement
-	 * @return {String}
-	 */
-	module.exports = function (str, locale, replacement) {
-	  if (str == null) {
-	    return ''
-	  }
-
-	  replacement = replacement || ' '
-
-	  function replace (match, index, string) {
-	    if (index === 0 || index === (string.length - match.length)) {
-	      return ''
-	    }
-
-	    return replacement
-	  }
-
-	  str = String(str)
-	    // Support camel case ("camelCase" -> "camel Case").
-	    .replace(CAMEL_CASE_REGEXP, '$1 $2')
-	    // Support digit groups ("test2012" -> "test 2012").
-	    .replace(TRAILING_DIGIT_REGEXP, '$1 $2')
-	    // Remove all non-word characters and replace with a single space.
-	    .replace(NON_WORD_REGEXP, replace)
-
-	  // Lower case the entire string.
-	  return lowerCase(str, locale)
-	}
-
-
-/***/ },
-/* 130 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var bind = __webpack_require__(134);
-
-	/*global toString:true*/
-
-	// utils is a library of generic helper functions non-specific to axios
-
-	var toString = Object.prototype.toString;
-
-	/**
-	 * Determine if a value is an Array
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is an Array, otherwise false
-	 */
-	function isArray(val) {
-	  return toString.call(val) === '[object Array]';
-	}
-
-	/**
-	 * Determine if a value is an ArrayBuffer
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is an ArrayBuffer, otherwise false
-	 */
-	function isArrayBuffer(val) {
-	  return toString.call(val) === '[object ArrayBuffer]';
-	}
-
-	/**
-	 * Determine if a value is a FormData
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is an FormData, otherwise false
-	 */
-	function isFormData(val) {
-	  return (typeof FormData !== 'undefined') && (val instanceof FormData);
-	}
-
-	/**
-	 * Determine if a value is a view on an ArrayBuffer
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
-	 */
-	function isArrayBufferView(val) {
-	  var result;
-	  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
-	    result = ArrayBuffer.isView(val);
-	  } else {
-	    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
-	  }
-	  return result;
-	}
-
-	/**
-	 * Determine if a value is a String
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a String, otherwise false
-	 */
-	function isString(val) {
-	  return typeof val === 'string';
-	}
-
-	/**
-	 * Determine if a value is a Number
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a Number, otherwise false
-	 */
-	function isNumber(val) {
-	  return typeof val === 'number';
-	}
-
-	/**
-	 * Determine if a value is undefined
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if the value is undefined, otherwise false
-	 */
-	function isUndefined(val) {
-	  return typeof val === 'undefined';
-	}
-
-	/**
-	 * Determine if a value is an Object
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is an Object, otherwise false
-	 */
-	function isObject(val) {
-	  return val !== null && typeof val === 'object';
-	}
-
-	/**
-	 * Determine if a value is a Date
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a Date, otherwise false
-	 */
-	function isDate(val) {
-	  return toString.call(val) === '[object Date]';
-	}
-
-	/**
-	 * Determine if a value is a File
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a File, otherwise false
-	 */
-	function isFile(val) {
-	  return toString.call(val) === '[object File]';
-	}
-
-	/**
-	 * Determine if a value is a Blob
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a Blob, otherwise false
-	 */
-	function isBlob(val) {
-	  return toString.call(val) === '[object Blob]';
-	}
-
-	/**
-	 * Determine if a value is a Function
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a Function, otherwise false
-	 */
-	function isFunction(val) {
-	  return toString.call(val) === '[object Function]';
-	}
-
-	/**
-	 * Determine if a value is a Stream
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a Stream, otherwise false
-	 */
-	function isStream(val) {
-	  return isObject(val) && isFunction(val.pipe);
-	}
-
-	/**
-	 * Determine if a value is a URLSearchParams object
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a URLSearchParams object, otherwise false
-	 */
-	function isURLSearchParams(val) {
-	  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
-	}
-
-	/**
-	 * Trim excess whitespace off the beginning and end of a string
-	 *
-	 * @param {String} str The String to trim
-	 * @returns {String} The String freed of excess whitespace
-	 */
-	function trim(str) {
-	  return str.replace(/^\s*/, '').replace(/\s*$/, '');
-	}
-
-	/**
-	 * Determine if we're running in a standard browser environment
-	 *
-	 * This allows axios to run in a web worker, and react-native.
-	 * Both environments support XMLHttpRequest, but not fully standard globals.
-	 *
-	 * web workers:
-	 *  typeof window -> undefined
-	 *  typeof document -> undefined
-	 *
-	 * react-native:
-	 *  typeof document.createElement -> undefined
-	 */
-	function isStandardBrowserEnv() {
-	  return (
-	    typeof window !== 'undefined' &&
-	    typeof document !== 'undefined' &&
-	    typeof document.createElement === 'function'
-	  );
-	}
-
-	/**
-	 * Iterate over an Array or an Object invoking a function for each item.
-	 *
-	 * If `obj` is an Array callback will be called passing
-	 * the value, index, and complete array for each item.
-	 *
-	 * If 'obj' is an Object callback will be called passing
-	 * the value, key, and complete object for each property.
-	 *
-	 * @param {Object|Array} obj The object to iterate
-	 * @param {Function} fn The callback to invoke for each item
-	 */
-	function forEach(obj, fn) {
-	  // Don't bother if no value provided
-	  if (obj === null || typeof obj === 'undefined') {
-	    return;
-	  }
-
-	  // Force an array if not already something iterable
-	  if (typeof obj !== 'object' && !isArray(obj)) {
-	    /*eslint no-param-reassign:0*/
-	    obj = [obj];
-	  }
-
-	  if (isArray(obj)) {
-	    // Iterate over array values
-	    for (var i = 0, l = obj.length; i < l; i++) {
-	      fn.call(null, obj[i], i, obj);
-	    }
-	  } else {
-	    // Iterate over object keys
-	    for (var key in obj) {
-	      if (Object.prototype.hasOwnProperty.call(obj, key)) {
-	        fn.call(null, obj[key], key, obj);
-	      }
-	    }
-	  }
-	}
-
-	/**
-	 * Accepts varargs expecting each argument to be an object, then
-	 * immutably merges the properties of each object and returns result.
-	 *
-	 * When multiple objects contain the same key the later object in
-	 * the arguments list will take precedence.
-	 *
-	 * Example:
-	 *
-	 * ```js
-	 * var result = merge({foo: 123}, {foo: 456});
-	 * console.log(result.foo); // outputs 456
-	 * ```
-	 *
-	 * @param {Object} obj1 Object to merge
-	 * @returns {Object} Result of all merge properties
-	 */
-	function merge(/* obj1, obj2, obj3, ... */) {
-	  var result = {};
-	  function assignValue(val, key) {
-	    if (typeof result[key] === 'object' && typeof val === 'object') {
-	      result[key] = merge(result[key], val);
-	    } else {
-	      result[key] = val;
-	    }
-	  }
-
-	  for (var i = 0, l = arguments.length; i < l; i++) {
-	    forEach(arguments[i], assignValue);
-	  }
-	  return result;
-	}
-
-	/**
-	 * Extends object a by mutably adding to it the properties of object b.
-	 *
-	 * @param {Object} a The object to be extended
-	 * @param {Object} b The object to copy properties from
-	 * @param {Object} thisArg The object to bind function to
-	 * @return {Object} The resulting value of object a
-	 */
-	function extend(a, b, thisArg) {
-	  forEach(b, function assignValue(val, key) {
-	    if (thisArg && typeof val === 'function') {
-	      a[key] = bind(val, thisArg);
-	    } else {
-	      a[key] = val;
-	    }
-	  });
-	  return a;
-	}
-
-	module.exports = {
-	  isArray: isArray,
-	  isArrayBuffer: isArrayBuffer,
-	  isFormData: isFormData,
-	  isArrayBufferView: isArrayBufferView,
-	  isString: isString,
-	  isNumber: isNumber,
-	  isObject: isObject,
-	  isUndefined: isUndefined,
-	  isDate: isDate,
-	  isFile: isFile,
-	  isBlob: isBlob,
-	  isFunction: isFunction,
-	  isStream: isStream,
-	  isURLSearchParams: isURLSearchParams,
-	  isStandardBrowserEnv: isStandardBrowserEnv,
-	  forEach: forEach,
-	  merge: merge,
-	  extend: extend,
-	  trim: trim
-	};
-
-
-/***/ },
-/* 131 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-
-	var utils = __webpack_require__(130);
-	var normalizeHeaderName = __webpack_require__(149);
-
-	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
-	var DEFAULT_CONTENT_TYPE = {
-	  'Content-Type': 'application/x-www-form-urlencoded'
-	};
-
-	function setContentTypeIfUnset(headers, value) {
-	  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-	    headers['Content-Type'] = value;
-	  }
-	}
-
-	function getDefaultAdapter() {
-	  var adapter;
-	  if (typeof XMLHttpRequest !== 'undefined') {
-	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(158);
-	  } else if (typeof process !== 'undefined') {
-	    // For node use HTTP adapter
-	    adapter = __webpack_require__(158);
-	  }
-	  return adapter;
-	}
-
-	var defaults = {
-	  adapter: getDefaultAdapter(),
-
-	  transformRequest: [function transformRequest(data, headers) {
-	    normalizeHeaderName(headers, 'Content-Type');
-	    if (utils.isFormData(data) ||
-	      utils.isArrayBuffer(data) ||
-	      utils.isStream(data) ||
-	      utils.isFile(data) ||
-	      utils.isBlob(data)
-	    ) {
-	      return data;
-	    }
-	    if (utils.isArrayBufferView(data)) {
-	      return data.buffer;
-	    }
-	    if (utils.isURLSearchParams(data)) {
-	      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-	      return data.toString();
-	    }
-	    if (utils.isObject(data)) {
-	      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-	      return JSON.stringify(data);
-	    }
-	    return data;
-	  }],
-
-	  transformResponse: [function transformResponse(data) {
-	    /*eslint no-param-reassign:0*/
-	    if (typeof data === 'string') {
-	      data = data.replace(PROTECTION_PREFIX, '');
-	      try {
-	        data = JSON.parse(data);
-	      } catch (e) { /* Ignore */ }
-	    }
-	    return data;
-	  }],
-
-	  timeout: 0,
-
-	  xsrfCookieName: 'XSRF-TOKEN',
-	  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-	  maxContentLength: -1,
-
-	  validateStatus: function validateStatus(status) {
-	    return status >= 200 && status < 300;
-	  }
-	};
-
-	defaults.headers = {
-	  common: {
-	    'Accept': 'application/json, text/plain, */*'
-	  }
-	};
-
-	utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
-	  defaults.headers[method] = {};
-	});
-
-	utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-	  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-	});
-
-	module.exports = defaults;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(119)))
-
-/***/ },
-/* 132 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// Copyright (c) 2005  Tom Wu
 	// All Rights Reserved.
 	// See "LICENSE" for details.
@@ -24570,7 +24118,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 133 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	if (typeof Object.create === 'function') {
@@ -24599,247 +24147,458 @@ var StellarWallet =
 
 
 /***/ },
-/* 134 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	var lowerCase = __webpack_require__(170)
 
-	module.exports = function bind(fn, thisArg) {
-	  return function wrap() {
-	    var args = new Array(arguments.length);
-	    for (var i = 0; i < args.length; i++) {
-	      args[i] = arguments[i];
+	var NON_WORD_REGEXP = __webpack_require__(151)
+	var CAMEL_CASE_REGEXP = __webpack_require__(152)
+	var TRAILING_DIGIT_REGEXP = __webpack_require__(153)
+
+	/**
+	 * Sentence case a string.
+	 *
+	 * @param  {String} str
+	 * @param  {String} locale
+	 * @param  {String} replacement
+	 * @return {String}
+	 */
+	module.exports = function (str, locale, replacement) {
+	  if (str == null) {
+	    return ''
+	  }
+
+	  replacement = replacement || ' '
+
+	  function replace (match, index, string) {
+	    if (index === 0 || index === (string.length - match.length)) {
+	      return ''
 	    }
-	    return fn.apply(thisArg, args);
-	  };
-	};
+
+	    return replacement
+	  }
+
+	  str = String(str)
+	    // Support camel case ("camelCase" -> "camel Case").
+	    .replace(CAMEL_CASE_REGEXP, '$1 $2')
+	    // Support digit groups ("test2012" -> "test 2012").
+	    .replace(TRAILING_DIGIT_REGEXP, '$1 $2')
+	    // Remove all non-word characters and replace with a single space.
+	    .replace(NON_WORD_REGEXP, replace)
+
+	  // Lower case the entire string.
+	  return lowerCase(str, locale)
+	}
 
 
 /***/ },
-/* 135 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	/**
-	 * Syntactic sugar for invoking a function and expanding an array for arguments.
-	 *
-	 * Common use case would be to use `Function.prototype.apply`.
-	 *
-	 *  ```js
-	 *  function f(x, y, z) {}
-	 *  var args = [1, 2, 3];
-	 *  f.apply(null, args);
-	 *  ```
-	 *
-	 * With `spread` this example can be re-written.
-	 *
-	 *  ```js
-	 *  spread(function(x, y, z) {})([1, 2, 3]);
-	 *  ```
-	 *
-	 * @param {Function} callback
-	 * @returns {Function}
-	 */
-	module.exports = function spread(callback) {
-	  return function wrap(arr) {
-	    return callback.apply(null, arr);
-	  };
-	};
+	var bind = __webpack_require__(135);
 
+	/*global toString:true*/
 
-/***/ },
-/* 136 */
-/***/ function(module, exports, __webpack_require__) {
+	// utils is a library of generic helper functions non-specific to axios
 
-	'use strict';
-
-	var defaults = __webpack_require__(131);
-	var utils = __webpack_require__(130);
-	var InterceptorManager = __webpack_require__(154);
-	var dispatchRequest = __webpack_require__(155);
-	var isAbsoluteURL = __webpack_require__(156);
-	var combineURLs = __webpack_require__(157);
+	var toString = Object.prototype.toString;
 
 	/**
-	 * Create a new instance of Axios
+	 * Determine if a value is an Array
 	 *
-	 * @param {Object} instanceConfig The default config for the instance
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is an Array, otherwise false
 	 */
-	function Axios(instanceConfig) {
-	  this.defaults = instanceConfig;
-	  this.interceptors = {
-	    request: new InterceptorManager(),
-	    response: new InterceptorManager()
-	  };
+	function isArray(val) {
+	  return toString.call(val) === '[object Array]';
 	}
 
 	/**
-	 * Dispatch a request
+	 * Determine if a value is an ArrayBuffer
 	 *
-	 * @param {Object} config The config specific for this request (merged with this.defaults)
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is an ArrayBuffer, otherwise false
 	 */
-	Axios.prototype.request = function request(config) {
-	  /*eslint no-param-reassign:0*/
-	  // Allow for axios('example/url'[, config]) a la fetch API
-	  if (typeof config === 'string') {
-	    config = utils.merge({
-	      url: arguments[0]
-	    }, arguments[1]);
+	function isArrayBuffer(val) {
+	  return toString.call(val) === '[object ArrayBuffer]';
+	}
+
+	/**
+	 * Determine if a value is a FormData
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is an FormData, otherwise false
+	 */
+	function isFormData(val) {
+	  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+	}
+
+	/**
+	 * Determine if a value is a view on an ArrayBuffer
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+	 */
+	function isArrayBufferView(val) {
+	  var result;
+	  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+	    result = ArrayBuffer.isView(val);
+	  } else {
+	    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+	  }
+	  return result;
+	}
+
+	/**
+	 * Determine if a value is a String
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a String, otherwise false
+	 */
+	function isString(val) {
+	  return typeof val === 'string';
+	}
+
+	/**
+	 * Determine if a value is a Number
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a Number, otherwise false
+	 */
+	function isNumber(val) {
+	  return typeof val === 'number';
+	}
+
+	/**
+	 * Determine if a value is undefined
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if the value is undefined, otherwise false
+	 */
+	function isUndefined(val) {
+	  return typeof val === 'undefined';
+	}
+
+	/**
+	 * Determine if a value is an Object
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is an Object, otherwise false
+	 */
+	function isObject(val) {
+	  return val !== null && typeof val === 'object';
+	}
+
+	/**
+	 * Determine if a value is a Date
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a Date, otherwise false
+	 */
+	function isDate(val) {
+	  return toString.call(val) === '[object Date]';
+	}
+
+	/**
+	 * Determine if a value is a File
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a File, otherwise false
+	 */
+	function isFile(val) {
+	  return toString.call(val) === '[object File]';
+	}
+
+	/**
+	 * Determine if a value is a Blob
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a Blob, otherwise false
+	 */
+	function isBlob(val) {
+	  return toString.call(val) === '[object Blob]';
+	}
+
+	/**
+	 * Determine if a value is a Function
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a Function, otherwise false
+	 */
+	function isFunction(val) {
+	  return toString.call(val) === '[object Function]';
+	}
+
+	/**
+	 * Determine if a value is a Stream
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a Stream, otherwise false
+	 */
+	function isStream(val) {
+	  return isObject(val) && isFunction(val.pipe);
+	}
+
+	/**
+	 * Determine if a value is a URLSearchParams object
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+	 */
+	function isURLSearchParams(val) {
+	  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+	}
+
+	/**
+	 * Trim excess whitespace off the beginning and end of a string
+	 *
+	 * @param {String} str The String to trim
+	 * @returns {String} The String freed of excess whitespace
+	 */
+	function trim(str) {
+	  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+	}
+
+	/**
+	 * Determine if we're running in a standard browser environment
+	 *
+	 * This allows axios to run in a web worker, and react-native.
+	 * Both environments support XMLHttpRequest, but not fully standard globals.
+	 *
+	 * web workers:
+	 *  typeof window -> undefined
+	 *  typeof document -> undefined
+	 *
+	 * react-native:
+	 *  typeof document.createElement -> undefined
+	 */
+	function isStandardBrowserEnv() {
+	  return (
+	    typeof window !== 'undefined' &&
+	    typeof document !== 'undefined' &&
+	    typeof document.createElement === 'function'
+	  );
+	}
+
+	/**
+	 * Iterate over an Array or an Object invoking a function for each item.
+	 *
+	 * If `obj` is an Array callback will be called passing
+	 * the value, index, and complete array for each item.
+	 *
+	 * If 'obj' is an Object callback will be called passing
+	 * the value, key, and complete object for each property.
+	 *
+	 * @param {Object|Array} obj The object to iterate
+	 * @param {Function} fn The callback to invoke for each item
+	 */
+	function forEach(obj, fn) {
+	  // Don't bother if no value provided
+	  if (obj === null || typeof obj === 'undefined') {
+	    return;
 	  }
 
-	  config = utils.merge(defaults, this.defaults, { method: 'get' }, config);
-
-	  // Support baseURL config
-	  if (config.baseURL && !isAbsoluteURL(config.url)) {
-	    config.url = combineURLs(config.baseURL, config.url);
+	  // Force an array if not already something iterable
+	  if (typeof obj !== 'object' && !isArray(obj)) {
+	    /*eslint no-param-reassign:0*/
+	    obj = [obj];
 	  }
 
-	  // Hook up interceptors middleware
-	  var chain = [dispatchRequest, undefined];
-	  var promise = Promise.resolve(config);
+	  if (isArray(obj)) {
+	    // Iterate over array values
+	    for (var i = 0, l = obj.length; i < l; i++) {
+	      fn.call(null, obj[i], i, obj);
+	    }
+	  } else {
+	    // Iterate over object keys
+	    for (var key in obj) {
+	      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+	        fn.call(null, obj[key], key, obj);
+	      }
+	    }
+	  }
+	}
 
-	  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-	    chain.unshift(interceptor.fulfilled, interceptor.rejected);
+	/**
+	 * Accepts varargs expecting each argument to be an object, then
+	 * immutably merges the properties of each object and returns result.
+	 *
+	 * When multiple objects contain the same key the later object in
+	 * the arguments list will take precedence.
+	 *
+	 * Example:
+	 *
+	 * ```js
+	 * var result = merge({foo: 123}, {foo: 456});
+	 * console.log(result.foo); // outputs 456
+	 * ```
+	 *
+	 * @param {Object} obj1 Object to merge
+	 * @returns {Object} Result of all merge properties
+	 */
+	function merge(/* obj1, obj2, obj3, ... */) {
+	  var result = {};
+	  function assignValue(val, key) {
+	    if (typeof result[key] === 'object' && typeof val === 'object') {
+	      result[key] = merge(result[key], val);
+	    } else {
+	      result[key] = val;
+	    }
+	  }
+
+	  for (var i = 0, l = arguments.length; i < l; i++) {
+	    forEach(arguments[i], assignValue);
+	  }
+	  return result;
+	}
+
+	/**
+	 * Extends object a by mutably adding to it the properties of object b.
+	 *
+	 * @param {Object} a The object to be extended
+	 * @param {Object} b The object to copy properties from
+	 * @param {Object} thisArg The object to bind function to
+	 * @return {Object} The resulting value of object a
+	 */
+	function extend(a, b, thisArg) {
+	  forEach(b, function assignValue(val, key) {
+	    if (thisArg && typeof val === 'function') {
+	      a[key] = bind(val, thisArg);
+	    } else {
+	      a[key] = val;
+	    }
 	  });
+	  return a;
+	}
 
-	  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-	    chain.push(interceptor.fulfilled, interceptor.rejected);
-	  });
-
-	  while (chain.length) {
-	    promise = promise.then(chain.shift(), chain.shift());
-	  }
-
-	  return promise;
+	module.exports = {
+	  isArray: isArray,
+	  isArrayBuffer: isArrayBuffer,
+	  isFormData: isFormData,
+	  isArrayBufferView: isArrayBufferView,
+	  isString: isString,
+	  isNumber: isNumber,
+	  isObject: isObject,
+	  isUndefined: isUndefined,
+	  isDate: isDate,
+	  isFile: isFile,
+	  isBlob: isBlob,
+	  isFunction: isFunction,
+	  isStream: isStream,
+	  isURLSearchParams: isURLSearchParams,
+	  isStandardBrowserEnv: isStandardBrowserEnv,
+	  forEach: forEach,
+	  merge: merge,
+	  extend: extend,
+	  trim: trim
 	};
 
-	// Provide aliases for supported request methods
-	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-	  /*eslint func-names:0*/
-	  Axios.prototype[method] = function(url, config) {
-	    return this.request(utils.merge(config || {}, {
-	      method: method,
-	      url: url
-	    }));
-	  };
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	var utils = __webpack_require__(132);
+	var normalizeHeaderName = __webpack_require__(150);
+
+	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
+	var DEFAULT_CONTENT_TYPE = {
+	  'Content-Type': 'application/x-www-form-urlencoded'
+	};
+
+	function setContentTypeIfUnset(headers, value) {
+	  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+	    headers['Content-Type'] = value;
+	  }
+	}
+
+	function getDefaultAdapter() {
+	  var adapter;
+	  if (typeof XMLHttpRequest !== 'undefined') {
+	    // For browsers use XHR adapter
+	    adapter = __webpack_require__(158);
+	  } else if (typeof process !== 'undefined') {
+	    // For node use HTTP adapter
+	    adapter = __webpack_require__(158);
+	  }
+	  return adapter;
+	}
+
+	var defaults = {
+	  adapter: getDefaultAdapter(),
+
+	  transformRequest: [function transformRequest(data, headers) {
+	    normalizeHeaderName(headers, 'Content-Type');
+	    if (utils.isFormData(data) ||
+	      utils.isArrayBuffer(data) ||
+	      utils.isStream(data) ||
+	      utils.isFile(data) ||
+	      utils.isBlob(data)
+	    ) {
+	      return data;
+	    }
+	    if (utils.isArrayBufferView(data)) {
+	      return data.buffer;
+	    }
+	    if (utils.isURLSearchParams(data)) {
+	      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+	      return data.toString();
+	    }
+	    if (utils.isObject(data)) {
+	      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+	      return JSON.stringify(data);
+	    }
+	    return data;
+	  }],
+
+	  transformResponse: [function transformResponse(data) {
+	    /*eslint no-param-reassign:0*/
+	    if (typeof data === 'string') {
+	      data = data.replace(PROTECTION_PREFIX, '');
+	      try {
+	        data = JSON.parse(data);
+	      } catch (e) { /* Ignore */ }
+	    }
+	    return data;
+	  }],
+
+	  timeout: 0,
+
+	  xsrfCookieName: 'XSRF-TOKEN',
+	  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+	  maxContentLength: -1,
+
+	  validateStatus: function validateStatus(status) {
+	    return status >= 200 && status < 300;
+	  }
+	};
+
+	defaults.headers = {
+	  common: {
+	    'Accept': 'application/json, text/plain, */*'
+	  }
+	};
+
+	utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
+	  defaults.headers[method] = {};
 	});
 
 	utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-	  /*eslint func-names:0*/
-	  Axios.prototype[method] = function(url, data, config) {
-	    return this.request(utils.merge(config || {}, {
-	      method: method,
-	      url: url,
-	      data: data
-	    }));
-	  };
+	  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
 	});
 
-	module.exports = Axios;
-
-
-/***/ },
-/* 137 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	/**
-	 * A `Cancel` is an object that is thrown when an operation is canceled.
-	 *
-	 * @class
-	 * @param {string=} message The message.
-	 */
-	function Cancel(message) {
-	  this.message = message;
-	}
-
-	Cancel.prototype.toString = function toString() {
-	  return 'Cancel' + (this.message ? ': ' + this.message : '');
-	};
-
-	Cancel.prototype.__CANCEL__ = true;
-
-	module.exports = Cancel;
-
+	module.exports = defaults;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(117)))
 
 /***/ },
-/* 138 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Cancel = __webpack_require__(137);
-
-	/**
-	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
-	 *
-	 * @class
-	 * @param {Function} executor The executor function.
-	 */
-	function CancelToken(executor) {
-	  if (typeof executor !== 'function') {
-	    throw new TypeError('executor must be a function.');
-	  }
-
-	  var resolvePromise;
-	  this.promise = new Promise(function promiseExecutor(resolve) {
-	    resolvePromise = resolve;
-	  });
-
-	  var token = this;
-	  executor(function cancel(message) {
-	    if (token.reason) {
-	      // Cancellation has already been requested
-	      return;
-	    }
-
-	    token.reason = new Cancel(message);
-	    resolvePromise(token.reason);
-	  });
-	}
-
-	/**
-	 * Throws a `Cancel` if cancellation has been requested.
-	 */
-	CancelToken.prototype.throwIfRequested = function throwIfRequested() {
-	  if (this.reason) {
-	    throw this.reason;
-	  }
-	};
-
-	/**
-	 * Returns an object that contains a new `CancelToken` and a function that, when called,
-	 * cancels the `CancelToken`.
-	 */
-	CancelToken.source = function source() {
-	  var cancel;
-	  var token = new CancelToken(function executor(c) {
-	    cancel = c;
-	  });
-	  return {
-	    token: token,
-	    cancel: cancel
-	  };
-	};
-
-	module.exports = CancelToken;
-
-
-/***/ },
-/* 139 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = function isCancel(value) {
-	  return !!(value && value.__CANCEL__);
-	};
-
-
-/***/ },
-/* 140 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -24966,6 +24725,246 @@ var StellarWallet =
 		exports.toByteArray = b64ToByteArray
 		exports.fromByteArray = uint8ToBase64
 	}(false ? (this.base64js = {}) : exports))
+
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = function bind(fn, thisArg) {
+	  return function wrap() {
+	    var args = new Array(arguments.length);
+	    for (var i = 0; i < args.length; i++) {
+	      args[i] = arguments[i];
+	    }
+	    return fn.apply(thisArg, args);
+	  };
+	};
+
+
+/***/ },
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	/**
+	 * Syntactic sugar for invoking a function and expanding an array for arguments.
+	 *
+	 * Common use case would be to use `Function.prototype.apply`.
+	 *
+	 *  ```js
+	 *  function f(x, y, z) {}
+	 *  var args = [1, 2, 3];
+	 *  f.apply(null, args);
+	 *  ```
+	 *
+	 * With `spread` this example can be re-written.
+	 *
+	 *  ```js
+	 *  spread(function(x, y, z) {})([1, 2, 3]);
+	 *  ```
+	 *
+	 * @param {Function} callback
+	 * @returns {Function}
+	 */
+	module.exports = function spread(callback) {
+	  return function wrap(arr) {
+	    return callback.apply(null, arr);
+	  };
+	};
+
+
+/***/ },
+/* 137 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var defaults = __webpack_require__(133);
+	var utils = __webpack_require__(132);
+	var InterceptorManager = __webpack_require__(154);
+	var dispatchRequest = __webpack_require__(155);
+	var isAbsoluteURL = __webpack_require__(156);
+	var combineURLs = __webpack_require__(157);
+
+	/**
+	 * Create a new instance of Axios
+	 *
+	 * @param {Object} instanceConfig The default config for the instance
+	 */
+	function Axios(instanceConfig) {
+	  this.defaults = instanceConfig;
+	  this.interceptors = {
+	    request: new InterceptorManager(),
+	    response: new InterceptorManager()
+	  };
+	}
+
+	/**
+	 * Dispatch a request
+	 *
+	 * @param {Object} config The config specific for this request (merged with this.defaults)
+	 */
+	Axios.prototype.request = function request(config) {
+	  /*eslint no-param-reassign:0*/
+	  // Allow for axios('example/url'[, config]) a la fetch API
+	  if (typeof config === 'string') {
+	    config = utils.merge({
+	      url: arguments[0]
+	    }, arguments[1]);
+	  }
+
+	  config = utils.merge(defaults, this.defaults, { method: 'get' }, config);
+
+	  // Support baseURL config
+	  if (config.baseURL && !isAbsoluteURL(config.url)) {
+	    config.url = combineURLs(config.baseURL, config.url);
+	  }
+
+	  // Hook up interceptors middleware
+	  var chain = [dispatchRequest, undefined];
+	  var promise = Promise.resolve(config);
+
+	  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+	    chain.unshift(interceptor.fulfilled, interceptor.rejected);
+	  });
+
+	  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+	    chain.push(interceptor.fulfilled, interceptor.rejected);
+	  });
+
+	  while (chain.length) {
+	    promise = promise.then(chain.shift(), chain.shift());
+	  }
+
+	  return promise;
+	};
+
+	// Provide aliases for supported request methods
+	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+	  /*eslint func-names:0*/
+	  Axios.prototype[method] = function(url, config) {
+	    return this.request(utils.merge(config || {}, {
+	      method: method,
+	      url: url
+	    }));
+	  };
+	});
+
+	utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+	  /*eslint func-names:0*/
+	  Axios.prototype[method] = function(url, data, config) {
+	    return this.request(utils.merge(config || {}, {
+	      method: method,
+	      url: url,
+	      data: data
+	    }));
+	  };
+	});
+
+	module.exports = Axios;
+
+
+/***/ },
+/* 138 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	/**
+	 * A `Cancel` is an object that is thrown when an operation is canceled.
+	 *
+	 * @class
+	 * @param {string=} message The message.
+	 */
+	function Cancel(message) {
+	  this.message = message;
+	}
+
+	Cancel.prototype.toString = function toString() {
+	  return 'Cancel' + (this.message ? ': ' + this.message : '');
+	};
+
+	Cancel.prototype.__CANCEL__ = true;
+
+	module.exports = Cancel;
+
+
+/***/ },
+/* 139 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Cancel = __webpack_require__(138);
+
+	/**
+	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
+	 *
+	 * @class
+	 * @param {Function} executor The executor function.
+	 */
+	function CancelToken(executor) {
+	  if (typeof executor !== 'function') {
+	    throw new TypeError('executor must be a function.');
+	  }
+
+	  var resolvePromise;
+	  this.promise = new Promise(function promiseExecutor(resolve) {
+	    resolvePromise = resolve;
+	  });
+
+	  var token = this;
+	  executor(function cancel(message) {
+	    if (token.reason) {
+	      // Cancellation has already been requested
+	      return;
+	    }
+
+	    token.reason = new Cancel(message);
+	    resolvePromise(token.reason);
+	  });
+	}
+
+	/**
+	 * Throws a `Cancel` if cancellation has been requested.
+	 */
+	CancelToken.prototype.throwIfRequested = function throwIfRequested() {
+	  if (this.reason) {
+	    throw this.reason;
+	  }
+	};
+
+	/**
+	 * Returns an object that contains a new `CancelToken` and a function that, when called,
+	 * cancels the `CancelToken`.
+	 */
+	CancelToken.source = function source() {
+	  var cancel;
+	  var token = new CancelToken(function executor(c) {
+	    cancel = c;
+	  });
+	  return {
+	    token: token,
+	    cancel: cancel
+	  };
+	};
+
+	module.exports = CancelToken;
+
+
+/***/ },
+/* 140 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = function isCancel(value) {
+	  return !!(value && value.__CANCEL__);
+	};
 
 
 /***/ },
@@ -25131,7 +25130,7 @@ var StellarWallet =
 	else throw new Error("no async scheduler available");
 	module.exports = schedule;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(119)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(117)))
 
 /***/ },
 /* 143 */
@@ -25351,15 +25350,31 @@ var StellarWallet =
 	}
 
 	var Buffer = __webpack_require__(68).Buffer
-	var Hash   = __webpack_require__(162)(Buffer)
+	var Hash   = __webpack_require__(164)(Buffer)
 
-	exports.sha1 = __webpack_require__(163)(Buffer, Hash)
-	exports.sha256 = __webpack_require__(164)(Buffer, Hash)
-	exports.sha512 = __webpack_require__(165)(Buffer, Hash)
+	exports.sha1 = __webpack_require__(165)(Buffer, Hash)
+	exports.sha256 = __webpack_require__(166)(Buffer, Hash)
+	exports.sha512 = __webpack_require__(167)(Buffer, Hash)
 
 
 /***/ },
 /* 146 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// This object serves as a singleton to store config options
+
+	var extend = __webpack_require__(144);
+
+	var config = module.exports = {
+	  load: function (newOpts) {
+	    extend(config, newOpts);
+	    return config;
+	  }
+	};
+
+
+/***/ },
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;"use strict";function q(a){throw a;}var u=void 0,v=!1;var sjcl={cipher:{},hash:{},keyexchange:{},mode:{},misc:{},codec:{},exception:{corrupt:function(a){this.toString=function(){return"CORRUPT: "+this.message};this.message=a},invalid:function(a){this.toString=function(){return"INVALID: "+this.message};this.message=a},bug:function(a){this.toString=function(){return"BUG: "+this.message};this.message=a},notReady:function(a){this.toString=function(){return"NOT READY: "+this.message};this.message=a}}};
@@ -25445,22 +25460,6 @@ var StellarWallet =
 
 
 /***/ },
-/* 147 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// This object serves as a singleton to store config options
-
-	var extend = __webpack_require__(144);
-
-	var config = module.exports = {
-	  load: function (newOpts) {
-	    extend(config, newOpts);
-	    return config;
-	  }
-	};
-
-
-/***/ },
 /* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -25503,24 +25502,6 @@ var StellarWallet =
 
 /***/ },
 /* 149 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var utils = __webpack_require__(130);
-
-	module.exports = function normalizeHeaderName(headers, normalizedName) {
-	  utils.forEach(headers, function processHeader(value, name) {
-	    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
-	      headers[normalizedName] = value;
-	      delete headers[name];
-	    }
-	  });
-	};
-
-
-/***/ },
-/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = function(crypto) {
@@ -25611,6 +25592,24 @@ var StellarWallet =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(68).Buffer))
 
 /***/ },
+/* 150 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var utils = __webpack_require__(132);
+
+	module.exports = function normalizeHeaderName(headers, normalizedName) {
+	  utils.forEach(headers, function processHeader(value, name) {
+	    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+	      headers[normalizedName] = value;
+	      delete headers[name];
+	    }
+	  });
+	};
+
+
+/***/ },
 /* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -25637,7 +25636,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(130);
+	var utils = __webpack_require__(132);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -25695,10 +25694,10 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(130);
+	var utils = __webpack_require__(132);
 	var transformData = __webpack_require__(171);
-	var isCancel = __webpack_require__(139);
-	var defaults = __webpack_require__(131);
+	var isCancel = __webpack_require__(140);
+	var defaults = __webpack_require__(133);
 
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -25818,7 +25817,7 @@ var StellarWallet =
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(130);
+	var utils = __webpack_require__(132);
 	var settle = __webpack_require__(172);
 	var buildURL = __webpack_require__(173);
 	var parseHeaders = __webpack_require__(174);
@@ -25994,7 +25993,7 @@ var StellarWallet =
 	  });
 	};
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(119)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(117)))
 
 /***/ },
 /* 159 */
@@ -26212,6 +26211,16 @@ var StellarWallet =
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	exports.decode = exports.parse = __webpack_require__(180);
+	exports.encode = exports.stringify = __webpack_require__(181);
+
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// Copyright Joyent, Inc. and other Node contributors.
 	//
 	// Permission is hereby granted, free of charge, to any person obtaining a
@@ -26305,7 +26314,7 @@ var StellarWallet =
 	      'gopher:': true,
 	      'file:': true
 	    },
-	    querystring = __webpack_require__(161);
+	    querystring = __webpack_require__(160);
 
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
 	  if (url && isObject(url) && url instanceof Url) return url;
@@ -26922,17 +26931,206 @@ var StellarWallet =
 
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	
+	/**
+	 * Expose `Emitter`.
+	 */
 
-	exports.decode = exports.parse = __webpack_require__(180);
-	exports.encode = exports.stringify = __webpack_require__(181);
+	module.exports = Emitter;
+
+	/**
+	 * Initialize a new `Emitter`.
+	 *
+	 * @api public
+	 */
+
+	function Emitter(obj) {
+	  if (obj) return mixin(obj);
+	};
+
+	/**
+	 * Mixin the emitter properties.
+	 *
+	 * @param {Object} obj
+	 * @return {Object}
+	 * @api private
+	 */
+
+	function mixin(obj) {
+	  for (var key in Emitter.prototype) {
+	    obj[key] = Emitter.prototype[key];
+	  }
+	  return obj;
+	}
+
+	/**
+	 * Listen on the given `event` with `fn`.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.on =
+	Emitter.prototype.addEventListener = function(event, fn){
+	  this._callbacks = this._callbacks || {};
+	  (this._callbacks[event] = this._callbacks[event] || [])
+	    .push(fn);
+	  return this;
+	};
+
+	/**
+	 * Adds an `event` listener that will be invoked a single
+	 * time then automatically removed.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.once = function(event, fn){
+	  var self = this;
+	  this._callbacks = this._callbacks || {};
+
+	  function on() {
+	    self.off(event, on);
+	    fn.apply(this, arguments);
+	  }
+
+	  on.fn = fn;
+	  this.on(event, on);
+	  return this;
+	};
+
+	/**
+	 * Remove the given callback for `event` or all
+	 * registered callbacks.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.off =
+	Emitter.prototype.removeListener =
+	Emitter.prototype.removeAllListeners =
+	Emitter.prototype.removeEventListener = function(event, fn){
+	  this._callbacks = this._callbacks || {};
+
+	  // all
+	  if (0 == arguments.length) {
+	    this._callbacks = {};
+	    return this;
+	  }
+
+	  // specific event
+	  var callbacks = this._callbacks[event];
+	  if (!callbacks) return this;
+
+	  // remove all handlers
+	  if (1 == arguments.length) {
+	    delete this._callbacks[event];
+	    return this;
+	  }
+
+	  // remove specific handler
+	  var cb;
+	  for (var i = 0; i < callbacks.length; i++) {
+	    cb = callbacks[i];
+	    if (cb === fn || cb.fn === fn) {
+	      callbacks.splice(i, 1);
+	      break;
+	    }
+	  }
+	  return this;
+	};
+
+	/**
+	 * Emit `event` with the given args.
+	 *
+	 * @param {String} event
+	 * @param {Mixed} ...
+	 * @return {Emitter}
+	 */
+
+	Emitter.prototype.emit = function(event){
+	  this._callbacks = this._callbacks || {};
+	  var args = [].slice.call(arguments, 1)
+	    , callbacks = this._callbacks[event];
+
+	  if (callbacks) {
+	    callbacks = callbacks.slice(0);
+	    for (var i = 0, len = callbacks.length; i < len; ++i) {
+	      callbacks[i].apply(this, args);
+	    }
+	  }
+
+	  return this;
+	};
+
+	/**
+	 * Return array of callbacks for `event`.
+	 *
+	 * @param {String} event
+	 * @return {Array}
+	 * @api public
+	 */
+
+	Emitter.prototype.listeners = function(event){
+	  this._callbacks = this._callbacks || {};
+	  return this._callbacks[event] || [];
+	};
+
+	/**
+	 * Check if this emitter has `event` handlers.
+	 *
+	 * @param {String} event
+	 * @return {Boolean}
+	 * @api public
+	 */
+
+	Emitter.prototype.hasListeners = function(event){
+	  return !! this.listeners(event).length;
+	};
 
 
 /***/ },
-/* 162 */
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * Reduce `arr` with `fn`.
+	 *
+	 * @param {Array} arr
+	 * @param {Function} fn
+	 * @param {Mixed} initial
+	 *
+	 * TODO: combatible error handling?
+	 */
+
+	module.exports = function(arr, fn, initial){  
+	  var idx = 0;
+	  var len = arr.length;
+	  var curr = arguments.length == 3
+	    ? initial
+	    : arr[idx++];
+
+	  while (idx < len) {
+	    curr = fn.call(null, curr, arr[idx], ++idx, arr);
+	  }
+	  
+	  return curr;
+	};
+
+/***/ },
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function (Buffer) {
@@ -27015,7 +27213,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 163 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -27027,7 +27225,7 @@ var StellarWallet =
 	 * See http://pajhome.org.uk/crypt/md5 for details.
 	 */
 
-	var inherits = __webpack_require__(66).inherits
+	var inherits = __webpack_require__(31).inherits
 
 	module.exports = function (Buffer, Hash) {
 
@@ -27159,7 +27357,7 @@ var StellarWallet =
 
 
 /***/ },
-/* 164 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -27171,7 +27369,7 @@ var StellarWallet =
 	 *
 	 */
 
-	var inherits = __webpack_require__(66).inherits
+	var inherits = __webpack_require__(31).inherits
 
 	module.exports = function (Buffer, Hash) {
 
@@ -27312,10 +27510,10 @@ var StellarWallet =
 
 
 /***/ },
-/* 165 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var inherits = __webpack_require__(66).inherits
+	var inherits = __webpack_require__(31).inherits
 
 	module.exports = function (Buffer, Hash) {
 	  var K = [
@@ -27560,205 +27758,6 @@ var StellarWallet =
 
 	}
 
-
-/***/ },
-/* 166 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * Expose `Emitter`.
-	 */
-
-	module.exports = Emitter;
-
-	/**
-	 * Initialize a new `Emitter`.
-	 *
-	 * @api public
-	 */
-
-	function Emitter(obj) {
-	  if (obj) return mixin(obj);
-	};
-
-	/**
-	 * Mixin the emitter properties.
-	 *
-	 * @param {Object} obj
-	 * @return {Object}
-	 * @api private
-	 */
-
-	function mixin(obj) {
-	  for (var key in Emitter.prototype) {
-	    obj[key] = Emitter.prototype[key];
-	  }
-	  return obj;
-	}
-
-	/**
-	 * Listen on the given `event` with `fn`.
-	 *
-	 * @param {String} event
-	 * @param {Function} fn
-	 * @return {Emitter}
-	 * @api public
-	 */
-
-	Emitter.prototype.on =
-	Emitter.prototype.addEventListener = function(event, fn){
-	  this._callbacks = this._callbacks || {};
-	  (this._callbacks[event] = this._callbacks[event] || [])
-	    .push(fn);
-	  return this;
-	};
-
-	/**
-	 * Adds an `event` listener that will be invoked a single
-	 * time then automatically removed.
-	 *
-	 * @param {String} event
-	 * @param {Function} fn
-	 * @return {Emitter}
-	 * @api public
-	 */
-
-	Emitter.prototype.once = function(event, fn){
-	  var self = this;
-	  this._callbacks = this._callbacks || {};
-
-	  function on() {
-	    self.off(event, on);
-	    fn.apply(this, arguments);
-	  }
-
-	  on.fn = fn;
-	  this.on(event, on);
-	  return this;
-	};
-
-	/**
-	 * Remove the given callback for `event` or all
-	 * registered callbacks.
-	 *
-	 * @param {String} event
-	 * @param {Function} fn
-	 * @return {Emitter}
-	 * @api public
-	 */
-
-	Emitter.prototype.off =
-	Emitter.prototype.removeListener =
-	Emitter.prototype.removeAllListeners =
-	Emitter.prototype.removeEventListener = function(event, fn){
-	  this._callbacks = this._callbacks || {};
-
-	  // all
-	  if (0 == arguments.length) {
-	    this._callbacks = {};
-	    return this;
-	  }
-
-	  // specific event
-	  var callbacks = this._callbacks[event];
-	  if (!callbacks) return this;
-
-	  // remove all handlers
-	  if (1 == arguments.length) {
-	    delete this._callbacks[event];
-	    return this;
-	  }
-
-	  // remove specific handler
-	  var cb;
-	  for (var i = 0; i < callbacks.length; i++) {
-	    cb = callbacks[i];
-	    if (cb === fn || cb.fn === fn) {
-	      callbacks.splice(i, 1);
-	      break;
-	    }
-	  }
-	  return this;
-	};
-
-	/**
-	 * Emit `event` with the given args.
-	 *
-	 * @param {String} event
-	 * @param {Mixed} ...
-	 * @return {Emitter}
-	 */
-
-	Emitter.prototype.emit = function(event){
-	  this._callbacks = this._callbacks || {};
-	  var args = [].slice.call(arguments, 1)
-	    , callbacks = this._callbacks[event];
-
-	  if (callbacks) {
-	    callbacks = callbacks.slice(0);
-	    for (var i = 0, len = callbacks.length; i < len; ++i) {
-	      callbacks[i].apply(this, args);
-	    }
-	  }
-
-	  return this;
-	};
-
-	/**
-	 * Return array of callbacks for `event`.
-	 *
-	 * @param {String} event
-	 * @return {Array}
-	 * @api public
-	 */
-
-	Emitter.prototype.listeners = function(event){
-	  this._callbacks = this._callbacks || {};
-	  return this._callbacks[event] || [];
-	};
-
-	/**
-	 * Check if this emitter has `event` handlers.
-	 *
-	 * @param {String} event
-	 * @return {Boolean}
-	 * @api public
-	 */
-
-	Emitter.prototype.hasListeners = function(event){
-	  return !! this.listeners(event).length;
-	};
-
-
-/***/ },
-/* 167 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * Reduce `arr` with `fn`.
-	 *
-	 * @param {Array} arr
-	 * @param {Function} fn
-	 * @param {Mixed} initial
-	 *
-	 * TODO: combatible error handling?
-	 */
-
-	module.exports = function(arr, fn, initial){  
-	  var idx = 0;
-	  var len = arr.length;
-	  var curr = arguments.length == 3
-	    ? initial
-	    : arr[idx++];
-
-	  while (idx < len) {
-	    curr = fn.call(null, curr, arr[idx], ++idx, arr);
-	  }
-	  
-	  return curr;
-	};
 
 /***/ },
 /* 168 */
@@ -28961,66 +28960,6 @@ var StellarWallet =
 /* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * Special language-specific overrides.
-	 *
-	 * Source: ftp://ftp.unicode.org/Public/UCD/latest/ucd/SpecialCasing.txt
-	 *
-	 * @type {Object}
-	 */
-	var LANGUAGES = {
-	  tr: {
-	    regexp: /\u0130|\u0049|\u0049\u0307/g,
-	    map: {
-	      '\u0130': '\u0069',
-	      '\u0049': '\u0131',
-	      '\u0049\u0307': '\u0069'
-	    }
-	  },
-	  az: {
-	    regexp: /[\u0130]/g,
-	    map: {
-	      '\u0130': '\u0069',
-	      '\u0049': '\u0131',
-	      '\u0049\u0307': '\u0069'
-	    }
-	  },
-	  lt: {
-	    regexp: /[\u0049\u004A\u012E\u00CC\u00CD\u0128]/g,
-	    map: {
-	      '\u0049': '\u0069\u0307',
-	      '\u004A': '\u006A\u0307',
-	      '\u012E': '\u012F\u0307',
-	      '\u00CC': '\u0069\u0307\u0300',
-	      '\u00CD': '\u0069\u0307\u0301',
-	      '\u0128': '\u0069\u0307\u0303'
-	    }
-	  }
-	}
-
-	/**
-	 * Lowercase a string.
-	 *
-	 * @param  {String} str
-	 * @return {String}
-	 */
-	module.exports = function (str, locale) {
-	  var lang = LANGUAGES[locale]
-
-	  str = str == null ? '' : String(str)
-
-	  if (lang) {
-	    str = str.replace(lang.regexp, function (m) { return lang.map[m] })
-	  }
-
-	  return str.toLowerCase()
-	}
-
-
-/***/ },
-/* 170 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(Buffer) {
 	module.exports = ripemd160
 
@@ -29230,12 +29169,72 @@ var StellarWallet =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(68).Buffer))
 
 /***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Special language-specific overrides.
+	 *
+	 * Source: ftp://ftp.unicode.org/Public/UCD/latest/ucd/SpecialCasing.txt
+	 *
+	 * @type {Object}
+	 */
+	var LANGUAGES = {
+	  tr: {
+	    regexp: /\u0130|\u0049|\u0049\u0307/g,
+	    map: {
+	      '\u0130': '\u0069',
+	      '\u0049': '\u0131',
+	      '\u0049\u0307': '\u0069'
+	    }
+	  },
+	  az: {
+	    regexp: /[\u0130]/g,
+	    map: {
+	      '\u0130': '\u0069',
+	      '\u0049': '\u0131',
+	      '\u0049\u0307': '\u0069'
+	    }
+	  },
+	  lt: {
+	    regexp: /[\u0049\u004A\u012E\u00CC\u00CD\u0128]/g,
+	    map: {
+	      '\u0049': '\u0069\u0307',
+	      '\u004A': '\u006A\u0307',
+	      '\u012E': '\u012F\u0307',
+	      '\u00CC': '\u0069\u0307\u0300',
+	      '\u00CD': '\u0069\u0307\u0301',
+	      '\u0128': '\u0069\u0307\u0303'
+	    }
+	  }
+	}
+
+	/**
+	 * Lowercase a string.
+	 *
+	 * @param  {String} str
+	 * @return {String}
+	 */
+	module.exports = function (str, locale) {
+	  var lang = LANGUAGES[locale]
+
+	  str = str == null ? '' : String(str)
+
+	  if (lang) {
+	    str = str.replace(lang.regexp, function (m) { return lang.map[m] })
+	  }
+
+	  return str.toLowerCase()
+	}
+
+
+/***/ },
 /* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(130);
+	var utils = __webpack_require__(132);
 
 	/**
 	 * Transform the data for a request or a response
@@ -29292,7 +29291,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(130);
+	var utils = __webpack_require__(132);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -29366,7 +29365,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(130);
+	var utils = __webpack_require__(132);
 
 	/**
 	 * Parse headers into an object
@@ -29409,7 +29408,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(130);
+	var utils = __webpack_require__(132);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -29548,7 +29547,7 @@ var StellarWallet =
 
 	'use strict';
 
-	var utils = __webpack_require__(130);
+	var utils = __webpack_require__(132);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -29609,8 +29608,8 @@ var StellarWallet =
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(166);
-	var reduce = __webpack_require__(167);
+	var Emitter = __webpack_require__(162);
+	var reduce = __webpack_require__(163);
 
 	/**
 	 * Root reference for iframes.
@@ -31370,7 +31369,7 @@ var StellarWallet =
 
 	}(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(84)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(85)(module), (function() { return this; }())))
 
 /***/ }
 /******/ ])
