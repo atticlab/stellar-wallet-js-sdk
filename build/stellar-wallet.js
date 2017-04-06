@@ -9040,10 +9040,8 @@ var StellarWallet =
 	function sendWalletCreateRequest(params) {
 	    var resolver = Promise.pending();
 
-	    var route = params.phoneAsLogin ? '/wallets/createphone' : '/wallets/create';
-
 	    request
-	        .post(params.server + route)
+	        .post(params.server + '/wallets/create')
 	        .type('json')
 	        .send(_.pick(params, [
 	            'username',
@@ -9058,7 +9056,8 @@ var StellarWallet =
 	            'kdfParams',
 	            // Hack for stellar-wallet run by SDF to allow transition from V1 wallet
 	            // https://github.com/stellar/stellar-wallet/issues/34
-	            'usernameProof'
+	            'usernameProof',
+	            'phone'
 	        ]))
 	        .end(function (err, res) {
 	            /* istanbul ignore if */
